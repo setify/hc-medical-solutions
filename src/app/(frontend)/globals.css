@@ -1,0 +1,43 @@
+@import 'tailwindcss';
+
+/*
+ * Neutrale Design-Tokens als Platzhalter. Werden nach Designfreigabe
+ * durch die HC-Markenwerte ersetzt. Schriften später lokal aus /public/fonts.
+ */
+@theme {
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --color-surface: #ffffff;
+  --color-ink: #16202a;
+  --color-muted: #55606b;
+  --color-line: #d9dee3;
+  --color-accent: #0b5cad;
+  --color-focus: #0b5cad;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-surface font-sans text-ink antialiased;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "Meta": {
+    "siteName": "HC Medical Solutions",
+    "homeTitle": "HC Medical Solutions",
+    "homeDescription": "Die neue Website von HC Medical Solutions ist in Vorbereitung."
+  },
+  "Common": {
+    "skipToContent": "Zum Inhalt springen",
+    "languageSwitcher": "Sprache wählen",
+    "languages": { "de": "Deutsch", "en": "English", "fr": "Français" }
+  },
+  "Home": {
+    "eyebrow": "In Vorbereitung",
+    "title": "Hier entsteht die neue Website von HC Medical Solutions.",
+    "text": "Inhalte und Gestaltung folgen in Kürze."
+  },
+  "NotFound": {
+    "title": "Seite nicht gefunden",
+    "text": "Die angeforderte Seite existiert nicht oder wurde verschoben.",
+    "back": "Zur Startseite"
+  }
+}

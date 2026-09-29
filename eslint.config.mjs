@@ -1,0 +1,27 @@
+import { defineConfig, globalIgnores } from 'eslint/config'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+
+export default defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  {
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+      ],
+    },
+  },
+  globalIgnores([
+    '.next/**',
+    'src/payload-types.ts',
+    'src/payload-generated-schema.ts',
+    'src/app/(payload)/admin/importMap.js',
+    'src/migrations/**',
+    'playwright-report/**',
+    'test-results/**',
+    '.claude/**',
+  ]),
+])

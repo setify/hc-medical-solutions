@@ -1,0 +1,22 @@
+{
+  "Meta": {
+    "siteName": "HC Medical Solutions",
+    "homeTitle": "HC Medical Solutions",
+    "homeDescription": "The new HC Medical Solutions website is in preparation."
+  },
+  "Common": {
+    "skipToContent": "Skip to content",
+    "languageSwitcher": "Choose language",
+    "languages": { "de": "Deutsch", "en": "English", "fr": "Français" }
+  },
+  "Home": {
+    "eyebrow": "In preparation",
+    "title": "The new HC Medical Solutions website is on its way.",
+    "text": "Content and design will follow shortly."
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "text": "The requested page does not exist or has been moved.",
+    "back": "Back to home"
+  }
+}
