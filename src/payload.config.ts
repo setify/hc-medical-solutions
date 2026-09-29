@@ -19,6 +19,7 @@ import { Footer } from './globals/Footer'
 import { Navigation } from './globals/Navigation'
 import { Settings } from './globals/Settings'
 import { defaultLocale, locales } from './i18n/routing'
+import { indexLocaleParents } from './lib/db-schema'
 import { hasS3, parseEnv } from './lib/env'
 
 const filename = fileURLToPath(import.meta.url)
@@ -60,6 +61,10 @@ export default buildConfig({
     pool: {
       connectionString: env.DATABASE_URL,
     },
+    // Eigenes Schema statt `public`: Supabase stellt nur `public` über die REST-API bereit.
+    // So sind Payload-Daten (inkl. Benutzer und Passwort-Hashes) nie über den API-Key erreichbar.
+    schemaName: 'payload',
+    afterSchemaInit: [indexLocaleParents],
     migrationDir: path.resolve(dirname, 'migrations'),
     // Schema-Änderungen laufen außerhalb der Entwicklung ausschließlich über Migrationen.
     push: process.env.NODE_ENV === 'development',
