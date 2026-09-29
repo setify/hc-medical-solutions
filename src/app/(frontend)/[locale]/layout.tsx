@@ -40,8 +40,10 @@ export default async function LocaleLayout({ children, params }: Props) {
   const t = await getTranslations({ locale, namespace: 'Common' })
 
   return (
-    <html lang={locale} className={lexendDeca.variable}>
-      <body className="flex min-h-dvh flex-col">
+    // suppressHydrationWarning: Browser-Erweiterungen (z. B. LanguageTool, Grammarly) setzen
+    // Attribute auf <html>/<body>, bevor React hydriert. Gilt nur für diese beiden Elemente.
+    <html lang={locale} className={lexendDeca.variable} suppressHydrationWarning>
+      <body className="flex min-h-dvh flex-col" suppressHydrationWarning>
         <NextIntlClientProvider>
           <SkipLink label={t('skipToContent')} />
           <header className="border-b border-line">

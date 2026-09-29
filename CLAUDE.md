@@ -27,6 +27,7 @@ Setup, Scripts und Struktur: `README.md`.
 - Nach Änderungen an Admin-Komponenten: `pnpm generate:importmap`.
 - Dateien in `src/app/(payload)/` sind generiert – nicht bearbeiten.
 - Vor Commit: `pnpm lint && pnpm typecheck && pnpm test` (E2E: `pnpm test:e2e`).
+- **Versionierung & Changelog:** Jede ausgelieferte Änderung erhöht die Version in `package.json` (SemVer, bis Launch 0.x: Feature = Minor, Fix = Patch) und bekommt einen Eintrag in `CHANGELOG.md` (Keep a Changelog, Deutsch, verständlich für HC). Denselben Eintrag parallel in Notion spiegeln: Seite „Changelog“ (ID `3eae35581acf80f08853f033d1956534`), neueste Version oben.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
