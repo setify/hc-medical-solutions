@@ -70,6 +70,20 @@ supabase/                    Lokale Supabase-Konfiguration
 tests/unit, tests/e2e        Tests
 ```
 
+## Corporate Design
+
+Designsystem unter [`/de/styleguide`](http://localhost:3000/de/styleguide) (intern, nicht indexiert): Audit, Prinzipien, Logo, Farbskalen mit Kontrastwerten, fluide Typografie, Raster, Bewegung sowie alle Komponenten (Buttons, Formulare, Cards, Dialoge, Feedback, Navigation, Textanimationen, WebGL-Hintergrund).
+
+- Tokens: `src/app/(frontend)/globals.css` (nur Markenfarben, Tailwind-Standardpalette deaktiviert)
+- Komponenten: `src/components/ui/`, `src/components/effects/`, `src/components/text/`
+- Animationen: `motion`; `ogl` nur für „Micro Slats“. Effekte nach [React Bits](https://reactbits.dev) (MIT + Commons Clause), überwiegend neu umgesetzt.
+
+## Datenbank-Schema und Sicherheit
+
+Payload speichert alle Tabellen im Postgres-Schema **`payload`**, nicht in `public`. Supabase stellt über seine REST-/GraphQL-API nur `public` bereit – Payload-Daten (inkl. Benutzer und Passwort-Hashes) sind damit über den Supabase-API-Key nicht erreichbar. Zugriff erfolgt ausschließlich serverseitig über `DATABASE_URL`.
+
+In der Supabase-Cloud das Schema `payload` **nicht** unter „API Settings → Exposed schemas“ eintragen.
+
 ## Umgebungen und Indexierung
 
 - `SITE_INDEXABLE=true` nur in Produktion. Sonst: `robots.txt` sperrt alles, jede Antwort trägt `X-Robots-Tag: noindex`.
@@ -82,4 +96,3 @@ tests/unit, tests/e2e        Tests
 - Design und Inhaltsblöcke nach Freigabe
 - Kontaktformular (Versand per SMTP, keine Speicherung), Matomo-Einbindung
 - Sitemap aus veröffentlichten Seiten und aktiven Stellen, dynamische Seiten-Routen
-- Lokale Webfonts in `public/fonts`

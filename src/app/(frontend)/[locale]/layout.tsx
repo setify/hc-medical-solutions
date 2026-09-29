@@ -4,8 +4,11 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { ReactNode } from 'react'
 
+import { Logo } from '@/components/brand/Logo'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { SkipLink } from '@/components/SkipLink'
+import { lexendDeca } from '@/fonts'
+import { Link } from '@/i18n/navigation'
 import { routing } from '@/i18n/routing'
 
 import '../globals.css'
@@ -37,13 +40,15 @@ export default async function LocaleLayout({ children, params }: Props) {
   const t = await getTranslations({ locale, namespace: 'Common' })
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={lexendDeca.variable}>
       <body className="flex min-h-dvh flex-col">
         <NextIntlClientProvider>
           <SkipLink label={t('skipToContent')} />
           <header className="border-b border-line">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-              <span className="font-semibold tracking-tight">HC Medical Solutions</span>
+              <Link href="/" className="inline-block rounded-sm">
+                <Logo className="h-9 w-auto sm:h-10" />
+              </Link>
               <LanguageSwitcher />
             </div>
           </header>

@@ -1,43 +1,395 @@
 @import 'tailwindcss';
 
 /*
- * Neutrale Design-Tokens als Platzhalter. Werden nach Designfreigabe
- * durch die HC-Markenwerte ersetzt. Schriften später lokal aus /public/fonts.
+ * HC Medical Solutions – Designsystem
+ * Grundlage: Logoblatt Honegger&Bregenzer (09/2023), erweitert für das Web.
+ * Dokumentation und Beispiele: /de/styleguide
+ *
+ * Leitmotiv „Die Linie“: Der senkrechte Schnitt im HC-Bildzeichen wird als
+ * wiederkehrendes Gestaltungselement genutzt (Trenner, Marker, Hover-Zustände,
+ * Lamellen-Hintergrund).
  */
-@theme {
-  --font-sans:
-    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
-  --color-surface: #ffffff;
-  --color-ink: #16202a;
-  --color-muted: #55606b;
-  --color-line: #d9dee3;
-  --color-accent: #0b5cad;
-  --color-focus: #0b5cad;
+@theme {
+  /* Nur Markenpalette – Tailwind-Standardfarben bewusst deaktiviert. */
+  --color-*: initial;
+
+  --color-white: #ffffff;
+
+  /* Petrol – Primärfarbe (Hausfarbe #004E5C = 700) */
+  --color-petrol-50: #eef6f7;
+  --color-petrol-100: #d6e9ec;
+  --color-petrol-200: #b0d3d9;
+  --color-petrol-300: #7fb5c0;
+  --color-petrol-400: #4a92a0;
+  --color-petrol-500: #1d6f7f;
+  --color-petrol-600: #085d6c;
+  --color-petrol-700: #004e5c;
+  --color-petrol-800: #033f4a;
+  --color-petrol-900: #062f37;
+  --color-petrol-950: #031f25;
+
+  /* Blau – Akzent (Hausfarbe #007F9D = 600) */
+  --color-blue-50: #e8f5f9;
+  --color-blue-100: #cfeaf2;
+  --color-blue-200: #a0cce0;
+  --color-blue-300: #5fb3cc;
+  --color-blue-400: #2a98b5;
+  --color-blue-500: #0b8aa8;
+  --color-blue-600: #007f9d;
+  --color-blue-700: #006a84;
+  --color-blue-800: #00566b;
+
+  /* Rot – Signal (Hausfarbe #E9483D = 500) */
+  --color-red-50: #fdecea;
+  --color-red-100: #fbd5d1;
+  --color-red-500: #e9483d;
+  --color-red-600: #c9342a;
+  --color-red-700: #a62a22;
+
+  /* Neutral – leicht petrol-getönt, damit Grau und Marke harmonieren */
+  --color-n-0: #ffffff;
+  --color-n-25: #f8fafb;
+  --color-n-50: #f2f6f7;
+  --color-n-100: #e6ecee;
+  --color-n-200: #d3dde0;
+  --color-n-300: #b3c1c5;
+  --color-n-400: #8a9aa0;
+  --color-n-500: #667880;
+  --color-n-600: #4d5d64;
+  --color-n-700: #38464c;
+  --color-n-800: #243034;
+  --color-n-900: #152226;
+  --color-n-950: #0c171a;
+
+  /* Status */
+  --color-success-50: #e7f5ee;
+  --color-success-700: #16704a;
+  --color-warning-50: #fdf4e1;
+  --color-warning-700: #8a5a00;
+
+  /* Logo */
+  --color-logo: #48779e;
+  --color-logo-strich: #231f20;
+
+  /* Hausfarben unter ihren Markennamen */
+  --color-brand-blue: #007f9d;
+  --color-brand-petrol: #004e5c;
+  --color-brand-red: #e9483d;
+  --color-brand-sky: #a0cce0;
+
+  /* Semantische Tokens – in Komponenten bevorzugt verwenden */
+  --color-surface: var(--color-n-0);
+  --color-surface-muted: var(--color-n-50);
+  --color-surface-sunken: var(--color-n-100);
+  --color-surface-inverse: var(--color-petrol-950);
+  --color-ink: var(--color-n-950);
+  --color-ink-soft: var(--color-n-800);
+  --color-muted: var(--color-n-600);
+  --color-line: var(--color-n-200);
+  --color-line-strong: var(--color-n-300);
+  --color-accent: var(--color-blue-600);
+  --color-accent-strong: var(--color-blue-700);
+  --color-primary: var(--color-petrol-700);
+  --color-primary-strong: var(--color-petrol-800);
+  --color-focus: var(--color-blue-600);
+  --color-danger: var(--color-red-700);
+
+  /* Typografie */
+  --font-sans: var(--font-lexend-deca), system-ui, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Fluide Schriftgrößen (clamp: 375 px → 1440 px Viewport) */
+  --text-display: clamp(2.75rem, 1.9rem + 3.6vw, 5.25rem);
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.035em;
+  --text-h1: clamp(2.25rem, 1.75rem + 2.1vw, 3.75rem);
+  --text-h1--line-height: 1.05;
+  --text-h1--letter-spacing: -0.03em;
+  --text-h2: clamp(1.75rem, 1.45rem + 1.3vw, 2.75rem);
+  --text-h2--line-height: 1.12;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h3: clamp(1.375rem, 1.25rem + 0.55vw, 1.75rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.01em;
+  --text-h4: 1.25rem;
+  --text-h4--line-height: 1.35;
+  --text-lead: clamp(1.125rem, 1.05rem + 0.35vw, 1.375rem);
+  --text-lead--line-height: 1.55;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.7;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.55;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.45;
+  --text-overline: 0.75rem;
+  --text-overline--line-height: 1.3;
+  --text-overline--letter-spacing: 0.16em;
+
+  /* Radien – abgeleitet vom abgerundeten Bildzeichen */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+  --radius-2xl: 2.5rem;
+
+  /* Schatten – petrol-getönt statt Schwarz */
+  --shadow-xs: 0 1px 2px rgb(3 31 37 / 0.06);
+  --shadow-sm: 0 2px 6px -2px rgb(3 31 37 / 0.1), 0 1px 2px rgb(3 31 37 / 0.05);
+  --shadow-md: 0 12px 28px -14px rgb(3 31 37 / 0.22), 0 2px 6px -2px rgb(3 31 37 / 0.06);
+  --shadow-lg: 0 30px 60px -28px rgb(3 31 37 / 0.32), 0 8px 18px -10px rgb(3 31 37 / 0.1);
+  --shadow-edge: inset 0 1px 0 rgb(255 255 255 / 0.12);
+
+  /* Bewegung */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --animate-shine: shine 3.2s linear infinite;
+  --animate-gradient-pan: gradient-pan 8s var(--ease-in-out-soft) infinite alternate;
+  --animate-marquee: marquee var(--marquee-duration, 30s) linear infinite;
+  --animate-star-top: star-top var(--star-speed, 6s) linear infinite alternate;
+  --animate-star-bottom: star-bottom var(--star-speed, 6s) linear infinite alternate;
+  --animate-shimmer: shimmer 1.6s var(--ease-in-out-soft) infinite;
+  --animate-breathe: breathe 2.4s var(--ease-in-out-soft) infinite;
+
+  @keyframes shine {
+    from {
+      background-position: 150% center;
+    }
+    to {
+      background-position: -50% center;
+    }
+  }
+  @keyframes gradient-pan {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 100% 50%;
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+  @keyframes star-top {
+    from {
+      transform: translate(0%, 0%);
+      opacity: 1;
+    }
+    to {
+      transform: translate(100%, 0%);
+      opacity: 0;
+    }
+  }
+  @keyframes star-bottom {
+    from {
+      transform: translate(0%, 0%);
+      opacity: 1;
+    }
+    to {
+      transform: translate(-100%, 0%);
+      opacity: 0;
+    }
+  }
+  @keyframes shimmer {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes breathe {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
 }
 
 @layer base {
   html {
     color-scheme: light;
     -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-surface font-sans text-ink antialiased;
+    @apply bg-surface font-sans text-body font-light text-ink antialiased;
+    font-feature-settings: 'ss01' 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-normal text-balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  strong,
+  b {
+    @apply font-semibold;
+  }
+
+  ::selection {
+    background: var(--color-blue-200);
+    color: var(--color-petrol-950);
   }
 
   :focus-visible {
-    outline: 3px solid var(--color-focus);
+    outline: 2px solid var(--color-focus);
     outline-offset: 3px;
+    border-radius: var(--radius-xs);
   }
 
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
     *,
     *::before,
     *::after {
       animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
     }
+  }
+}
+
+@layer components {
+  /* Seitencontainer */
+  .container-page {
+    @apply mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-10;
+  }
+
+  /* Overline mit Linien-Motiv */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-overline font-normal text-muted uppercase;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply inline-block h-3.5 w-px bg-accent;
+  }
+
+  /* Fließtext aus dem CMS (Rich Text) */
+  .prose-hc {
+    @apply max-w-[68ch] text-ink-soft;
+  }
+  .prose-hc > * + * {
+    margin-top: 1.25em;
+  }
+  .prose-hc h2 {
+    @apply mt-[2.2em] text-h3 text-ink;
+  }
+  .prose-hc h3 {
+    @apply mt-[1.8em] text-h4 font-medium text-ink;
+  }
+  .prose-hc a {
+    @apply text-accent-strong underline decoration-blue-300 decoration-1 underline-offset-4 transition-colors hover:decoration-current;
+  }
+  .prose-hc ul,
+  .prose-hc ol {
+    @apply flex flex-col gap-2 pl-0;
+  }
+  .prose-hc ul > li {
+    @apply relative pl-6;
+  }
+  .prose-hc ul > li::before {
+    content: '';
+    @apply absolute top-[0.55em] left-0 h-[0.8em] w-px bg-accent;
+  }
+  .prose-hc ol {
+    counter-reset: prose;
+  }
+  .prose-hc ol > li {
+    @apply relative pl-9;
+    counter-increment: prose;
+  }
+  .prose-hc ol > li::before {
+    content: counter(prose, decimal-leading-zero);
+    @apply absolute top-[0.3em] left-0 text-caption font-medium text-accent-strong tabular-nums;
+  }
+  .prose-hc blockquote {
+    @apply border-l border-accent pl-6 text-lead font-light text-ink;
+  }
+  .prose-hc hr {
+    @apply my-10 border-line;
+  }
+
+  /* Skeleton mit Lichtreflex */
+  .skeleton {
+    @apply relative overflow-hidden rounded-sm bg-n-100;
+  }
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 animate-shimmer;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.65), transparent);
+  }
+}
+
+@layer utilities {
+  /* Scroll-Reveal ohne JavaScript (CSS Scroll-Driven Animations).
+     Browser ohne Unterstützung zeigen den Inhalt sofort an. */
+  @supports (animation-timeline: view()) {
+    .reveal-word {
+      animation: reveal-word linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 45%;
+    }
+    .reveal-up {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+  }
+
+  /* Barrierefrei: jeder Zwischenzustand erfüllt WCAG AA (n-500 = 4,6 : 1 auf Weiß). */
+  @keyframes reveal-word {
+    from {
+      color: var(--color-n-500);
+      transform: translateY(0.12em);
+    }
+    to {
+      color: currentColor;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-word,
+    .reveal-up {
+      animation: none !important;
+    }
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
   }
 }
