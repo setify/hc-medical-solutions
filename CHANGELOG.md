@@ -5,6 +5,37 @@ Versionierung nach [SemVer](https://semver.org/lang/de/). Bis zum Launch gilt 0.
 
 Gespiegelt in Notion: Setify / HC Medical Solutions / Changelog.
 
+## [0.3.0] – 2026-09-30
+
+### Hinzugefügt
+
+- Seiten kommen aus dem CMS: 13 Seitenbausteine, Seitenhierarchie mit Pfaden je Sprache, Entwurfsvorschau, Startseite in den Einstellungen wählbar.
+- Header mit Untermenü und Mobilmenü, Footer mit Firmendaten, Sprachumschalter auf die übersetzte Seite.
+- Kontaktformular: Versand per E-Mail ohne Speicherung, Spamschutz ohne Drittanbieter, Fehlermeldungen in drei Sprachen.
+- Karriere: offene Stellen aus JOIN, serverseitig geladen und im HC-Design dargestellt – ohne Skript von join.com.
+- SEO: Metadaten aus dem CMS, hreflang/canonical, Sitemap aus veröffentlichten Seiten, JSON-LD, eigene Fehlerseiten.
+- Weiterleitungen alter URLs mit genau einer 301; Erfassung der alten Website (117 URLs) mit Vorschlägen zur Freigabe.
+- Matomo (HC-Instanz) ohne Cookies, nur Besuchszählung, nur in Produktion.
+- Technische Datenschutz-Übersicht für HC.
+
+### Geändert
+
+- Design-Audit „AI-Muster“: Radien aus dem HC-Bildzeichen abgeleitet (≈ 10 %, Buttons 4 px, Flächen max. 8 px), keine Pillenformen mehr.
+- Cards liegen flach (kein Anheben, keine großen Schatten), Icons ohne Kreis, Tabs und Sprachwahl mit Linie statt Füllung.
+- Styleguide-Hero ohne Glaseffekt und Zweizeiler, sachliche Metadaten.
+- Effekte beruhigt: einfarbiger Leuchtrand, Grafiken ohne Glow, Verlauf nur auf einzelnen Wörtern, kein pulsierender Statuspunkt.
+- Beispielinhalte ohne erfundene Kennzahlen, Partnernamen und Schlagwort-Reihen.
+- Erst-Migration neu erzeugt (noch keine Produktionsdatenbank); lokale Datenbanken einmal mit `supabase db reset` neu aufsetzen.
+- Entwicklungsserver fest auf Port 3100.
+
+### Behoben
+
+- Hydration-Warnung durch Passwortmanager (z. B. Dashlane) an Formularfeldern.
+
+### Entfernt
+
+- CMS-Collection „Offene Stellen“ (JOIN ist die einzige Quelle).
+
 ## [0.2.1] – 2026-09-29
 
 ### Behoben
@@ -46,7 +77,8 @@ Gespiegelt in Notion: Setify / HC Medical Solutions / Changelog.
 - Statische Platzhalter-Startseite, SEO-Grundlagen (robots.txt, Sitemap, hreflang, canonical), Staging-Schutz.
 - Qualitätssicherung: Lint, Typecheck, Unit-Tests, Browser- und Barrierefreiheitstests, GitHub-CI.
 
-[0.2.1]: https://github.com/setify/hc-medical-solutions/compare/3c91a28...main
+[0.3.0]: https://github.com/setify/hc-medical-solutions/compare/cb11b04...main
+[0.2.1]: https://github.com/setify/hc-medical-solutions/commit/cb11b04
 [0.2.0]: https://github.com/setify/hc-medical-solutions/commit/3c91a28
 [0.1.1]: https://github.com/setify/hc-medical-solutions/commit/95f496f
 [0.1.0]: https://github.com/setify/hc-medical-solutions/commit/cdcb5ee

@@ -11,39 +11,29 @@ const tones: Record<Tone, string> = {
   success: 'bg-success-50 text-success-700',
   warning: 'bg-warning-50 text-warning-700',
   danger: 'bg-red-50 text-red-700',
-  inverse: 'bg-white/10 text-white ring-1 ring-inset ring-white/15',
+  inverse: 'bg-white/10 text-white',
 }
 
 export function Badge({
   children,
   tone = 'neutral',
   dot,
-  live,
   className,
 }: {
   children: ReactNode
   tone?: Tone
   dot?: boolean
-  /** Pulsierender Punkt, z. B. „Stelle aktiv“. */
-  live?: boolean
   className?: string
 }) {
   return (
     <span
       className={cn(
-        'inline-flex h-7 items-center gap-2 rounded-full px-3 text-caption font-normal',
+        'inline-flex h-6 items-center gap-2 rounded-xs px-2 text-caption font-normal',
         tones[tone],
         className,
       )}
     >
-      {dot || live ? (
-        <span aria-hidden="true" className="relative flex size-1.5">
-          {live ? (
-            <span className="absolute inset-0 animate-breathe rounded-full bg-current" />
-          ) : null}
-          <span className="relative size-1.5 rounded-full bg-current" />
-        </span>
-      ) : null}
+      {dot ? <span aria-hidden="true" className="size-1.5 rounded-full bg-current" /> : null}
       {children}
     </span>
   )

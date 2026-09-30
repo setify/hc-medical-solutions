@@ -2,12 +2,15 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
 test.describe('Styleguide', () => {
+  // Umfangreiche Seite (WebGL, viele Komponenten) – im Dev-Server dauert der erste Aufruf länger.
+  test.describe.configure({ timeout: 90_000 })
+
   test.beforeEach(async ({ page }) => {
     await page.goto('/de/styleguide')
   })
 
   test('zeigt alle Abschnitte, Hausschrift und ist nicht indexierbar', async ({ page }) => {
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Eine Linie.')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Designsystem')
     await expect(page.locator('section[id]')).toHaveCount(14)
     for (const hex of ['#004E5C', '#007F9D', '#E9483D', '#A0CCE0']) {
       await expect(page.getByText(hex, { exact: true }).first()).toBeVisible()

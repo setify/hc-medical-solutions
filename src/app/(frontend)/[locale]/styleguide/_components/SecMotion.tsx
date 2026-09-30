@@ -34,13 +34,14 @@ const marks = [
     <circle cx="21" cy="16" r="7" />
   </svg>,
 ]
+// Bewusst neutrale Platzhalter: keine erfundenen Partnernamen auf einer echten Firmenseite.
 const partners = [
-  'Lindgrund Medtech',
-  'Vetorra Diagnostik',
-  'Aurelstein Kliniken',
-  'Holmquist Labor',
-  'Talwerk Medical',
-  'Ferrand & Oswald',
+  'Referenz 01',
+  'Referenz 02',
+  'Referenz 03',
+  'Referenz 04',
+  'Referenz 05',
+  'Referenz 06',
 ]
 
 export function SecText() {
@@ -49,11 +50,11 @@ export function SecText() {
       id="textanimation"
       no="11"
       title="Text in Bewegung"
-      intro="Sparsam dosiert – höchstens ein bewegtes Textelement pro Bildschirm. Alle Effekte halten mit „Bewegung reduzieren“ an; Screenreader lesen den vollständigen Text."
+      intro="Sparsam dosiert: höchstens ein bewegtes Textelement pro Bildschirm. Alle Effekte halten mit „Bewegung reduzieren“ an; Screenreader lesen den vollständigen Text."
     >
       <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
         <Specimen
-          label="Rotating Text – wechselnde Begriffe"
+          label="Rotating Text: wechselnde Begriffe"
           code="<RotatingText />"
           tone="plain"
           className="flex min-h-56 items-center"
@@ -68,36 +69,36 @@ export function SecText() {
         </Specimen>
         <div className="grid gap-6">
           <Specimen
-            label="Shiny Text – Lichtreflex"
+            label="Shiny Text: Lichtreflex"
             code="<ShinyText />"
             className="grid place-items-center"
           >
             <p className="text-h3">
-              <ShinyText>Neu: Karriere bei HC</ShinyText>
+              <ShinyText>Offene Stellen</ShinyText>
             </p>
           </Specimen>
           <Specimen
-            label="Gradient Text – wandernder Verlauf"
-            code="<GradientText outline />"
+            label="Gradient Text: nur ein Wort, nie ganze Überschriften"
+            code="<GradientText />"
             className="grid place-items-center"
           >
-            <GradientText outline className="text-small font-normal">
-              Jetzt in drei Sprachen
-            </GradientText>
+            <p className="text-h3">
+              Website in <GradientText>drei Sprachen</GradientText>
+            </p>
           </Specimen>
         </div>
       </div>
 
       <SgSub
-        title="Count Up – Kennzahlen"
-        text="Zählt beim Sichtbarwerden hoch. Ohne JavaScript steht sofort der Endwert da. Werte sind Beispiele."
+        title="Count Up: Kennzahlen"
+        text="Zählt beim Sichtbarwerden hoch. Ohne JavaScript steht sofort der Endwert da. Nur echte, belegbare Werte verwenden. Die Beispiele stammen aus diesem Styleguide."
       >
         <dl className="grid grid-cols-2 border-y border-line md:grid-cols-4">
           {[
-            { v: 1284, l: 'Projekte (Beispiel)' },
-            { v: 37.6, d: 1, s: ' %', l: 'kürzere Durchlaufzeit' },
             { v: 3, l: 'Sprachen' },
-            { v: 48, s: ' h', l: 'Antwortzeit' },
+            { v: 4, l: 'Hausfarben' },
+            { v: 9.36, d: 2, s: ' : 1', l: 'Kontrast Weiß auf Petrol' },
+            { v: 10, s: ' %', l: 'Eckradius des Bildzeichens' },
           ].map((k, i) => (
             <div
               key={k.l}
@@ -114,20 +115,20 @@ export function SecText() {
 
       <SgSub
         title="Scroll Reveal"
-        text="Wörter färben sich beim Scrollen von Grau zur Textfarbe – per CSS Scroll-Driven Animations, ohne JavaScript. Jeder Zwischenzustand erfüllt WCAG AA."
+        text="Wörter färben sich beim Scrollen von Grau zur Textfarbe. Umgesetzt mit CSS Scroll-Driven Animations, ohne JavaScript. Jeder Zwischenzustand erfüllt WCAG AA."
       >
         <ScrollReveal
           className="max-w-[26ch]"
-          text="Gute Gestaltung macht Komplexes zugänglich, ohne es zu vereinfachen. Sie schafft Vertrauen, bevor das erste Wort gelesen ist."
+          text="Dieser Absatz ist ein Beispiel für längeren Einleitungstext. Er färbt sich Wort für Wort ein, während er in die Mitte des Bildschirms scrollt."
         />
       </SgSub>
 
       <SgSub
         title="Curved Loop"
-        text="Laufschrift auf einer Kurve – mit Maus oder Finger ziehen, um Richtung und Tempo zu ändern. Für Übergänge zwischen großen Abschnitten."
+        text="Laufschrift auf einer Kurve. Mit Maus oder Finger ziehen, um Richtung und Tempo zu ändern. Höchstens einmal pro Seite."
       >
-        <div className="-mx-4 overflow-hidden bg-surface-muted py-6 sm:mx-0 sm:rounded-xl">
-          <CurvedLoop text="Präzision · Qualität · Verantwortung" />
+        <div className="-mx-4 overflow-hidden bg-surface-muted py-6 sm:mx-0 sm:rounded-lg">
+          <CurvedLoop text="Deutsch · English · Français" />
         </div>
       </SgSub>
 
@@ -150,14 +151,14 @@ export function SecBackgrounds() {
       id="hintergruende"
       no="12"
       title="Hintergründe"
-      intro="Micro Slats: ein Feld feiner Lamellen, das wie eine Oberfläche im Wind wogt – das Linien-Motiv als Bühne. WebGL, pausiert außerhalb des Sichtbereichs und bei „Bewegung reduzieren“."
+      intro="Micro Slats: ein Feld feiner Lamellen, das sich wie eine Oberfläche im Wind bewegt. Das Linien-Motiv als Bühne. WebGL, pausiert außerhalb des Sichtbereichs und bei „Bewegung reduzieren“; ohne WebGL bleibt die Grundfarbe."
     >
       <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
         <Specimen label="Micro Slats · Petrol (Standard)" code="<MicroSlats />" tone="none">
-          <div className="relative h-96 overflow-hidden rounded-xl bg-petrol-950">
+          <div className="relative h-96 overflow-hidden rounded-lg bg-petrol-950">
             <MicroSlats />
             <div className="pointer-events-none absolute inset-0 flex flex-col justify-end p-8 text-white">
-              <span className="eyebrow text-blue-200 before:bg-blue-200">Bühne</span>
+              <span className="eyebrow text-blue-200 before:bg-blue-200">Beispiel</span>
               <p className="mt-3 max-w-md text-h2 font-light">
                 Text liegt immer auf ruhiger Fläche.
               </p>
@@ -165,7 +166,7 @@ export function SecBackgrounds() {
           </div>
         </Specimen>
         <Specimen label="Micro Slats · Hell, Preset „tide“" code='preset="tide"' tone="none">
-          <div className="relative h-96 overflow-hidden rounded-xl bg-petrol-50">
+          <div className="relative h-96 overflow-hidden rounded-lg bg-petrol-50">
             <MicroSlats
               preset="tide"
               color="#7fb5c0"
@@ -193,8 +194,8 @@ export function SecOpen() {
           Für das Web gilt vorerst #007F9D.
         </li>
         <li>
-          <strong>Rot</strong> erreicht auf Weiß nur 3,85 : 1 – freigegeben nur für große Schrift,
-          Icons und Signale.
+          <strong>Rot</strong> erreicht auf Weiß nur 3,85 : 1 und ist deshalb nur für große Schrift,
+          Icons und Signale freigegeben.
         </li>
         <li>
           <strong>Bildsprache fehlt:</strong> Bis Fotos vorliegen, nutzen Demos generierte Grafiken

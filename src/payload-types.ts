@@ -68,7 +68,6 @@ export interface Config {
   blocks: {};
   collections: {
     pages: Page;
-    jobs: Job;
     media: Media;
     documents: Document;
     users: User;
@@ -81,7 +80,6 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
-    jobs: JobsSelect<false> | JobsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -144,26 +142,211 @@ export interface Page {
    * Teil der URL. Wird automatisch aus dem Titel erzeugt, wenn leer.
    */
   slug?: string | null;
+  /**
+   * Wird aus übergeordneter Seite und Slug erzeugt.
+   */
+  path?: string | null;
+  noindex?: boolean | null;
   layout?:
-    | {
-        content: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
+    | (
+        | {
+            eyebrow?: string | null;
+            title: string;
+            lead?: string | null;
+            variant?: ('light' | 'dark' | 'slats') | null;
+            image?: (number | null) | Media;
+            actions?:
+              | {
+                  link: {
+                    type?: ('page' | 'document' | 'external') | null;
+                    label: string;
+                    page?: (number | null) | Page;
+                    document?: (number | null) | Document;
+                    url?: string | null;
+                    newTab?: boolean | null;
+                  };
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
               [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richText';
+          }
+        | {
+            title?: string | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            image: number | Media;
+            imagePosition?: ('right' | 'left') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'textImage';
+          }
+        | {
+            title?: string | null;
+            intro?: string | null;
+            items?:
+              | {
+                  page: number | Page;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'teaserGrid';
+          }
+        | {
+            title?: string | null;
+            intro?: string | null;
+            steps?:
+              | {
+                  title: string;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'processSteps';
+          }
+        | {
+            title?: string | null;
+            items?:
+              | {
+                  question: string;
+                  answer?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            quote: string;
+            author?: string | null;
+            role?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'quote';
+          }
+        | {
+            title?: string | null;
+            /**
+             * Nur belegbare Werte verwenden.
+             */
+            items?:
+              | {
+                  value: number;
+                  decimals?: number | null;
+                  suffix?: string | null;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stats';
+          }
+        | {
+            title: string;
+            text?: string | null;
+            link: {
+              type?: ('page' | 'document' | 'external') | null;
+              label: string;
+              page?: (number | null) | Page;
+              document?: (number | null) | Document;
+              url?: string | null;
+              newTab?: boolean | null;
+            };
+            variant?: ('dark' | 'light') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'callToAction';
+          }
+        | {
+            title?: string | null;
+            documents: (number | Document)[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'downloads';
+          }
+        | {
+            title?: string | null;
+            /**
+             * Der Alternativtext des Bildes wird als Name verwendet.
+             */
+            logos: (number | Media)[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'partnerLogos';
+          }
+        | {
+            title?: string | null;
+            intro?: string | null;
+            emptyText?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'jobList';
+          }
+        | {
+            title?: string | null;
+            intro?: string | null;
+            topics?:
+              | {
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            privacyText: string;
+            successText?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contactForm';
+          }
+      )[]
+    | null;
+  parent?: (number | null) | Page;
+  breadcrumbs?:
+    | {
+        doc?: (number | null) | Page;
+        url?: string | null;
+        label?: string | null;
         id?: string | null;
-        blockName?: string | null;
-        blockType: 'richText';
       }[]
     | null;
   meta?: {
@@ -235,51 +418,6 @@ export interface Media {
       filename?: string | null;
     };
   };
-}
-/**
- * Stellen anlegen, ändern und über „Aktiv“ ein- oder ausblenden.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "jobs".
- */
-export interface Job {
-  id: number;
-  active?: boolean | null;
-  title: string;
-  /**
-   * Teil der URL. Wird automatisch aus dem Titel erzeugt, wenn leer.
-   */
-  slug?: string | null;
-  location?: string | null;
-  employmentType?:
-    ('full-time' | 'part-time' | 'full-or-part-time' | 'working-student' | 'apprenticeship' | 'internship') | null;
-  description?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  attachment?: (number | null) | Document;
-  publishedAt?: string | null;
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-  };
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -378,10 +516,6 @@ export interface PayloadLockedDocument {
         value: number | Page;
       } | null)
     | ({
-        relationTo: 'jobs';
-        value: number | Job;
-      } | null)
-    | ({
         relationTo: 'media';
         value: number | Media;
       } | null)
@@ -446,9 +580,37 @@ export interface PayloadMigration {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  path?: T;
+  noindex?: T;
   layout?:
     | T
     | {
+        hero?:
+          | T
+          | {
+              eyebrow?: T;
+              title?: T;
+              lead?: T;
+              variant?: T;
+              image?: T;
+              actions?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          label?: T;
+                          page?: T;
+                          document?: T;
+                          url?: T;
+                          newTab?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         richText?:
           | T
           | {
@@ -456,6 +618,154 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        textImage?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              image?: T;
+              imagePosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+        teaserGrid?:
+          | T
+          | {
+              title?: T;
+              intro?: T;
+              items?:
+                | T
+                | {
+                    page?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        processSteps?:
+          | T
+          | {
+              title?: T;
+              intro?: T;
+              steps?:
+                | T
+                | {
+                    title?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              title?: T;
+              items?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        quote?:
+          | T
+          | {
+              quote?: T;
+              author?: T;
+              role?: T;
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              title?: T;
+              items?:
+                | T
+                | {
+                    value?: T;
+                    decimals?: T;
+                    suffix?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        callToAction?:
+          | T
+          | {
+              title?: T;
+              text?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    label?: T;
+                    page?: T;
+                    document?: T;
+                    url?: T;
+                    newTab?: T;
+                  };
+              variant?: T;
+              id?: T;
+              blockName?: T;
+            };
+        downloads?:
+          | T
+          | {
+              title?: T;
+              documents?: T;
+              id?: T;
+              blockName?: T;
+            };
+        partnerLogos?:
+          | T
+          | {
+              title?: T;
+              logos?: T;
+              id?: T;
+              blockName?: T;
+            };
+        jobList?:
+          | T
+          | {
+              title?: T;
+              intro?: T;
+              emptyText?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contactForm?:
+          | T
+          | {
+              title?: T;
+              intro?: T;
+              topics?:
+                | T
+                | {
+                    label?: T;
+                    id?: T;
+                  };
+              privacyText?: T;
+              successText?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  parent?: T;
+  breadcrumbs?:
+    | T
+    | {
+        doc?: T;
+        url?: T;
+        label?: T;
+        id?: T;
       };
   meta?:
     | T
@@ -467,29 +777,6 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "jobs_select".
- */
-export interface JobsSelect<T extends boolean = true> {
-  active?: T;
-  title?: T;
-  slug?: T;
-  location?: T;
-  employmentType?: T;
-  description?: T;
-  attachment?: T;
-  publishedAt?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        image?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -673,9 +960,33 @@ export interface Navigation {
           url?: string | null;
           newTab?: boolean | null;
         };
+        children?:
+          | {
+              link: {
+                type?: ('page' | 'document' | 'external') | null;
+                label: string;
+                page?: (number | null) | Page;
+                document?: (number | null) | Document;
+                url?: string | null;
+                newTab?: boolean | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
+  cta?: {
+    enabled?: boolean | null;
+    link?: {
+      type?: ('page' | 'document' | 'external') | null;
+      label: string;
+      page?: (number | null) | Page;
+      document?: (number | null) | Document;
+      url?: string | null;
+      newTab?: boolean | null;
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -685,16 +996,22 @@ export interface Navigation {
  */
 export interface Footer {
   id: number;
-  links?:
+  columns?:
     | {
-        link: {
-          type?: ('page' | 'document' | 'external') | null;
-          label: string;
-          page?: (number | null) | Page;
-          document?: (number | null) | Document;
-          url?: string | null;
-          newTab?: boolean | null;
-        };
+        title?: string | null;
+        links?:
+          | {
+              link: {
+                type?: ('page' | 'document' | 'external') | null;
+                label: string;
+                page?: (number | null) | Page;
+                document?: (number | null) | Document;
+                url?: string | null;
+                newTab?: boolean | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -721,11 +1038,30 @@ export interface Footer {
 export interface Setting {
   id: number;
   /**
+   * Diese Seite wird unter /de, /en und /fr angezeigt.
+   */
+  homePage?: (number | null) | Page;
+  organization?: {
+    name?: string | null;
+    street?: string | null;
+    postalCode?: string | null;
+    city?: string | null;
+    country?: string | null;
+    phone?: string | null;
+    email?: string | null;
+  };
+  /**
    * Anfragen werden nur per E-Mail versendet, nicht gespeichert.
    */
   contactRecipient?: string | null;
+  /**
+   * Aus dem JOIN-Widget-Code (accessToken). Stellen werden serverseitig abgerufen und stündlich aktualisiert.
+   */
+  joinWidgetToken?: string | null;
+  joinCompanyUrl?: string | null;
   matomoUrl?: string | null;
   matomoSiteId?: string | null;
+  matomoRespectDnt?: boolean | null;
   defaultOgImage?: (number | null) | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -748,7 +1084,37 @@ export interface NavigationSelect<T extends boolean = true> {
               url?: T;
               newTab?: T;
             };
+        children?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    label?: T;
+                    page?: T;
+                    document?: T;
+                    url?: T;
+                    newTab?: T;
+                  };
+              id?: T;
+            };
         id?: T;
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              label?: T;
+              page?: T;
+              document?: T;
+              url?: T;
+              newTab?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -759,18 +1125,24 @@ export interface NavigationSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  links?:
+  columns?:
     | T
     | {
-        link?:
+        title?: T;
+        links?:
           | T
           | {
-              type?: T;
-              label?: T;
-              page?: T;
-              document?: T;
-              url?: T;
-              newTab?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    label?: T;
+                    page?: T;
+                    document?: T;
+                    url?: T;
+                    newTab?: T;
+                  };
+              id?: T;
             };
         id?: T;
       };
@@ -798,9 +1170,24 @@ export interface FooterSelect<T extends boolean = true> {
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
+  homePage?: T;
+  organization?:
+    | T
+    | {
+        name?: T;
+        street?: T;
+        postalCode?: T;
+        city?: T;
+        country?: T;
+        phone?: T;
+        email?: T;
+      };
   contactRecipient?: T;
+  joinWidgetToken?: T;
+  joinCompanyUrl?: T;
   matomoUrl?: T;
   matomoSiteId?: T;
+  matomoRespectDnt?: T;
   defaultOgImage?: T;
   updatedAt?: T;
   createdAt?: T;

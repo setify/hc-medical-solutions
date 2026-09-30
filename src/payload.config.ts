@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
@@ -11,13 +12,13 @@ import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
 import { Documents } from './collections/Documents'
-import { Jobs } from './collections/Jobs'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Users } from './collections/Users'
 import { Footer } from './globals/Footer'
 import { Navigation } from './globals/Navigation'
 import { Settings } from './globals/Settings'
+import { revalidateRedirects, revalidateRedirectsDelete } from './hooks/revalidate'
 import { defaultLocale, locales } from './i18n/routing'
 import { indexLocaleParents } from './lib/db-schema'
 import { hasS3, parseEnv } from './lib/env'
@@ -50,7 +51,7 @@ export default buildConfig({
     // Briefing: fehlende Übersetzungen dürfen nicht durch andere Sprachen ersetzt werden.
     fallback: false,
   },
-  collections: [Pages, Jobs, Media, Documents, Users],
+  collections: [Pages, Media, Documents, Users],
   globals: [Navigation, Footer, Settings],
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET,
@@ -71,8 +72,14 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
+    nestedDocsPlugin({
+      collections: ['pages'],
+      generateLabel: (_, doc) => String(doc.title ?? ''),
+      // Pfad ohne Sprachpräfix, z. B. /unternehmen/vorgehensweise
+      generateURL: (docs) => docs.reduce((url, doc) => `${url}/${String(doc.slug ?? '')}`, ''),
+    }),
     seoPlugin({
-      collections: ['pages', 'jobs'],
+      collections: ['pages'],
       uploadsCollection: 'media',
       tabbedUI: true,
       generateTitle: ({ doc }) =>
@@ -81,7 +88,9 @@ export default buildConfig({
     redirectsPlugin({
       collections: ['pages'],
       overrides: {
+        labels: { singular: 'Weiterleitung', plural: 'Weiterleitungen' },
         admin: { group: 'Website' },
+        hooks: { afterChange: [revalidateRedirects], afterDelete: [revalidateRedirectsDelete] },
       },
       redirectTypes: ['301', '302'],
     }),

@@ -4,12 +4,11 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { ReactNode } from 'react'
 
-import { Logo } from '@/components/brand/Logo'
-import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { Matomo } from '@/components/site/Matomo'
 import { SkipLink } from '@/components/SkipLink'
 import { lexendDeca } from '@/fonts'
-import { Link } from '@/i18n/navigation'
 import { routing } from '@/i18n/routing'
+import { getGlobals } from '@/lib/cms'
 
 import '../globals.css'
 
@@ -39,6 +38,19 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   const t = await getTranslations({ locale, namespace: 'Common' })
 
+  // Matomo nur in Produktion (SITE_INDEXABLE) oder ausdrücklich aktiviert – nie auf Staging.
+  const trackingEnabled =
+    process.env.SITE_INDEXABLE === 'true' || process.env.MATOMO_ENABLED === 'true'
+  const settings = trackingEnabled ? (await getGlobals(locale).catch(() => null))?.settings : null
+  const matomo =
+    settings?.matomoUrl && settings.matomoSiteId
+      ? {
+          url: settings.matomoUrl,
+          siteId: settings.matomoSiteId,
+          respectDnt: settings.matomoRespectDnt !== false,
+        }
+      : null
+
   return (
     // suppressHydrationWarning: Browser-Erweiterungen (z. B. LanguageTool, Grammarly) setzen
     // Attribute auf <html>/<body>, bevor React hydriert. Gilt nur für diese beiden Elemente.
@@ -46,17 +58,8 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className="flex min-h-dvh flex-col" suppressHydrationWarning>
         <NextIntlClientProvider>
           <SkipLink label={t('skipToContent')} />
-          <header className="border-b border-line">
-            <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-              <Link href="/" className="inline-block rounded-sm">
-                <Logo className="h-9 w-auto sm:h-10" />
-              </Link>
-              <LanguageSwitcher />
-            </div>
-          </header>
-          <main id="main" className="flex-1" tabIndex={-1}>
-            {children}
-          </main>
+          {children}
+          {matomo ? <Matomo {...matomo} /> : null}
         </NextIntlClientProvider>
       </body>
     </html>

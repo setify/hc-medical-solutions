@@ -7,7 +7,11 @@
   "Common": {
     "skipToContent": "Aller au contenu",
     "languageSwitcher": "Choisir la langue",
-    "languages": { "de": "Deutsch", "en": "English", "fr": "Français" }
+    "languages": {
+      "de": "Deutsch",
+      "en": "English",
+      "fr": "Français"
+    }
   },
   "Home": {
     "eyebrow": "En préparation",
@@ -18,5 +22,59 @@
     "title": "Page introuvable",
     "text": "La page demandée n’existe pas ou a été déplacée.",
     "back": "Retour à l’accueil"
+  },
+  "Site": {
+    "menu": "Menu",
+    "closeMenu": "Fermer le menu",
+    "mainNav": "Navigation principale",
+    "footerNav": "Pied de page",
+    "legal": "Mentions légales",
+    "contact": "Contact",
+    "home": "Accueil",
+    "submenu": "Sous-menu {label}"
+  },
+  "Jobs": {
+    "apply": "Voir le poste",
+    "opensJoin": "ouvre join.com",
+    "count": "{count, plural, one {# poste ouvert} other {# postes ouverts}}",
+    "empty": "Aucun poste n’est ouvert actuellement.",
+    "error": "Les postes ne peuvent pas être chargés pour le moment.",
+    "errorLink": "Voir tous les postes sur JOIN",
+    "workplace": {
+      "hybrid": "Hybride",
+      "remote": "Télétravail",
+      "onsite": "Sur site"
+    }
+  },
+  "Contact": {
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "topic": "Objet",
+    "topicPlaceholder": "Veuillez choisir",
+    "message": "Message",
+    "messageHint": "2 000 caractères maximum.",
+    "optional": "facultatif",
+    "required": "Champ obligatoire",
+    "submit": "Envoyer la demande",
+    "sending": "Envoi en cours",
+    "success": "Merci. Votre demande a été envoyée.",
+    "errors": {
+      "required": "Veuillez remplir ce champ.",
+      "email": "Veuillez saisir une adresse e-mail valide.",
+      "tooLong": "Le texte est trop long.",
+      "consent": "Veuillez confirmer la politique de confidentialité.",
+      "topic": "Veuillez choisir un objet.",
+      "form": "Veuillez vérifier les champs signalés.",
+      "spam": "Votre demande n’a pas pu être envoyée. Veuillez recharger la page et réessayer.",
+      "rate": "Trop de demandes en peu de temps. Veuillez réessayer dans quelques minutes.",
+      "send": "Votre demande n’a pas pu être envoyée. Veuillez réessayer plus tard ou nous écrire directement par e-mail."
+    }
+  },
+  "Error": {
+    "title": "Une erreur s’est produite",
+    "text": "La page n’a pas pu être chargée. Veuillez réessayer.",
+    "retry": "Réessayer"
   }
 }

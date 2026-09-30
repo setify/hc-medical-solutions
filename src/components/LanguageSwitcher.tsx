@@ -1,36 +1,54 @@
-'use client'
+import { getTranslations } from 'next-intl/server'
 
-import { useLocale, useTranslations } from 'next-intl'
+import { locales, type Locale } from '@/i18n/routing'
+import { cn } from '@/lib/cn'
 
-import { Link, usePathname } from '@/i18n/navigation'
-import { locales } from '@/i18n/routing'
-
-/** Sprachwechsel als einfache Linkliste: funktioniert ohne JavaScript und bleibt auf der aktuellen Unterseite. */
-export function LanguageSwitcher() {
-  const t = useTranslations('Common')
-  const pathname = usePathname()
-  const current = useLocale()
+/**
+ * Sprachwechsel als Linkliste – funktioniert ohne JavaScript.
+ * `alternates` enthält die Pfade dieser Seite je Sprache (lokalisierte Slugs);
+ * fehlt eine Übersetzung, führt der Link zur Startseite der Sprache.
+ */
+export async function LanguageSwitcher({
+  locale,
+  alternates,
+  tone = 'dark',
+}: {
+  locale: Locale
+  alternates: Partial<Record<Locale, string>>
+  tone?: 'dark' | 'light'
+}) {
+  const t = await getTranslations({ locale, namespace: 'Common' })
 
   return (
     <nav aria-label={t('languageSwitcher')}>
       <ul className="flex gap-1 text-sm">
-        {locales.map((locale) => {
-          const isCurrent = locale === current
+        {locales.map((l) => {
+          const isCurrent = l === locale
+          const href = `/${l}${alternates[l] ?? ''}`
           return (
-            <li key={locale}>
-              <Link
-                href={pathname}
-                locale={locale}
-                hrefLang={locale}
-                lang={locale}
+            <li key={l}>
+              <a
+                href={href}
+                hrefLang={l}
+                lang={l}
                 aria-current={isCurrent ? 'page' : undefined}
-                className={`inline-block rounded px-2 py-1 uppercase ${
-                  isCurrent ? 'bg-ink text-surface' : 'text-ink hover:bg-line'
-                }`}
+                className={cn(
+                  'relative inline-block px-1.5 py-2 uppercase transition-colors',
+                  isCurrent
+                    ? cn(
+                        'after:absolute after:inset-x-1.5 after:bottom-0.5 after:h-px',
+                        tone === 'dark'
+                          ? 'text-ink after:bg-accent'
+                          : 'text-white after:bg-blue-200',
+                      )
+                    : tone === 'dark'
+                      ? 'text-muted hover:text-ink'
+                      : 'text-petrol-200 hover:text-white',
+                )}
               >
-                <span aria-hidden="true">{locale}</span>
-                <span className="sr-only">{t(`languages.${locale}`)}</span>
-              </Link>
+                <span aria-hidden="true">{l}</span>
+                <span className="sr-only">{t(`languages.${l}`)}</span>
+              </a>
             </li>
           )
         })}

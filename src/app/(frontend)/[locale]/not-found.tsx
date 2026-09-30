@@ -1,19 +1,23 @@
-import { useTranslations } from 'next-intl'
+import { getLocale, getTranslations } from 'next-intl/server'
 
-import { Link } from '@/i18n/navigation'
+import { SiteShell } from '@/components/site/SiteShell'
+import { ButtonLink } from '@/components/ui/Button'
+import type { Locale } from '@/i18n/routing'
 
-export default function NotFound() {
-  const t = useTranslations('NotFound')
+export default async function NotFound() {
+  const locale = (await getLocale()) as Locale
+  const t = await getTranslations({ locale, namespace: 'NotFound' })
 
   return (
-    <section className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-24 sm:px-6">
-      <h1 className="text-3xl font-semibold">{t('title')}</h1>
-      <p className="text-muted">{t('text')}</p>
-      <p>
-        <Link href="/" className="text-accent underline underline-offset-4">
+    <SiteShell locale={locale} current="" alternates={{ de: '', en: '', fr: '' }}>
+      <section className="container-page flex flex-col items-start gap-6 py-24 md:py-32">
+        <p className="text-small text-muted">404</p>
+        <h1 className="text-h1 font-light">{t('title')}</h1>
+        <p className="max-w-xl text-lead font-light text-muted">{t('text')}</p>
+        <ButtonLink href={`/${locale}`} variant="secondary">
           {t('back')}
-        </Link>
-      </p>
-    </section>
+        </ButtonLink>
+      </section>
+    </SiteShell>
   )
 }

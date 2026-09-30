@@ -58,7 +58,7 @@ export function SecFeedback() {
             }
           />
         </Specimen>
-        <Specimen label="Toast – nach dem Absenden" code='aria-live="polite"'>
+        <Specimen label="Toast nach dem Absenden" code='aria-live="polite"'>
           <ToastDemo />
         </Specimen>
       </div>
@@ -81,10 +81,10 @@ export function SecFeedback() {
       <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
         <SgSub
           title="Ladezustand"
-          text="Skeletons in der Form des späteren Inhalts – keine Drehkreisel."
+          text="Skeletons in der Form des späteren Inhalts, keine Drehkreisel."
         >
           <div
-            className="flex flex-col gap-4 rounded-xl border border-line p-6"
+            className="flex flex-col gap-4 rounded-lg border border-line p-6"
             role="status"
             aria-busy="true"
             aria-label="Inhalt wird geladen"

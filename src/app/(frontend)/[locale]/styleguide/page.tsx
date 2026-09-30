@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { setRequestLocale } from 'next-intl/server'
+
+import { SiteShell } from '@/components/site/SiteShell'
+import type { Locale } from '@/i18n/routing'
 
 import { SecButtons, SecForms } from './_components/SecActions'
 import { SecCards } from './_components/SecCards'
@@ -46,10 +50,16 @@ const sections = [
 
 export default async function StyleguidePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
+  // Interne Seite nur auf Deutsch; dynamicParams allein reicht neben der Catch-all-Route nicht.
+  if (locale !== 'de') notFound()
   setRequestLocale(locale)
 
   return (
-    <>
+    <SiteShell
+      locale={locale as Locale}
+      current={`/${locale}/styleguide`}
+      alternates={{ de: '/styleguide' }}
+    >
       <SgHero />
       <div className="container-page grid gap-12 py-16 lg:grid-cols-[13rem_1fr] lg:gap-16">
         <aside>
@@ -72,6 +82,6 @@ export default async function StyleguidePage({ params }: { params: Promise<{ loc
           <SecOpen />
         </div>
       </div>
-    </>
+    </SiteShell>
   )
 }

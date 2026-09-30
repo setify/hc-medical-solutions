@@ -11,6 +11,8 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Trailing Slashes behandelt src/proxy.ts – so entsteht bei alten URLs nur eine Weiterleitung.
+  skipTrailingSlashRedirect: true,
   images: {
     localPatterns: [
       {

@@ -12,12 +12,21 @@ Setup, Scripts und Struktur: `README.md`.
 - **Schriften lokal:** Hausschrift Lexend Deca liegt in `src/fonts/` und wird über `next/font/local` eingebunden (`src/fonts/index.ts`).
 - **Corporate Design:** Farben, Logo und Schrift nach Logoblatt; Tokens in `src/app/(frontend)/globals.css`, Übersicht unter `/de/styleguide`. Logo nur über `<Logo />` (`src/components/brand/`) bzw. `public/brand/*.svg`, nie nachbauen.
 - **Komponenten:** UI-Bausteine in `src/components/ui/`, Animationen in `src/components/effects/` und `src/components/text/`. Neue Seiten aus diesen Bausteinen bauen, nicht neu erfinden. Nur semantische Farb-Tokens (`ink`, `muted`, `primary`, `accent` …); Tailwind-Standardfarben sind abgeschaltet.
+- **Gestaltung ohne AI-Muster:** Radien vom Bildzeichen (≈ 10 %): Buttons/Felder `rounded-sm` (4 px), Flächen max. `rounded-lg` (8 px). Keine Pillen (`rounded-full` nur Radio, Schalter, Statuspunkte), keine Glassmorphism-Kacheln, keine Icons in Kreisen, kein Anheben von Cards beim Hover, keine Glows/Blobs, keine Versalien-Overlines, keine erfundenen Kennzahlen/Partner/Buzzwords, keine Gedankenstrich-Prosa. Details: Audit auf `/de/styleguide`.
 - **Bewegung:** Einzige Animationsbibliothek ist `motion` (plus `ogl` nur für den WebGL-Hintergrund). Kein GSAP/Lenis. Jede Animation respektiert `prefers-reduced-motion`; Inhalte dürfen nie von JavaScript-Einblendungen abhängen (kein `initial={{ opacity: 0 }}` für Inhalt).
 - **Kontaktformular:** Versand nur per E-Mail an die in Settings hinterlegte Adresse. **Keine Speicherung** der Anfragen (kein Payload-Form-Builder). Spam-Schutz ohne Drittanbieter.
 - **Barrierefreiheit:** WCAG 2.2 AA als Maßstab (Semantik, Tastatur, sichtbarer Fokus, Kontraste, Alt-Texte, Formular-Labels). Besonders die Karriereseite. axe-Tests müssen grün bleiben.
 - **Staging** nie indexierbar (`SITE_INDEXABLE` nur in Produktion `true`) und per Basic-Auth geschützt.
 - **Datenbank:** Payload-Tabellen liegen im Schema `payload` (nicht `public`), damit die Supabase-API sie nie ausliefert. Dieses Schema nie in der Supabase-API freigeben; keine Payload-Daten nach `public` verschieben.
 - **Offene Stellen** (`jobs`) müssen ohne Entwickler anleg-, änder- und deaktivierbar sein.
+
+## Architektur (Kurzfassung)
+
+- Seiten: `src/app/(frontend)/[locale]/[[...slug]]/page.tsx` + Datenschicht `src/lib/cms.ts` (Local API, `unstable_cache` mit Tags). Header/Footer über `SiteShell` je Seite, weil der Sprachumschalter die lokalisierten Pfade der Seite braucht.
+- Revalidierung: Hooks in `src/hooks/revalidate.ts`. Next 16: `revalidateTag(tag, { expire: 0 })` – das Profil `'max'` liefert erst noch den alten Stand (stale-while-revalidate).
+- Skripte außerhalb von Next (Seed, Import) leeren den Cache über `POST /next/revalidate` (`scripts/revalidate.ts`).
+- Seed: bei Übersetzungen IDs verschachtelter Listen übernehmen (`withIds`), sonst ersetzt Payload die Einträge der anderen Sprachen.
+- Dev-Server: `pnpm dev` (Port 3100). E2E zuverlässig gegen Produktions-Build: `pnpm build && CI=1 pnpm test:e2e`.
 
 ## Konventionen
 

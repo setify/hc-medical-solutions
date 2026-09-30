@@ -46,7 +46,7 @@ export function BounceCards({
         return (
           <motion.div
             key={seed}
-            className="absolute aspect-[4/5] w-36 overflow-hidden rounded-xl border-[6px] border-white shadow-md sm:w-44"
+            className="absolute aspect-[4/5] w-36 overflow-hidden rounded-md border-4 border-white shadow-md sm:w-44"
             style={{ zIndex: isHovered ? 10 : i }}
             initial={false}
             animate={{

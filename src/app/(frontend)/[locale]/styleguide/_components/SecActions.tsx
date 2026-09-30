@@ -21,7 +21,7 @@ export function SecButtons() {
       id="buttons"
       no="06"
       title="Buttons & Links"
-      intro="Pillenform, ruhige Farbflächen. Pro Bereich höchstens ein primärer Button. Beim Klicken gibt jeder Button mit leichtem Eindrücken (scale 0,98) haptisches Feedback."
+      intro="Kantig wie das Bildzeichen (4 px Radius), ruhige Farbflächen ohne Schatten. Pro Bereich höchstens ein primärer Button. Beim Klicken gibt jeder Button mit leichtem Eindrücken (scale 0,98) Rückmeldung."
     >
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
         <Specimen label="Varianten" code="<Button variant=… />" tone="plain">
@@ -81,7 +81,7 @@ export function SecButtons() {
       >
         <div className="grid gap-6 md:grid-cols-[1.2fr_1fr]">
           <Specimen
-            label="Star Border – Lichtpunkt läuft um den Rand"
+            label="Star Border: Lichtpunkt läuft um den Rand"
             code="<StarBorder />"
             tone="dark"
             className="grid min-h-56 place-items-center"
@@ -92,14 +92,14 @@ export function SecButtons() {
           </Specimen>
           <div className="grid gap-6">
             <Specimen
-              label="Linien-Button – Linie klappt zur Unterstreichung"
+              label="Linien-Button: Linie klappt zur Unterstreichung"
               code="<LineButton />"
               className="grid place-items-center"
             >
               <LineButton href="#buttons">Alle Leistungen ansehen</LineButton>
             </Specimen>
             <Specimen
-              label="Magnetisch – folgt dem Mauszeiger"
+              label="Magnetisch: folgt dem Mauszeiger"
               code="<MagneticButton />"
               className="grid place-items-center"
             >
@@ -118,7 +118,7 @@ export function SecButtons() {
           <Badge tone="accent" dot>
             Akzent
           </Badge>
-          <Badge tone="success" live>
+          <Badge tone="success" dot>
             Stelle aktiv
           </Badge>
           <Badge tone="warning">Entwurf</Badge>
@@ -135,7 +135,7 @@ export function SecForms() {
       id="formulare"
       no="07"
       title="Formulare"
-      intro="Label über dem Feld, Pflichtfelder mit *, Hilfetext und Fehlermeldung darunter – per aria-describedby verknüpft. Kein externes Captcha; Spamschutz serverseitig."
+      intro="Label über dem Feld, Pflichtfelder mit *, Hilfetext und Fehlermeldung darunter, per aria-describedby verknüpft. Kein externes Captcha; Spamschutz serverseitig."
     >
       <div className="grid gap-10 lg:grid-cols-[1.35fr_1fr]">
         <Specimen label="Kontaktformular (Beispiel, ohne Versand)" tone="plain">

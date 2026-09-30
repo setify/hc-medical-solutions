@@ -83,7 +83,7 @@ export function Specimen({
     <figure className="flex min-w-0 flex-col gap-3">
       <div
         className={cn(
-          'relative rounded-xl',
+          'relative rounded-lg',
           tone === 'muted' && 'bg-surface-muted p-8 sm:p-10',
           tone === 'plain' && 'p-8 ring-1 ring-line sm:p-10',
           tone === 'dark' && 'bg-petrol-950 p-8 text-white sm:p-10',

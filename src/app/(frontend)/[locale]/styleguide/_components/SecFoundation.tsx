@@ -10,7 +10,7 @@ import { SgSection, SgSub, Specimen } from './Sg'
 const audit = [
   [
     'Kein Komponenten-System',
-    'Nur Logo, Farben, Schrift dokumentiert – keine Bausteine für Seiten.',
+    'Nur Logo, Farben und Schrift dokumentiert, keine Bausteine für Seiten.',
     'Vollständige Bibliothek: Buttons, Formulare, Cards, Dialoge, Feedback, Navigation, Bewegung.',
   ],
   [
@@ -31,7 +31,7 @@ const audit = [
   [
     'Tailwind-Standardfarben aktiv',
     'Beliebige Fremdfarben (purple, green …) jederzeit nutzbar.',
-    'Standardpalette abgeschaltet – nur Markenfarben verfügbar.',
+    'Standardpalette abgeschaltet, nur Markenfarben verfügbar.',
   ],
   [
     'Keine Bewegungsregeln',
@@ -45,38 +45,115 @@ const audit = [
   ],
 ] as const
 
+const auditSlop = [
+  [
+    'Pillenform überall',
+    '27 Elemente mit rounded-full: Buttons, Badges, Tabs, Sprachwahl.',
+    'Radien aus dem Bildzeichen abgeleitet (≈ 10 %): Buttons 4 px, Flächen max. 8 px.',
+  ],
+  [
+    'Weiche Riesenradien',
+    'Cards und Dialoge mit 20–40 px, der typische „Bento“-Look.',
+    'Flächen bei 8 px gedeckelt, passend zum eher kantigen HC-Zeichen.',
+  ],
+  [
+    'Glas-Kachel im Hero',
+    'Kennzahlen auf Milchglas mit Unschärfe.',
+    'Sachliche Metadaten auf Linien, kein Glaseffekt.',
+  ],
+  [
+    'Zweizeiler-Hero',
+    '„Eine Linie. Ein System.“ mit farbiger zweiter Zeile und rotierendem Wort.',
+    'Klarer Titel „Designsystem“ und ein sachlicher Satz.',
+  ],
+  [
+    'Icons im Kreis',
+    'Pfeil und Plus in runden Rahmen, die sich beim Hover drehen.',
+    'Freistehende Icons, die sich nur leicht bewegen.',
+  ],
+  [
+    'Schwebende Cards',
+    'Cards heben sich beim Hover mit großem Schatten.',
+    'Cards liegen flach, Hover über Randfarbe und Fläche.',
+  ],
+  [
+    'Farbige Glows',
+    'Leuchtrand von Blau nach Rot, Glow-Blobs in Grafiken, Verlaufs-Pille.',
+    'Ein Farbton je Effekt, Grafiken ohne Blobs, Verlauf nur auf einem Wort.',
+  ],
+  [
+    'Versalien-Overlines',
+    'Gesperrte Großbuchstaben über fast jedem Block.',
+    'Kleine Zeile in normaler Schreibung, Linie als Marker.',
+  ],
+  [
+    'Erfundene Zahlen und Partner',
+    '„1.284 Projekte“, „37,6 %“, erfundene Firmennamen, Buzzword-Tripel.',
+    'Nur belegbare Werte aus dem System, neutrale Platzhalter für Referenzen.',
+  ],
+  [
+    'Segmented Control',
+    'Tabs als Pille mit gleitender Füllung.',
+    'Tabs mit gleitender Linie, dem Leitmotiv folgend.',
+  ],
+  [
+    'Gedankenstrich-Prosa',
+    '43 Gedankenstriche in Beschriftungen und Sätzen.',
+    'Doppelpunkt, Komma oder eigener Satz.',
+  ],
+  [
+    'Pulsierende Status-Punkte',
+    'Dauerhaft „atmender“ Punkt bei aktiven Stellen.',
+    'Statischer Punkt; Bewegung nur als Reaktion auf Nutzeraktionen.',
+  ],
+] as const
+
+function AuditTable({ rows }: { rows: readonly (readonly [string, string, string])[] }) {
+  return (
+    <div className="divide-y divide-line border-y border-line">
+      {rows.map(([title, before, after], i) => (
+        <div key={title} className="grid gap-4 py-6 md:grid-cols-[3rem_1fr_1fr_1.2fr] md:gap-8">
+          <span className="pt-1 text-caption text-muted tabular-nums">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <p className="text-small font-normal text-ink">{title}</p>
+          <p className="flex gap-2 text-small text-muted">
+            <X aria-hidden="true" className="mt-1 size-4 shrink-0 text-red-600" />
+            <span>
+              <span className="sr-only">Vorher: </span>
+              {before}
+            </span>
+          </p>
+          <p className="flex gap-2 text-small text-ink-soft">
+            <Check aria-hidden="true" className="mt-1 size-4 shrink-0 text-success-700" />
+            <span>
+              <span className="sr-only">Jetzt: </span>
+              {after}
+            </span>
+          </p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export function SecAudit() {
   return (
     <SgSection
       id="audit"
       no="00"
-      title="Audit des ersten Entwurfs"
-      intro="Der erste Styleguide hat nur das Logoblatt abgebildet. Für eine Website fehlte fast alles. Das hier ist das Ergebnis der Prüfung – und was daraus wurde."
+      title="Audit"
+      intro="Zwei Prüfrunden: erst fehlende Grundlagen, dann typische Muster KI-generierter Oberflächen. Links der Befund, rechts die Entscheidung."
     >
-      <div className="divide-y divide-line border-y border-line">
-        {audit.map(([title, before, after], i) => (
-          <div key={title} className="grid gap-4 py-6 md:grid-cols-[3rem_1fr_1fr_1.2fr] md:gap-8">
-            <span className="pt-1 text-caption text-muted tabular-nums">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <p className="text-small font-normal text-ink">{title}</p>
-            <p className="flex gap-2 text-small text-muted">
-              <X aria-hidden="true" className="mt-1 size-4 shrink-0 text-red-600" />
-              <span>
-                <span className="sr-only">Vorher: </span>
-                {before}
-              </span>
-            </p>
-            <p className="flex gap-2 text-small text-ink-soft">
-              <Check aria-hidden="true" className="mt-1 size-4 shrink-0 text-success-700" />
-              <span>
-                <span className="sr-only">Jetzt: </span>
-                {after}
-              </span>
-            </p>
-          </div>
-        ))}
-      </div>
+      <SgSub title="Runde 1: Grundlagen">
+        <AuditTable rows={audit} />
+      </SgSub>
+      <SgSub
+        title="Runde 2: AI-Muster entfernt"
+        text="Muster, an denen man generierte Designs sofort erkennt. Sie wirken austauschbar und passen nicht zu einem medizinischen Umfeld."
+      >
+        <AuditTable rows={auditSlop} />
+      </SgSub>
     </SgSection>
   )
 }
@@ -94,7 +171,7 @@ const principles = [
   },
   {
     t: 'Zugänglich als Standard',
-    d: 'Kontraste, Tastaturbedienung und Screenreader sind in jede Komponente eingebaut – nicht nachträglich.',
+    d: 'Kontraste, Tastaturbedienung und Screenreader sind in jede Komponente eingebaut, nicht nachträglich ergänzt.',
   },
   {
     t: 'Ruhige Bewegung',
@@ -110,7 +187,7 @@ export function SecPrinciples() {
       title="Prinzipien"
       intro="Vier Regeln, an denen sich jede gestalterische Entscheidung messen lässt."
     >
-      <div className="grid gap-px overflow-hidden rounded-xl bg-line md:grid-cols-[1.3fr_1fr]">
+      <div className="grid gap-px overflow-hidden rounded-lg bg-line md:grid-cols-[1.3fr_1fr]">
         {principles.map((p, i) => (
           <div
             key={p.t}
@@ -183,7 +260,7 @@ export function SecBrand() {
         text="Rundum frei bleibt mindestens die Höhe des „C“ (≈ ½ Bildzeichen). Querformat nicht kleiner als 120 px Breite (Web) bzw. 30 mm (Druck)."
       >
         <div className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
-          <div className="grid place-items-center rounded-xl bg-surface-muted p-10">
+          <div className="grid place-items-center rounded-lg bg-surface-muted p-10">
             <div className="relative p-[clamp(1.25rem,4vw,2.5rem)] outline outline-1 outline-offset-0 outline-blue-400 outline-dashed">
               <span
                 aria-hidden="true"
@@ -192,7 +269,7 @@ export function SecBrand() {
               <Logo className="relative h-16 w-auto sm:h-20" />
             </div>
           </div>
-          <div className="flex flex-wrap items-end justify-center gap-x-8 gap-y-6 rounded-xl bg-surface-muted p-8">
+          <div className="flex flex-wrap items-end justify-center gap-x-8 gap-y-6 rounded-lg bg-surface-muted p-8">
             {[120, 160, 200].map((w) => (
               <div key={w} className="flex flex-col items-center gap-3">
                 <div style={{ width: w }}>

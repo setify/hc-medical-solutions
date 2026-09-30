@@ -10,7 +10,7 @@ const scale = [
     'lead',
     'clamp 18 → 22 px',
     'text-lead font-light',
-    'Einleitender Absatz – etwas größer, in Light, maximal drei Zeilen.',
+    'Einleitender Absatz, etwas größer, in Light, höchstens drei Zeilen.',
   ],
   [
     'body',
@@ -29,11 +29,11 @@ export function SecType() {
       id="typografie"
       no="04"
       title="Typografie"
-      intro="Hausschrift Lexend Deca als variabler Font (100–900), lokal ausgeliefert. Große Größen in Light, Hierarchie über Gewicht und Farbe – nicht über schiere Größe."
+      intro="Hausschrift Lexend Deca als variabler Font (100–900), lokal ausgeliefert. Große Größen in Light, Hierarchie über Gewicht und Farbe, nicht über schiere Größe."
     >
       <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
-        <div className="relative flex min-h-80 flex-col justify-between overflow-hidden rounded-xl bg-petrol-950 p-10 text-white">
-          <span className="text-overline text-blue-200 uppercase">Lexend Deca · Variable</span>
+        <div className="relative flex min-h-80 flex-col justify-between overflow-hidden rounded-lg bg-petrol-950 p-10 text-white">
+          <span className="text-small text-blue-200">Lexend Deca · Variable</span>
           <span
             aria-hidden="true"
             className="text-[11rem] leading-none font-extralight tracking-tighter"
@@ -60,7 +60,7 @@ export function SecType() {
                 <br />
                 {use}
               </span>
-              <span className={`${cls} text-h3 break-words`}>Äußerst präzise – « 1.284 € »</span>
+              <span className={`${cls} text-h3 break-words`}>Hamburgefonstiv 0123456789</span>
             </div>
           ))}
         </div>
@@ -92,8 +92,8 @@ export function SecType() {
           <Specimen label="Rich Text" code='className="prose-hc"' tone="plain">
             <div className="prose-hc">
               <p className="text-lead font-light text-ink">
-                Beispieltext: Gute Gestaltung macht komplexe Inhalte zugänglich – ohne sie zu
-                vereinfachen.
+                Beispieltext für einen einleitenden Absatz. Er steht in Lead-Größe und führt in das
+                Thema ein.
               </p>
               <h2>Zwischenüberschrift</h2>
               <p>
@@ -110,9 +110,7 @@ export function SecType() {
                 <li>Nummerierte Schritte mit führender Null</li>
                 <li>Für Abläufe und Anleitungen</li>
               </ol>
-              <blockquote>
-                „Zitate stehen an einer Linie – leicht, ruhig und gut lesbar.“
-              </blockquote>
+              <blockquote>„Zitate stehen an einer Linie: leicht, ruhig und gut lesbar.“</blockquote>
             </div>
           </Specimen>
           <div className="flex flex-col gap-10">

@@ -5,12 +5,12 @@ import { cn } from '@/lib/cn'
  * Ersetzt Fotos in Demos, bis echtes Bildmaterial von HC vorliegt.
  */
 const palettes = [
-  { bg: '#004e5c', line: '#7fb5c0', glow: '#a0cce0' },
-  { bg: '#031f25', line: '#1d6f7f', glow: '#007f9d' },
-  { bg: '#007f9d', line: '#a0cce0', glow: '#eef6f7' },
-  { bg: '#062f37', line: '#4a92a0', glow: '#e9483d' },
-  { bg: '#a0cce0', line: '#004e5c', glow: '#ffffff' },
-  { bg: '#085d6c', line: '#b0d3d9', glow: '#a0cce0' },
+  { bg: '#004e5c', line: '#7fb5c0' },
+  { bg: '#031f25', line: '#1d6f7f' },
+  { bg: '#007f9d', line: '#a0cce0' },
+  { bg: '#062f37', line: '#4a92a0' },
+  { bg: '#a0cce0', line: '#004e5c' },
+  { bg: '#085d6c', line: '#b0d3d9' },
 ] as const
 
 export function BrandArt({ seed = 0, className }: { seed?: number; className?: string }) {
@@ -25,19 +25,7 @@ export function BrandArt({ seed = 0, className }: { seed?: number; className?: s
       preserveAspectRatio="xMidYMid slice"
       className={cn('block size-full', className)}
     >
-      <defs>
-        <radialGradient
-          id={`g${seed}`}
-          cx={`${30 + ((seed * 17) % 50)}%`}
-          cy={`${25 + ((seed * 23) % 50)}%`}
-          r="75%"
-        >
-          <stop offset="0%" stopColor={p.glow} stopOpacity="0.55" />
-          <stop offset="100%" stopColor={p.bg} stopOpacity="0" />
-        </radialGradient>
-      </defs>
       <rect width="400" height="500" fill={p.bg} />
-      <rect width="400" height="500" fill={`url(#g${seed})`} />
       {Array.from({ length: count }, (_, i) => {
         // Gerundet, damit Server und Browser identisches Markup erzeugen (Hydration).
         const r = (v: number) => Math.round(v * 10) / 10

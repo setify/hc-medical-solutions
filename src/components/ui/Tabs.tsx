@@ -5,7 +5,7 @@ import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'rea
 
 import { cn } from '@/lib/cn'
 
-/** Tabs nach WAI-ARIA-Muster (Pfeiltasten, Pos1/Ende) mit gleitendem Indikator. */
+/** Tabs nach WAI-ARIA-Muster (Pfeiltasten, Pos1/Ende) mit gleitender Linie als Indikator. */
 export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode }[] }) {
   const [active, setActive] = useState(0)
   const id = useId()
@@ -39,7 +39,7 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode }[] }
         role="tablist"
         aria-orientation="horizontal"
         onKeyDown={onKey}
-        className="inline-flex gap-1 rounded-full bg-n-100 p-1"
+        className="flex gap-8 border-b border-line"
       >
         {tabs.map((tab, i) => (
           <button
@@ -54,14 +54,14 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode }[] }
             tabIndex={i === active ? 0 : -1}
             onClick={() => setActive(i)}
             className={cn(
-              'relative h-10 rounded-full px-5 text-small font-normal transition-colors',
-              i === active ? 'text-white' : 'text-n-700 hover:text-ink',
+              'relative h-12 text-small font-normal transition-colors',
+              i === active ? 'text-ink' : 'text-muted hover:text-ink',
             )}
           >
             {i === active ? (
               <motion.span
-                layoutId={`${id}-pill`}
-                className="absolute inset-0 rounded-full bg-primary shadow-sm"
+                layoutId={`${id}-line`}
+                className="absolute inset-x-0 -bottom-px h-0.5 bg-accent"
                 transition={{ type: 'spring', stiffness: 380, damping: 32 }}
               />
             ) : null}

@@ -80,8 +80,10 @@ export function Field({
   )
 }
 
+// suppressHydrationWarning an Feldern: Passwortmanager (Dashlane, 1Password, LastPass) setzen dort
+// Attribute vor der Hydration. Gilt nur für das jeweilige Element.
 const control =
-  'w-full rounded-md border bg-surface px-4 text-body text-ink font-light shadow-xs transition-[border-color,box-shadow,background-color] duration-200 placeholder:text-n-500 hover:border-n-400 focus:border-accent focus:outline-none focus:ring-4 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-n-50 disabled:text-n-500 read-only:bg-n-25'
+  'w-full rounded-sm border bg-surface px-4 text-body text-ink font-light shadow-xs transition-[border-color,box-shadow,background-color] duration-200 placeholder:text-n-500 hover:border-n-400 focus:border-accent focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-n-50 disabled:text-n-500 read-only:bg-n-25'
 
 const stateClass = (invalid?: boolean) =>
   invalid ? 'border-red-600 focus:border-red-600 focus:ring-red-100' : 'border-line-strong'
@@ -94,6 +96,7 @@ export function Input({
   return (
     <input
       aria-invalid={invalid || undefined}
+      suppressHydrationWarning
       className={cn(control, 'h-12', stateClass(invalid), className)}
       {...rest}
     />
@@ -108,6 +111,7 @@ export function Textarea({
   return (
     <textarea
       aria-invalid={invalid || undefined}
+      suppressHydrationWarning
       className={cn(
         control,
         'min-h-36 resize-y py-3 leading-relaxed',
@@ -129,6 +133,7 @@ export function Select({
     <div className="relative">
       <select
         aria-invalid={invalid || undefined}
+        suppressHydrationWarning
         className={cn(control, 'h-12 appearance-none pr-11', stateClass(invalid), className)}
         {...rest}
       >
@@ -161,7 +166,7 @@ export function Checkbox({
         <input
           id={id}
           type="checkbox"
-          className="peer size-5 appearance-none rounded-[5px] border border-line-strong bg-surface transition-colors duration-200 checked:border-primary checked:bg-primary focus-visible:ring-4 focus-visible:ring-blue-100"
+          className="peer size-5 appearance-none rounded-xs border border-line-strong bg-surface transition-colors duration-200 checked:border-primary checked:bg-primary focus-visible:ring-2 focus-visible:ring-blue-100"
           aria-describedby={description ? `${id}-d` : undefined}
           {...rest}
         />
@@ -196,7 +201,7 @@ export function Radio({
       <input
         id={id}
         type="radio"
-        className="grid size-5 shrink-0 appearance-none place-content-center rounded-full border border-line-strong bg-surface transition-colors before:size-2.5 before:scale-0 before:rounded-full before:bg-primary before:transition-transform before:duration-200 before:content-[''] checked:border-primary checked:before:scale-100 focus-visible:ring-4 focus-visible:ring-blue-100"
+        className="grid size-5 shrink-0 appearance-none place-content-center rounded-full border border-line-strong bg-surface transition-colors before:size-2.5 before:scale-0 before:rounded-full before:bg-primary before:transition-transform before:duration-200 before:content-[''] checked:border-primary checked:before:scale-100 focus-visible:ring-2 focus-visible:ring-blue-100"
         {...rest}
       />
       <label htmlFor={id} className="text-small text-ink">
@@ -218,7 +223,7 @@ export function Switch({
         id={id}
         type="checkbox"
         role="switch"
-        className="relative h-6 w-11 shrink-0 cursor-pointer appearance-none rounded-full bg-n-300 transition-colors duration-300 before:absolute before:top-0.5 before:left-0.5 before:size-5 before:rounded-full before:bg-white before:shadow-sm before:transition-transform before:duration-300 before:ease-out-back before:content-[''] checked:bg-primary checked:before:translate-x-5 focus-visible:ring-4 focus-visible:ring-blue-100"
+        className="relative h-6 w-11 shrink-0 cursor-pointer appearance-none rounded-full bg-n-300 transition-colors duration-300 before:absolute before:top-0.5 before:left-0.5 before:size-5 before:rounded-full before:bg-white before:shadow-sm before:transition-transform before:duration-300 before:ease-out-back before:content-[''] checked:bg-primary checked:before:translate-x-5 focus-visible:ring-2 focus-visible:ring-blue-100"
         {...rest}
       />
       <label htmlFor={id} className="text-small text-ink">

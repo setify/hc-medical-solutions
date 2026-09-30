@@ -10,7 +10,7 @@ const house = [
     hex: '#004E5C',
     rgb: '0 · 78 · 91',
     cmyk: '95 · 50 · 40 · 20',
-    role: 'Primärfarbe – Flächen, Buttons, Überschriften auf Hell.',
+    role: 'Primärfarbe: Flächen, Buttons, Überschriften auf Hell.',
     cls: 'bg-brand-petrol text-white',
     big: true,
   },
@@ -20,7 +20,7 @@ const house = [
     hex: '#007F9D',
     rgb: '0 · 127 · 157',
     cmyk: '90 · 30 · 20 · 5 *',
-    role: 'Akzent – Links, Fokus, Markierungen.',
+    role: 'Akzent: Links, Fokus, Markierungen.',
     cls: 'bg-brand-blue text-white',
   },
   {
@@ -38,7 +38,7 @@ const house = [
     hex: '#E9483D',
     rgb: '233 · 72 · 61',
     cmyk: '0 · 88 · 80 · 0',
-    role: 'Signal – sparsam, nie für Fließtext.',
+    role: 'Signal: sparsam, nie für Fließtext.',
     cls: 'bg-brand-red text-n-950 md:col-span-2',
   },
 ]
@@ -123,14 +123,14 @@ export function SecColor() {
       id="farbe"
       no="03"
       title="Farbe"
-      intro="Vier Hausfarben aus dem Logoblatt, erweitert zu vollständigen Skalen. Im Code werden ausschließlich Tokens verwendet – nie Hex-Werte."
+      intro="Vier Hausfarben aus dem Logoblatt, erweitert zu vollständigen Skalen. Im Code stehen ausschließlich Tokens, nie Hex-Werte."
     >
       <div className="grid gap-3 md:h-[28rem] md:grid-cols-[2fr_1fr_1fr] md:grid-rows-2">
         {house.map((c) => (
           <div
             key={c.name}
             className={cn(
-              'flex min-h-52 flex-col justify-between rounded-xl p-7',
+              'flex min-h-52 flex-col justify-between rounded-lg p-7',
               c.cls,
               c.big && 'md:row-span-2 md:p-10',
             )}
@@ -212,10 +212,7 @@ export function SecColor() {
           </dl>
         </SgSub>
 
-        <SgSub
-          title="Freigegebene Kombinationen"
-          text="Text auf Fläche – mit berechnetem Kontrast."
-        >
+        <SgSub title="Freigegebene Kombinationen" text="Text auf Fläche, mit berechnetem Kontrast.">
           <div className="grid gap-2">
             {[
               ['Weiß auf Petrol 700', '#ffffff', '#004e5c'],
@@ -223,7 +220,7 @@ export function SecColor() {
               ['Weiß auf Blau 600', '#ffffff', '#007f9d'],
               ['Hellblau auf Petrol 950', '#a0cce0', '#031f25'],
               ['Petrol 700 auf Neutral 50', '#004e5c', '#f2f6f7'],
-              ['Rot 500 auf Weiß – nur groß', '#e9483d', '#ffffff'],
+              ['Rot 500 auf Weiß, nur groß', '#e9483d', '#ffffff'],
             ].map(([label, fg, bg]) => {
               const r = contrast(fg!, bg!)
               return (

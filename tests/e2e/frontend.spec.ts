@@ -1,10 +1,11 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
+// Überschriften aus den Testseiten (pnpm seed)
 const locales = [
-  { code: 'de', heading: /neue Website von HC Medical Solutions/ },
-  { code: 'en', heading: /new HC Medical Solutions website/ },
-  { code: 'fr', heading: /nouveau site de HC Medical Solutions/ },
+  { code: 'de', heading: 'Seiten kommen jetzt aus dem CMS' },
+  { code: 'en', heading: 'Pages now come from the CMS' },
+  { code: 'fr', heading: 'Les pages viennent désormais du CMS' },
 ] as const
 
 test('Startseite "/" leitet auf /de um', async ({ page }) => {
@@ -30,7 +31,7 @@ for (const { code, heading } of locales) {
 
 test('Sprachwechsel bleibt auf der Seite', async ({ page }) => {
   await page.goto('/de')
-  await page.getByRole('link', { name: 'Français' }).click()
+  await page.getByRole('link', { name: 'Français' }).first().click()
   await expect(page).toHaveURL(/\/fr$/)
   await expect(page.locator('html')).toHaveAttribute('lang', 'fr')
 })
@@ -54,6 +55,10 @@ for (const { code } of locales) {
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
       .analyze()
-    expect(results.violations).toEqual([])
+    expect(
+      results.violations.map(
+        (v) => `${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(' | ')}`,
+      ),
+    ).toEqual([])
   })
 }

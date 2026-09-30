@@ -39,7 +39,7 @@ export function SecCards() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.3fr]">
           <Card>
             <p className="text-h4">Plain</p>
-            <p className="mt-2 text-small text-muted">Weiß, feiner Rand, leichter Schatten.</p>
+            <p className="mt-2 text-small text-muted">Weiß mit feiner Linie, ohne Schatten.</p>
           </Card>
           <Card tone="muted">
             <p className="text-h4">Muted</p>
@@ -84,35 +84,38 @@ export function SecCards() {
         <div className="border-t border-line">
           <JobCard
             title="Regulatory Affairs Manager (m/w/d)"
-            location="Hybrid · Region Stuttgart"
-            type="Vollzeit"
-            isNew
+            meta={[
+              { icon: 'location', text: 'Region Stuttgart' },
+              { icon: 'workplace', text: 'Hybrid' },
+              { icon: 'type', text: 'Vollzeit' },
+            ]}
+            badge="Neu"
           />
           <JobCard
             title="Werkstudent Qualitätssicherung (m/w/d)"
-            location="Vor Ort"
-            type="Teilzeit · 16–20 h"
+            meta={[
+              { icon: 'location', text: 'Köln' },
+              { icon: 'type', text: 'Teilzeit, 16–20 h' },
+            ]}
           />
         </div>
       </SgSub>
 
       <SgSub title="Animierte Cards">
         <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-          <Specimen label="Glare – Lichtreflex beim Hover" code="<GlareCard />" tone="none">
+          <Specimen label="Glare: Lichtreflex beim Hover" code="<GlareCard />" tone="none">
             <GlareCard className="flex min-h-72 flex-col justify-between">
-              <span className="eyebrow text-blue-200 before:bg-blue-200">Kennzahl</span>
+              <span className="eyebrow text-blue-200 before:bg-blue-200">Kontrast</span>
               <div>
                 <p className="text-display font-extralight">
-                  37,6<span className="text-h2 text-blue-200"> %</span>
+                  9,36<span className="text-h2 text-blue-200"> : 1</span>
                 </p>
-                <p className="mt-2 text-small text-petrol-100">
-                  Beispielwert – schnellere Freigabezyklen
-                </p>
+                <p className="mt-2 text-small text-petrol-100">Weiß auf Petrol 700, erfüllt AAA</p>
               </div>
             </GlareCard>
           </Specimen>
           <Specimen
-            label="Border Glow – Rand leuchtet zum Cursor hin"
+            label="Border Glow: Rand leuchtet zum Cursor hin"
             code="<BorderGlowCard />"
             tone="none"
           >
@@ -121,7 +124,7 @@ export function SecCards() {
               <div className="flex flex-col gap-3">
                 <p className="text-h3">Mit der Maus an den Rand fahren</p>
                 <p className="max-w-sm text-small text-petrol-100">
-                  Der Schein folgt dem Zeiger und wird zur Kante hin stärker – ohne React-Re-Render.
+                  Der Schein folgt dem Zeiger und wird zur Kante hin stärker. Ohne React-Re-Render.
                 </p>
               </div>
             </BorderGlowCard>
@@ -129,14 +132,14 @@ export function SecCards() {
         </div>
         <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
           <Specimen
-            label="Bounce Cards – Stapel springt beim Hover auf"
+            label="Bounce Cards: Stapel fächert beim Hover auf"
             code="<BounceCards />"
             className="overflow-hidden"
           >
             <BounceCards label="Fünf Beispielgrafiken im Linien-Motiv, aufgefächert" />
           </Specimen>
           <Specimen label="Bild-Card mit Zoom" tone="none">
-            <a href="#cards" className="group/img relative block overflow-hidden rounded-xl">
+            <a href="#cards" className="group/img relative block overflow-hidden rounded-lg">
               <div className="aspect-[4/3] transition-transform duration-700 ease-out-expo group-hover/img:scale-105">
                 <BrandArt seed={2} />
               </div>
@@ -172,13 +175,13 @@ export function SecCards() {
 
       <SgSub
         title="Scroll Stack"
-        text="Karten kleben beim Scrollen oben und schieben sich übereinander. Kein Scroll-Hijacking – Scrollverhalten bleibt nativ."
+        text="Karten kleben beim Scrollen oben und schieben sich übereinander. Kein Scroll-Hijacking, das Scrollverhalten bleibt nativ."
       >
         <ScrollStack
           items={stack.map((s) => (
             <div
               key={s.no}
-              className="grid min-h-80 overflow-hidden rounded-2xl bg-petrol-900 text-white shadow-lg md:grid-cols-[1.2fr_1fr]"
+              className="grid min-h-80 overflow-hidden rounded-lg bg-petrol-900 text-white md:grid-cols-[1.2fr_1fr]"
             >
               <div className="flex flex-col justify-between gap-10 p-8 sm:p-12">
                 <span className="text-caption text-blue-200 tabular-nums">{s.no} / 04</span>

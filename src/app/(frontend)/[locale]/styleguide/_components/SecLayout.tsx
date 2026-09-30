@@ -17,20 +17,18 @@ const spacing = [
 ] as const
 
 const radii = [
-  ['xs', '4 px', 'rounded-xs'],
-  ['sm', '8 px', 'rounded-sm'],
-  ['md', '12 px', 'rounded-md'],
-  ['lg', '20 px', 'rounded-lg'],
-  ['xl', '28 px', 'rounded-xl'],
-  ['2xl', '40 px', 'rounded-2xl'],
-  ['full', 'Pille', 'rounded-full'],
+  ['xs', '2 px', 'rounded-xs', 'Badges, Checkbox'],
+  ['sm', '4 px', 'rounded-sm', 'Buttons, Felder'],
+  ['md', '6 px', 'rounded-md', 'Swatches, Toasts'],
+  ['lg', '8 px', 'rounded-lg', 'Cards, Dialoge'],
+  ['xl', '12 px', 'rounded-xl', 'Große Medien'],
 ] as const
 
 const shadows = [
   ['xs', 'shadow-xs', 'Felder'],
-  ['sm', 'shadow-sm', 'Cards, Buttons'],
-  ['md', 'shadow-md', 'Hover, Dropdowns'],
-  ['lg', 'shadow-lg', 'Dialoge, Toasts'],
+  ['sm', 'shadow-sm', 'Schalter-Knopf'],
+  ['md', 'shadow-md', 'Toasts'],
+  ['lg', 'shadow-lg', 'Dialoge'],
 ] as const
 
 const easings = [
@@ -78,7 +76,7 @@ export function SecLayout() {
           title="Seitenraster"
           text="12 Spalten ab lg, darunter einspaltig. Rand 16 / 24 / 40 px."
         >
-          <div className="grid h-56 grid-cols-4 gap-2 rounded-xl bg-surface-muted p-4 sm:grid-cols-6 lg:grid-cols-12">
+          <div className="grid h-56 grid-cols-4 gap-2 rounded-lg bg-surface-muted p-4 sm:grid-cols-6 lg:grid-cols-12">
             {Array.from({ length: 12 }, (_, i) => (
               <span
                 key={i}
@@ -97,19 +95,27 @@ export function SecLayout() {
       </div>
 
       <div className="grid gap-12 lg:grid-cols-2">
-        <SgSub title="Radien">
-          <div className="grid grid-cols-4 gap-4 sm:grid-cols-7">
-            {radii.map(([t, v, cls]) => (
+        <SgSub
+          title="Radien"
+          text="Abgeleitet vom Bildzeichen: Eckradius ≈ 10 % der Kantenlänge, Flächen bei 8 px gedeckelt. Keine Pillenformen; rounded-full nur für Radio, Schalter und Statuspunkte."
+        >
+          <div className="grid grid-cols-3 gap-4 sm:grid-cols-5">
+            {radii.map(([t, v, cls, use]) => (
               <div key={t} className="flex flex-col gap-2">
                 <span className={cn('aspect-square bg-petrol-700', cls)} />
                 <span className="font-mono text-caption text-ink">{t}</span>
-                <span className="text-caption text-muted">{v}</span>
+                <span className="text-caption text-muted">
+                  {v} · {use}
+                </span>
               </div>
             ))}
           </div>
         </SgSub>
-        <SgSub title="Schatten">
-          <div className="grid grid-cols-2 gap-6 rounded-xl bg-surface-muted p-8 sm:grid-cols-4">
+        <SgSub
+          title="Schatten"
+          text="Nur für schwebende Ebenen. Cards liegen flach und grenzen sich über Linie oder Fläche ab."
+        >
+          <div className="grid grid-cols-2 gap-6 rounded-lg bg-surface-muted p-8 sm:grid-cols-4">
             {shadows.map(([t, cls, use]) => (
               <div key={t} className="flex flex-col gap-3">
                 <span className={cn('aspect-square rounded-lg bg-surface', cls)} />
@@ -132,7 +138,7 @@ export function SecLayout() {
               className="group/ease grid items-center gap-4 py-5 md:grid-cols-[9rem_1fr_16rem]"
             >
               <span className="font-mono text-small text-ink">{t}</span>
-              <div className="@container relative h-10 overflow-hidden rounded-full bg-n-100">
+              <div className="@container relative h-10 overflow-hidden rounded-sm bg-n-100">
                 <span
                   className={cn(
                     'absolute top-1 left-1 size-8 rounded-full bg-primary shadow-sm transition-transform duration-[1200ms] group-hover/ease:translate-x-[calc(100cqw-2.5rem)]',

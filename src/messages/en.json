@@ -7,7 +7,11 @@
   "Common": {
     "skipToContent": "Skip to content",
     "languageSwitcher": "Choose language",
-    "languages": { "de": "Deutsch", "en": "English", "fr": "Français" }
+    "languages": {
+      "de": "Deutsch",
+      "en": "English",
+      "fr": "Français"
+    }
   },
   "Home": {
     "eyebrow": "In preparation",
@@ -18,5 +22,59 @@
     "title": "Page not found",
     "text": "The requested page does not exist or has been moved.",
     "back": "Back to home"
+  },
+  "Site": {
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main navigation",
+    "footerNav": "Footer",
+    "legal": "Legal",
+    "contact": "Contact",
+    "home": "Home",
+    "submenu": "Submenu {label}"
+  },
+  "Jobs": {
+    "apply": "View position",
+    "opensJoin": "opens join.com",
+    "count": "{count, plural, one {# open position} other {# open positions}}",
+    "empty": "There are currently no open positions.",
+    "error": "The positions cannot be loaded right now.",
+    "errorLink": "View all positions on JOIN",
+    "workplace": {
+      "hybrid": "Hybrid",
+      "remote": "Remote",
+      "onsite": "On site"
+    }
+  },
+  "Contact": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "topic": "Subject",
+    "topicPlaceholder": "Please select",
+    "message": "Message",
+    "messageHint": "Maximum 2,000 characters.",
+    "optional": "optional",
+    "required": "Required",
+    "submit": "Send enquiry",
+    "sending": "Sending",
+    "success": "Thank you. Your enquiry has been sent.",
+    "errors": {
+      "required": "Please fill in this field.",
+      "email": "Please enter a valid email address.",
+      "tooLong": "The text is too long.",
+      "consent": "Please confirm the privacy notice.",
+      "topic": "Please select a subject.",
+      "form": "Please check the highlighted fields.",
+      "spam": "Your enquiry could not be sent. Please reload the page and try again.",
+      "rate": "Too many requests in a short time. Please try again in a few minutes.",
+      "send": "Your enquiry could not be sent. Please try again later or email us directly."
+    }
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "text": "The page could not be loaded. Please try again.",
+    "retry": "Try again"
   }
 }

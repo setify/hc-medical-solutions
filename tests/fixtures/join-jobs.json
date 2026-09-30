@@ -1,0 +1,23 @@
+{
+  "jobs": [
+    {
+      "title": "Teststelle Einkauf (m/w/d)",
+      "url": "https://join.com/companies/hc-consulting/1",
+      "place": "Köln, Deutschland",
+      "employmentType": "Angestellte/r",
+      "category": "Einkauf",
+      "workplaceType": "HYBRID",
+      "city": { "cityName": "Köln", "countryName": "Deutschland" }
+    },
+    {
+      "title": "Teststelle Qualitätssicherung (m/w/d)",
+      "url": "https://join.com/companies/hc-consulting/2",
+      "place": "Köln, Deutschland",
+      "employmentType": "Werkstudent/in",
+      "category": "Qualität",
+      "workplaceType": "ONSITE",
+      "city": { "cityName": "Köln", "countryName": "Deutschland" }
+    }
+  ],
+  "pagination": { "rowCount": 2, "pageCount": 1, "page": 1, "pageSize": 25 }
+}

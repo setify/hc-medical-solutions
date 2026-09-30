@@ -26,7 +26,7 @@ export function StarBorder({
     <button
       type={type}
       className={cn(
-        'group/star relative inline-flex overflow-hidden rounded-full py-px transition-transform duration-300 ease-out-expo active:scale-[0.98]',
+        'group/star relative inline-flex overflow-hidden rounded-sm py-px transition-transform duration-300 ease-out-expo active:scale-[0.98]',
         className,
       )}
       style={{ '--star-speed': speed } as CSSProperties}
@@ -44,7 +44,7 @@ export function StarBorder({
       />
       <span
         className={cn(
-          'relative inline-flex h-12 items-center gap-2.5 rounded-full border px-7 text-small font-normal transition-colors duration-300',
+          'relative inline-flex h-12 items-center gap-2.5 rounded-sm border px-7 text-small font-normal transition-colors duration-300',
           tone === 'dark'
             ? 'border-petrol-600 bg-petrol-950 text-white group-hover/star:bg-petrol-900'
             : 'border-line bg-surface text-ink group-hover/star:bg-petrol-50',

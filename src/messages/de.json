@@ -7,7 +7,11 @@
   "Common": {
     "skipToContent": "Zum Inhalt springen",
     "languageSwitcher": "Sprache wählen",
-    "languages": { "de": "Deutsch", "en": "English", "fr": "Français" }
+    "languages": {
+      "de": "Deutsch",
+      "en": "English",
+      "fr": "Français"
+    }
   },
   "Home": {
     "eyebrow": "In Vorbereitung",
@@ -18,5 +22,59 @@
     "title": "Seite nicht gefunden",
     "text": "Die angeforderte Seite existiert nicht oder wurde verschoben.",
     "back": "Zur Startseite"
+  },
+  "Site": {
+    "menu": "Menü",
+    "closeMenu": "Menü schließen",
+    "mainNav": "Hauptnavigation",
+    "footerNav": "Fußzeile",
+    "legal": "Rechtliches",
+    "contact": "Kontakt",
+    "home": "Startseite",
+    "submenu": "Untermenü {label}"
+  },
+  "Jobs": {
+    "apply": "Zur Stelle",
+    "opensJoin": "öffnet join.com",
+    "count": "{count, plural, one {# offene Stelle} other {# offene Stellen}}",
+    "empty": "Aktuell sind keine Stellen ausgeschrieben.",
+    "error": "Die Stellen können gerade nicht geladen werden.",
+    "errorLink": "Alle Stellen bei JOIN ansehen",
+    "workplace": {
+      "hybrid": "Hybrid",
+      "remote": "Remote",
+      "onsite": "Vor Ort"
+    }
+  },
+  "Contact": {
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "topic": "Anliegen",
+    "topicPlaceholder": "Bitte wählen",
+    "message": "Nachricht",
+    "messageHint": "Höchstens 2.000 Zeichen.",
+    "optional": "optional",
+    "required": "Pflichtfeld",
+    "submit": "Anfrage senden",
+    "sending": "Wird gesendet",
+    "success": "Vielen Dank. Ihre Anfrage wurde gesendet.",
+    "errors": {
+      "required": "Bitte füllen Sie dieses Feld aus.",
+      "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "tooLong": "Der Text ist zu lang.",
+      "consent": "Bitte bestätigen Sie die Datenschutzhinweise.",
+      "topic": "Bitte wählen Sie ein Anliegen.",
+      "form": "Bitte prüfen Sie die markierten Felder.",
+      "spam": "Die Anfrage konnte nicht gesendet werden. Bitte laden Sie die Seite neu und versuchen Sie es erneut.",
+      "rate": "Zu viele Anfragen in kurzer Zeit. Bitte versuchen Sie es in einigen Minuten erneut.",
+      "send": "Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es später erneut oder schreiben Sie uns direkt per E-Mail."
+    }
+  },
+  "Error": {
+    "title": "Etwas ist schiefgelaufen",
+    "text": "Die Seite konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
+    "retry": "Erneut versuchen"
   }
 }

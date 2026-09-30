@@ -44,11 +44,11 @@ export function Dialog({
           if (e.target === e.currentTarget) e.currentTarget.close()
         }}
         className={cn(
-          'm-auto w-[calc(100%-2rem)] rounded-2xl bg-surface p-0 text-ink shadow-lg',
+          'm-auto w-[calc(100%-2rem)] rounded-lg bg-surface p-0 text-ink shadow-lg',
           'translate-y-6 scale-[0.98] opacity-0 transition-[opacity,transform,overlay,display] transition-discrete duration-500 ease-out-expo',
           'open:translate-y-0 open:scale-100 open:opacity-100 starting:open:translate-y-6 starting:open:scale-[0.98] starting:open:opacity-0',
-          'backdrop:bg-petrol-950/0 backdrop:backdrop-blur-none backdrop:transition-[background-color,backdrop-filter,overlay,display] backdrop:transition-discrete backdrop:duration-500',
-          'open:backdrop:bg-petrol-950/55 open:backdrop:backdrop-blur-sm starting:open:backdrop:bg-petrol-950/0',
+          'backdrop:bg-petrol-950/0 backdrop:transition-[background-color,overlay,display] backdrop:transition-discrete backdrop:duration-500',
+          'open:backdrop:bg-petrol-950/55 starting:open:backdrop:bg-petrol-950/0',
           { sm: 'max-w-md', md: 'max-w-xl', lg: 'max-w-3xl' }[size],
         )}
       >
@@ -67,7 +67,7 @@ export function Dialog({
             <button
               type="button"
               onClick={() => ref.current?.close()}
-              className="-mt-1 -mr-2 grid size-10 shrink-0 place-items-center rounded-full text-muted transition-colors hover:bg-n-100 hover:text-ink"
+              className="-mt-1 -mr-2 grid size-10 shrink-0 place-items-center rounded-sm text-muted transition-colors hover:bg-n-100 hover:text-ink"
             >
               <X aria-hidden="true" className="size-5" />
               <span className="sr-only">Schließen</span>

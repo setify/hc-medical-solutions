@@ -11,7 +11,7 @@ import { cn } from '@/lib/cn'
 export function BorderGlowCard({
   children,
   className,
-  colors = ['#a0cce0', '#007f9d', '#e9483d'],
+  colors = ['#a0cce0', '#5fb3cc', '#a0cce0'],
 }: {
   children: ReactNode
   className?: string
@@ -48,7 +48,7 @@ export function BorderGlowCard({
       onPointerMove={onMove}
       onPointerLeave={onLeave}
       className={cn(
-        'group/glow relative isolate rounded-xl bg-petrol-950 p-8 text-white',
+        'group/glow relative isolate rounded-lg bg-petrol-950 p-8 text-white',
         className,
       )}
       style={{ ['--glow-edge' as string]: 0 }}
@@ -69,7 +69,7 @@ export function BorderGlowCard({
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] opacity-0 transition-opacity duration-500 group-hover/glow:opacity-100"
         style={{
-          background: `radial-gradient(420px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgb(0 127 157 / 0.22), transparent 60%)`,
+          background: `radial-gradient(420px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgb(0 127 157 / 0.14), transparent 60%)`,
         }}
       />
       {children}

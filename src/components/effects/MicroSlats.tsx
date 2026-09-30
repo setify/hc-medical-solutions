@@ -441,6 +441,16 @@ void main() {
 }
 `
 
+function hasWebGL2(): boolean {
+  try {
+    const gl = document.createElement('canvas').getContext('webgl2')
+    gl?.getExtension('WEBGL_lose_context')?.loseContext()
+    return Boolean(gl)
+  } catch {
+    return false
+  }
+}
+
 const MicroSlats = ({
   preset = 'swell',
   color = '#1d6f7f',
@@ -523,8 +533,9 @@ const MicroSlats = ({
     const container = containerRef.current
     if (!container) return undefined
 
-    // HC: Ohne WebGL (ältere Geräte, deaktivierte Hardwarebeschleunigung) still auf die
-    // Hintergrundfarbe zurückfallen, statt die Seite abstürzen zu lassen.
+    // HC: Ohne WebGL2 (ältere Geräte, deaktivierte Hardwarebeschleunigung, Headless-Browser) still auf die
+    // Hintergrundfarbe zurückfallen. Vorab prüfen, damit ogl keine Fehlermeldung in die Konsole schreibt.
+    if (!hasWebGL2()) return undefined
     let renderer: Renderer
     try {
       renderer = new Renderer({

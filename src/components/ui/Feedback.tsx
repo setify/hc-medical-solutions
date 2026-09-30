@@ -38,7 +38,7 @@ export function Alert({
   return (
     <div
       role={tone === 'danger' ? 'alert' : 'status'}
-      className={cn('flex gap-3 rounded-md border-l-2 p-4 pr-5', t.box)}
+      className={cn('flex gap-3 rounded-sm border-l-2 p-4 pr-5', t.box)}
     >
       <span aria-hidden="true" className="mt-0.5 shrink-0">
         {t.icon}
@@ -63,12 +63,10 @@ export function Accordion({ items }: { items: { q: string; a: ReactNode }[] }) {
         >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-h4 text-ink transition-colors hover:text-petrol-700 [&::-webkit-details-marker]:hidden">
             {item.q}
-            <span
+            <Plus
               aria-hidden="true"
-              className="grid size-9 shrink-0 place-items-center rounded-full border border-line transition-colors duration-300 group-open/acc:border-primary group-open/acc:bg-primary group-open/acc:text-white"
-            >
-              <Plus className="size-4 transition-transform duration-500 ease-out-expo group-open/acc:rotate-45" />
-            </span>
+              className="size-5 shrink-0 text-muted transition-[transform,color] duration-500 ease-out-expo group-open/acc:rotate-45 group-open/acc:text-accent-strong"
+            />
           </summary>
           <div className="max-w-[65ch] pb-7 text-body text-muted">{item.a}</div>
         </details>
@@ -80,17 +78,20 @@ export function Accordion({ items }: { items: { q: string; a: ReactNode }[] }) {
 /** Prozess-Schritte (z. B. Seite „Vorgehensweise“) mit durchgehender Linie. */
 export function ProcessSteps({ steps }: { steps: { title: string; text: string }[] }) {
   return (
-    <ol className="relative grid gap-10 md:grid-cols-4 md:gap-6">
-      <span
-        aria-hidden="true"
-        className="absolute top-5 bottom-5 left-5 w-px bg-line md:top-5 md:right-0 md:bottom-auto md:left-0 md:h-px md:w-full"
-      />
+    <ol className="grid gap-10 md:grid-cols-4 md:gap-6">
       {steps.map((step, i) => (
-        <li key={step.title} className="reveal-up relative flex gap-5 md:flex-col md:gap-6">
-          <span className="relative grid size-10 shrink-0 place-items-center rounded-full border border-primary bg-surface text-small font-normal text-primary tabular-nums">
+        <li
+          key={step.title}
+          className="reveal-up relative flex flex-col gap-4 border-l border-line pl-6 md:border-t md:border-l-0 md:pt-6 md:pl-0"
+        >
+          <span
+            aria-hidden="true"
+            className="absolute -top-px -left-px h-10 w-px bg-accent md:h-px md:w-10"
+          />
+          <span className="text-caption font-normal text-accent-strong tabular-nums">
             {String(i + 1).padStart(2, '0')}
           </span>
-          <div className="flex flex-col gap-2 pt-1.5 md:pt-0 md:pr-6">
+          <div className="flex flex-col gap-2 md:pr-6">
             <h3 className="text-h4">{step.title}</h3>
             <p className="text-small text-muted">{step.text}</p>
           </div>
@@ -111,12 +112,7 @@ export function EmptyState({
   action?: ReactNode
 }) {
   return (
-    <div className="flex flex-col items-start gap-5 rounded-xl border border-dashed border-line-strong p-10">
-      <span aria-hidden="true" className="flex h-12 items-end gap-1.5">
-        {[28, 44, 20, 36, 12].map((h, i) => (
-          <span key={i} className="w-px rounded-full bg-petrol-200" style={{ height: h }} />
-        ))}
-      </span>
+    <div className="flex flex-col items-start gap-5 border-l border-line-strong py-2 pl-8">
       <div className="flex flex-col gap-2">
         <p className="text-h4">{title}</p>
         <p className="max-w-md text-small text-muted">{text}</p>
