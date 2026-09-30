@@ -29,7 +29,7 @@ export function Hero({
     <section
       className={cn(
         'relative isolate overflow-hidden',
-        dark ? 'bg-petrol-950 text-white' : 'bg-surface',
+        dark ? 'bg-blue-950 text-white' : 'bg-surface',
       )}
     >
       {block.variant === 'slats' ? (
@@ -39,7 +39,7 @@ export function Hero({
           </div>
           <div
             aria-hidden="true"
-            className="absolute inset-0 -z-10 bg-gradient-to-r from-petrol-950 from-35% via-petrol-950/70 to-transparent"
+            className="absolute inset-0 -z-10 bg-gradient-to-r from-blue-950 from-35% via-blue-950/70 to-transparent"
           />
         </>
       ) : null}
@@ -53,7 +53,7 @@ export function Hero({
       >
         <div className="flex max-w-3xl flex-col gap-6">
           {block.eyebrow ? (
-            <p className={cn('eyebrow', dark && 'text-petrol-200 before:bg-blue-200')}>
+            <p className={cn('eyebrow', dark && 'text-blue-200 before:bg-blue-200')}>
               {block.eyebrow}
             </p>
           ) : null}
@@ -62,7 +62,7 @@ export function Hero({
             <p
               className={cn(
                 'max-w-[56ch] text-lead font-light',
-                dark ? 'text-petrol-100' : 'text-muted',
+                dark ? 'text-blue-100' : 'text-muted',
               )}
             >
               {block.lead}

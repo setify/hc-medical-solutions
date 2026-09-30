@@ -16,7 +16,7 @@
 
   --color-white: #ffffff;
 
-  /* Petrol – Primärfarbe (Hausfarbe #004E5C = 700) */
+  /* Petrol – Ergänzungsfarbe, sparsam (Hausfarbe #004E5C = 700) */
   --color-petrol-50: #eef6f7;
   --color-petrol-100: #d6e9ec;
   --color-petrol-200: #b0d3d9;
@@ -29,7 +29,7 @@
   --color-petrol-900: #062f37;
   --color-petrol-950: #031f25;
 
-  /* Blau – Akzent (Hausfarbe #007F9D = 600) */
+  /* Blau – Primär- und Akzentfarbe (Hausfarbe #007F9D = 600) */
   --color-blue-50: #e8f5f9;
   --color-blue-100: #cfeaf2;
   --color-blue-200: #a0cce0;
@@ -39,6 +39,8 @@
   --color-blue-600: #007f9d;
   --color-blue-700: #006a84;
   --color-blue-800: #00566b;
+  --color-blue-900: #0a3550;
+  --color-blue-950: #061f33;
 
   /* Rot – Signal (Hausfarbe #E9483D = 500) */
   --color-red-50: #fdecea;
@@ -82,7 +84,7 @@
   --color-surface: var(--color-n-0);
   --color-surface-muted: var(--color-n-50);
   --color-surface-sunken: var(--color-n-100);
-  --color-surface-inverse: var(--color-petrol-950);
+  --color-surface-inverse: var(--color-blue-950);
   --color-ink: var(--color-n-950);
   --color-ink-soft: var(--color-n-800);
   --color-muted: var(--color-n-600);
@@ -90,8 +92,9 @@
   --color-line-strong: var(--color-n-300);
   --color-accent: var(--color-blue-600);
   --color-accent-strong: var(--color-blue-700);
-  --color-primary: var(--color-petrol-700);
-  --color-primary-strong: var(--color-petrol-800);
+  /* Primär- und Akzentfarbe: Hausfarbe Blau; dunkle Flächen in tiefem Blau (blue-950). */
+  --color-primary: var(--color-blue-600);
+  --color-primary-strong: var(--color-blue-700);
   --color-focus: var(--color-blue-600);
   --color-danger: var(--color-red-700);
 
@@ -249,7 +252,7 @@
 
   ::selection {
     background: var(--color-blue-200);
-    color: var(--color-petrol-950);
+    color: var(--color-blue-950);
   }
 
   :focus-visible {

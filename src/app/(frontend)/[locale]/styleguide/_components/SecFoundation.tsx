@@ -194,7 +194,7 @@ export function SecPrinciples() {
             className={cn(
               'flex flex-col gap-4 p-8 sm:p-10',
               i === 0
-                ? 'min-h-96 bg-petrol-950 text-white md:row-span-3 md:justify-end'
+                ? 'min-h-96 bg-blue-950 text-white md:row-span-3 md:justify-end'
                 : 'bg-surface',
             )}
           >
@@ -206,7 +206,7 @@ export function SecPrinciples() {
               </span>
             ) : null}
             <h3 className={cn(i === 0 ? 'text-h2' : 'text-h4')}>{p.t}</h3>
-            <p className={cn('max-w-md text-small', i === 0 ? 'text-petrol-100' : 'text-muted')}>
+            <p className={cn('max-w-md text-small', i === 0 ? 'text-blue-100' : 'text-muted')}>
               {p.d}
             </p>
           </div>
@@ -248,7 +248,7 @@ export function SecBrand() {
             label="Hochformat · Weiß"
             code='variant="weiss"'
             tone="dark"
-            className="grid min-h-72 place-items-center bg-petrol-700"
+            className="grid min-h-72 place-items-center bg-blue-900"
           >
             <Logo format="hoch" variant="weiss" className="h-36 w-auto" />
           </Specimen>

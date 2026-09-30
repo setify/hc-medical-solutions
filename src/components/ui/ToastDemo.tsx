@@ -29,7 +29,7 @@ export function ToastDemo() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 8, scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-              className="flex items-start gap-3 rounded-md border-l-2 border-blue-200 bg-petrol-950 p-4 pr-6 text-white shadow-md"
+              className="flex items-start gap-3 rounded-md border-l-2 border-blue-200 bg-blue-950 p-4 pr-6 text-white shadow-md"
             >
               <CheckCircle
                 aria-hidden="true"
@@ -38,7 +38,7 @@ export function ToastDemo() {
               />
               <div>
                 <p className="text-small font-normal">Vielen Dank für Ihre Anfrage.</p>
-                <p className="text-caption text-petrol-100">
+                <p className="text-caption text-blue-100">
                   Wir melden uns innerhalb von zwei Werktagen.
                 </p>
               </div>

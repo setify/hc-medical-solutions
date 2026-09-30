@@ -5,12 +5,12 @@ import { cn } from '@/lib/cn'
  * Ersetzt Fotos in Demos, bis echtes Bildmaterial von HC vorliegt.
  */
 const palettes = [
-  { bg: '#004e5c', line: '#7fb5c0' },
-  { bg: '#031f25', line: '#1d6f7f' },
+  { bg: '#00566b', line: '#5fb3cc' },
+  { bg: '#061f33', line: '#0b8aa8' },
   { bg: '#007f9d', line: '#a0cce0' },
-  { bg: '#062f37', line: '#4a92a0' },
-  { bg: '#a0cce0', line: '#004e5c' },
-  { bg: '#085d6c', line: '#b0d3d9' },
+  { bg: '#0a3550', line: '#2a98b5' },
+  { bg: '#a0cce0', line: '#0a3550' },
+  { bg: '#006a84', line: '#cfeaf2' },
 ] as const
 
 export function BrandArt({ seed = 0, className }: { seed?: number; className?: string }) {

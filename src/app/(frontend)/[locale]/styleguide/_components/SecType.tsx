@@ -32,7 +32,7 @@ export function SecType() {
       intro="Hausschrift Lexend Deca als variabler Font (100–900), lokal ausgeliefert. Große Größen in Light, Hierarchie über Gewicht und Farbe, nicht über schiere Größe."
     >
       <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
-        <div className="relative flex min-h-80 flex-col justify-between overflow-hidden rounded-lg bg-petrol-950 p-10 text-white">
+        <div className="relative flex min-h-80 flex-col justify-between overflow-hidden rounded-lg bg-blue-950 p-10 text-white">
           <span className="text-small text-blue-200">Lexend Deca · Variable</span>
           <span
             aria-hidden="true"
@@ -40,7 +40,7 @@ export function SecType() {
           >
             Aa
           </span>
-          <span className="text-caption text-petrol-100">
+          <span className="text-caption text-blue-100">
             SIL Open Font License · Latin (DE/EN/FR)
           </span>
         </div>

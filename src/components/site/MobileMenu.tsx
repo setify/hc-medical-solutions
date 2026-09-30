@@ -38,7 +38,7 @@ export function MobileMenu({
         onClick={(e) => {
           if (e.target === e.currentTarget) e.currentTarget.close()
         }}
-        className="m-0 ml-auto h-dvh max-h-none w-[min(24rem,100%)] max-w-none bg-surface p-0 text-ink backdrop:bg-petrol-950/50 open:flex open:flex-col"
+        className="m-0 ml-auto h-dvh max-h-none w-[min(24rem,100%)] max-w-none bg-surface p-0 text-ink backdrop:bg-blue-950/50 open:flex open:flex-col"
       >
         <div className="flex items-center justify-end border-b border-line p-4">
           <button

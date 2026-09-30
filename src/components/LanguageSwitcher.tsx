@@ -43,7 +43,7 @@ export async function LanguageSwitcher({
                       )
                     : tone === 'dark'
                       ? 'text-muted hover:text-ink'
-                      : 'text-petrol-200 hover:text-white',
+                      : 'text-blue-200 hover:text-white',
                 )}
               >
                 <span aria-hidden="true">{l}</span>

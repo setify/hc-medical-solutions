@@ -29,12 +29,12 @@ export async function Footer({
     .filter((l): l is ResolvedLink => l !== null)
 
   return (
-    <footer className="bg-petrol-950 text-white">
+    <footer className="bg-blue-950 text-white">
       <div className="container-page grid gap-12 py-16 md:grid-cols-[1.4fr_repeat(3,1fr)]">
         <div className="flex flex-col gap-6">
           <Logo variant="weiss" className="h-10 w-auto self-start" />
           {org?.name ? (
-            <address className="text-small text-petrol-100 not-italic">
+            <address className="text-small text-blue-100 not-italic">
               <span className="text-white">{org.name}</span>
               {org.street ? (
                 <>
@@ -75,7 +75,7 @@ export async function Footer({
         </div>
         {columns.map((col, i) => (
           <nav key={i} aria-label={col.title ?? t('footerNav')} className="flex flex-col gap-4">
-            {col.title ? <p className="text-small text-petrol-200">{col.title}</p> : null}
+            {col.title ? <p className="text-small text-blue-200">{col.title}</p> : null}
             <ul className="flex flex-col gap-2.5">
               {col.links.map((link) => (
                 <li key={link.href}>
@@ -94,7 +94,7 @@ export async function Footer({
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between">
           <nav aria-label={t('legal')}>
-            <ul className="flex flex-wrap gap-x-6 gap-y-2 text-caption text-petrol-200">
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 text-caption text-blue-200">
               <li>
                 © {new Date().getFullYear()} {org?.name || 'HC Medical Solutions'}
               </li>

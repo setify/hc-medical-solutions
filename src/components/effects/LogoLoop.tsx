@@ -22,7 +22,7 @@ export function LogoLoop({
       {items.map((item) => (
         <li
           key={item.name}
-          className="flex items-center gap-3 whitespace-nowrap text-n-600 transition-colors duration-300 hover:text-petrol-700"
+          className="flex items-center gap-3 whitespace-nowrap text-n-600 transition-colors duration-300 hover:text-primary-strong"
         >
           <span className="size-8">{item.mark}</span>
           <span className="text-h4 font-normal tracking-tight">{item.name}</span>

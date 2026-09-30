@@ -9,7 +9,7 @@ type Tone = 'plain' | 'muted' | 'inverse' | 'outline'
 const tones: Record<Tone, string> = {
   plain: 'bg-surface border border-line',
   muted: 'bg-surface-muted',
-  inverse: 'bg-petrol-950 text-white',
+  inverse: 'bg-blue-950 text-white',
   outline: 'border border-line',
 }
 
@@ -38,7 +38,7 @@ export function ServiceCard({
   href?: string
 }) {
   return (
-    <article className="group/svc relative flex min-h-72 flex-col justify-between overflow-hidden rounded-lg border border-line bg-surface p-8 transition-colors duration-500 ease-out-expo hover:border-petrol-300 hover:bg-petrol-50/50">
+    <article className="group/svc relative flex min-h-72 flex-col justify-between overflow-hidden rounded-lg border border-line bg-surface p-8 transition-colors duration-500 ease-out-expo hover:border-blue-300 hover:bg-blue-50/60">
       <span
         aria-hidden="true"
         className="absolute top-0 left-8 h-10 w-px origin-top bg-accent transition-transform duration-700 ease-out-expo group-hover/svc:scale-y-[3]"
@@ -83,7 +83,7 @@ export function JobCard({
 }) {
   const icons = { location: MapPin, type: Clock, workplace: Buildings }
   return (
-    <article className="group/job relative grid gap-4 border-b border-line px-2 py-7 transition-colors duration-300 hover:border-petrol-300 hover:bg-petrol-50/60 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8">
+    <article className="group/job relative grid gap-4 border-b border-line px-2 py-7 transition-colors duration-300 hover:border-blue-300 hover:bg-blue-50/60 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8">
       <div className="flex flex-col gap-3">
         {badge ? (
           <div>
@@ -139,7 +139,7 @@ export function GlareCard({
     <div
       className={cn(
         'group/glare relative isolate overflow-hidden rounded-lg p-8',
-        tone === 'inverse' ? 'bg-petrol-900 text-white' : 'bg-surface ring-1 ring-line',
+        tone === 'inverse' ? 'bg-blue-900 text-white' : 'bg-surface ring-1 ring-line',
         className,
       )}
     >

@@ -47,10 +47,7 @@ export function BorderGlowCard({
       ref={ref}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
-      className={cn(
-        'group/glow relative isolate rounded-lg bg-petrol-950 p-8 text-white',
-        className,
-      )}
+      className={cn('group/glow relative isolate rounded-lg bg-blue-950 p-8 text-white', className)}
       style={{ ['--glow-edge' as string]: 0 }}
     >
       {/* Leuchtender Rand: konischer Verlauf, per Maske auf 1,5 px beschränkt */}

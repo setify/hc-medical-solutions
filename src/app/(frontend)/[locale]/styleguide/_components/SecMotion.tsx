@@ -155,7 +155,7 @@ export function SecBackgrounds() {
     >
       <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
         <Specimen label="Micro Slats · Petrol (Standard)" code="<MicroSlats />" tone="none">
-          <div className="relative h-96 overflow-hidden rounded-lg bg-petrol-950">
+          <div className="relative h-96 overflow-hidden rounded-lg bg-blue-950">
             <MicroSlats />
             <div className="pointer-events-none absolute inset-0 flex flex-col justify-end p-8 text-white">
               <span className="eyebrow text-blue-200 before:bg-blue-200">Beispiel</span>
@@ -166,12 +166,12 @@ export function SecBackgrounds() {
           </div>
         </Specimen>
         <Specimen label="Micro Slats · Hell, Preset „tide“" code='preset="tide"' tone="none">
-          <div className="relative h-96 overflow-hidden rounded-lg bg-petrol-50">
+          <div className="relative h-96 overflow-hidden rounded-lg bg-blue-50">
             <MicroSlats
               preset="tide"
-              color="#7fb5c0"
+              color="#5fb3cc"
               glintColor="#007f9d"
-              backgroundColor="#eef6f7"
+              backgroundColor="#e8f5f9"
             />
           </div>
         </Specimen>

@@ -45,7 +45,7 @@ export function AccordionGallery({
             >
               <BrandArt seed={item.seed} />
             </span>
-            <span className="absolute inset-0 bg-gradient-to-t from-petrol-950/85 via-transparent to-transparent" />
+            <span className="absolute inset-0 bg-gradient-to-t from-blue-950/85 via-transparent to-transparent" />
             <span
               className={cn(
                 'absolute inset-x-0 bottom-0 flex flex-col gap-2 p-6 text-white transition-[opacity,transform] duration-500 ease-out-expo',

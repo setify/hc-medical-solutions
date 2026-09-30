@@ -67,7 +67,7 @@ export function SecLayout() {
               <div key={t} className="grid grid-cols-[3rem_4rem_1fr] items-center gap-4">
                 <span className="font-mono text-caption text-ink">{t}</span>
                 <span className="text-caption text-muted tabular-nums">{px} px</span>
-                <span className="h-3 rounded-xs bg-petrol-200" style={{ width: px * 2 }} />
+                <span className="h-3 rounded-xs bg-blue-200" style={{ width: px * 2 }} />
               </div>
             ))}
           </div>
@@ -102,7 +102,7 @@ export function SecLayout() {
           <div className="grid grid-cols-3 gap-4 sm:grid-cols-5">
             {radii.map(([t, v, cls, use]) => (
               <div key={t} className="flex flex-col gap-2">
-                <span className={cn('aspect-square bg-petrol-700', cls)} />
+                <span className={cn('aspect-square bg-primary', cls)} />
                 <span className="font-mono text-caption text-ink">{t}</span>
                 <span className="text-caption text-muted">
                   {v} · {use}

@@ -61,7 +61,7 @@ export function Accordion({ items }: { items: { q: string; a: ReactNode }[] }) {
           name="faq"
           className="group/acc [&::details-content]:h-0 [&::details-content]:overflow-clip [&::details-content]:transition-[height,content-visibility] [&::details-content]:transition-discrete [&::details-content]:duration-500 [&::details-content]:ease-out-expo open:[&::details-content]:h-auto"
         >
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-h4 text-ink transition-colors hover:text-petrol-700 [&::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-h4 text-ink transition-colors hover:text-primary-strong [&::-webkit-details-marker]:hidden">
             {item.q}
             <Plus
               aria-hidden="true"

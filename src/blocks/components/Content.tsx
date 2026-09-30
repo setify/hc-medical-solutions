@@ -143,7 +143,7 @@ export function CallToAction({ block, locale, homeId }: { block: Block<'callToAc
         <div className="flex flex-col gap-4">
           <h2 className="text-h2 font-light">{block.title}</h2>
           {block.text ? (
-            <p className={cn('text-lead font-light', dark ? 'text-petrol-100' : 'text-muted')}>
+            <p className={cn('text-lead font-light', dark ? 'text-blue-100' : 'text-muted')}>
               {block.text}
             </p>
           ) : null}

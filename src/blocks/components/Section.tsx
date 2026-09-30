@@ -21,7 +21,7 @@ export function Section({
       className={cn(
         'py-16 md:py-24',
         tone === 'muted' && 'bg-surface-muted',
-        tone === 'dark' && 'bg-petrol-950 text-white',
+        tone === 'dark' && 'bg-blue-950 text-white',
         className,
       )}
     >
@@ -33,7 +33,7 @@ export function Section({
               <p
                 className={cn(
                   'text-lead font-light',
-                  tone === 'dark' ? 'text-petrol-100' : 'text-muted',
+                  tone === 'dark' ? 'text-blue-100' : 'text-muted',
                 )}
               >
                 {intro}

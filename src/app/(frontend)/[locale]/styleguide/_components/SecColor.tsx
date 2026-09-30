@@ -5,23 +5,23 @@ import { SgSection, SgSub } from './Sg'
 
 const house = [
   {
+    name: 'Blau',
+    token: 'brand-blue · blue-600 · primary',
+    hex: '#007F9D',
+    rgb: '0 · 127 · 157',
+    cmyk: '90 · 30 · 20 · 5 *',
+    role: 'Primär- und Akzentfarbe: Buttons, Links, Fokus, Markierungen.',
+    cls: 'bg-brand-blue text-white',
+    big: true,
+  },
+  {
     name: 'Petrol',
     token: 'brand-petrol · petrol-700',
     hex: '#004E5C',
     rgb: '0 · 78 · 91',
     cmyk: '95 · 50 · 40 · 20',
-    role: 'Primärfarbe: Flächen, Buttons, Überschriften auf Hell.',
+    role: 'Ergänzungsfarbe, sparsam. Dunkle Flächen sind Blau 950.',
     cls: 'bg-brand-petrol text-white',
-    big: true,
-  },
-  {
-    name: 'Blau',
-    token: 'brand-blue · blue-600',
-    hex: '#007F9D',
-    rgb: '0 · 127 · 157',
-    cmyk: '90 · 30 · 20 · 5 *',
-    role: 'Akzent: Links, Fokus, Markierungen.',
-    cls: 'bg-brand-blue text-white',
   },
   {
     name: 'Hellblau',
@@ -29,8 +29,8 @@ const house = [
     hex: '#A0CCE0',
     rgb: '160 · 204 · 224',
     cmyk: '43 · 10 · 5 · 0',
-    role: 'Flächen, Linien auf Petrol.',
-    cls: 'bg-brand-sky text-petrol-950',
+    role: 'Flächen, Linien auf dunklem Grund.',
+    cls: 'bg-brand-sky text-blue-950',
   },
   {
     name: 'Rot',
@@ -72,6 +72,8 @@ const scales: { name: string; steps: [string, string][] }[] = [
       ['600', '#007f9d'],
       ['700', '#006a84'],
       ['800', '#00566b'],
+      ['900', '#0a3550'],
+      ['950', '#061f33'],
     ],
   },
   {
@@ -109,8 +111,8 @@ const semantic = [
   ['muted', 'n-600', 'Nebentexte, Hilfetexte (≥ 6,8 : 1)'],
   ['line / line-strong', 'n-200 / n-300', 'Trennlinien, Feldränder'],
   ['surface / -muted / -sunken', 'weiß / n-50 / n-100', 'Hintergründe in drei Ebenen'],
-  ['surface-inverse', 'petrol-950', 'Dunkle Bühnen, Footer'],
-  ['primary / -strong', 'petrol-700 / 800', 'Primäre Aktionen'],
+  ['surface-inverse', 'blue-950', 'Dunkle Flächen: Hero, Footer, Aufrufe'],
+  ['primary / -strong', 'blue-600 / 700', 'Primäre Aktionen (Buttons, Auswahl)'],
   ['accent / -strong', 'blue-600 / 700', 'Links, Akzente, Fokus'],
   ['danger', 'red-700', 'Fehlertexte (7,06 : 1)'],
 ]
@@ -215,10 +217,10 @@ export function SecColor() {
         <SgSub title="Freigegebene Kombinationen" text="Text auf Fläche, mit berechnetem Kontrast.">
           <div className="grid gap-2">
             {[
-              ['Weiß auf Petrol 700', '#ffffff', '#004e5c'],
-              ['Petrol 950 auf Hellblau', '#031f25', '#a0cce0'],
+              ['Weiß auf Blau 950', '#ffffff', '#061f33'],
+              ['Blau 950 auf Hellblau', '#061f33', '#a0cce0'],
               ['Weiß auf Blau 600', '#ffffff', '#007f9d'],
-              ['Hellblau auf Petrol 950', '#a0cce0', '#031f25'],
+              ['Hellblau auf Blau 950', '#a0cce0', '#061f33'],
               ['Petrol 700 auf Neutral 50', '#004e5c', '#f2f6f7'],
               ['Rot 500 auf Weiß, nur groß', '#e9483d', '#ffffff'],
             ].map(([label, fg, bg]) => {

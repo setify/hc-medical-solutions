@@ -5,6 +5,13 @@ Versionierung nach [SemVer](https://semver.org/lang/de/). Bis zum Launch gilt 0.
 
 Gespiegelt in Notion: Setify / HC Medical Solutions / Changelog.
 
+## [0.4.0] – 2026-09-30
+
+### Geändert
+
+- Blau (`#007F9D`) ist jetzt Primär- und Akzentfarbe: Buttons, Auswahlfelder, Hover-Zustände, Lamellen-Hintergrund.
+- Dunkle Flächen (Hero, Footer, Aufrufe, Dialog-Hintergrund) in tiefem Blau `#061F33` statt Petrol; Blau-Skala um 900/950 ergänzt.
+
 ## [0.3.0] – 2026-09-30
 
 ### Hinzugefügt
@@ -77,7 +84,8 @@ Gespiegelt in Notion: Setify / HC Medical Solutions / Changelog.
 - Statische Platzhalter-Startseite, SEO-Grundlagen (robots.txt, Sitemap, hreflang, canonical), Staging-Schutz.
 - Qualitätssicherung: Lint, Typecheck, Unit-Tests, Browser- und Barrierefreiheitstests, GitHub-CI.
 
-[0.3.0]: https://github.com/setify/hc-medical-solutions/compare/cb11b04...main
+[0.4.0]: https://github.com/setify/hc-medical-solutions/compare/fde23fa...main
+[0.3.0]: https://github.com/setify/hc-medical-solutions/commit/fde23fa
 [0.2.1]: https://github.com/setify/hc-medical-solutions/commit/cb11b04
 [0.2.0]: https://github.com/setify/hc-medical-solutions/commit/3c91a28
 [0.1.1]: https://github.com/setify/hc-medical-solutions/commit/95f496f

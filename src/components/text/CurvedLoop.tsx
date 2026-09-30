@@ -101,7 +101,7 @@ export function CurvedLoop({
         {spacing > 0 ? (
           <text
             xmlSpace="preserve"
-            className="fill-petrol-700 text-[5.5rem] font-light tracking-tight"
+            className="fill-blue-600 text-[5.5rem] font-light tracking-tight"
           >
             <textPath ref={textPathRef} href={`#${pathId}`} xmlSpace="preserve">
               {content}

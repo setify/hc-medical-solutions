@@ -453,9 +453,9 @@ function hasWebGL2(): boolean {
 
 const MicroSlats = ({
   preset = 'swell',
-  color = '#1d6f7f',
+  color = '#0b8aa8',
   glintColor = '#a0cce0',
-  backgroundColor = '#031f25',
+  backgroundColor = '#061f33',
   slatWidth = 10,
   slatHeight = 25,
   gap = 3,

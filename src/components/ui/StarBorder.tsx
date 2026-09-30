@@ -46,8 +46,8 @@ export function StarBorder({
         className={cn(
           'relative inline-flex h-12 items-center gap-2.5 rounded-sm border px-7 text-small font-normal transition-colors duration-300',
           tone === 'dark'
-            ? 'border-petrol-600 bg-petrol-950 text-white group-hover/star:bg-petrol-900'
-            : 'border-line bg-surface text-ink group-hover/star:bg-petrol-50',
+            ? 'border-blue-700 bg-blue-950 text-white group-hover/star:bg-blue-900'
+            : 'border-line bg-surface text-ink group-hover/star:bg-blue-50',
         )}
       >
         {children}

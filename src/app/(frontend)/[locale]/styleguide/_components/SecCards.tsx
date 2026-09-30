@@ -52,7 +52,7 @@ export function SecCards() {
           <Card tone="inverse">
             <ShieldCheck aria-hidden="true" className="size-7 text-blue-200" />
             <p className="mt-6 text-h4">Inverse</p>
-            <p className="mt-2 text-small text-petrol-100">Für Hervorhebungen auf hellen Seiten.</p>
+            <p className="mt-2 text-small text-blue-100">Für Hervorhebungen auf hellen Seiten.</p>
           </Card>
         </div>
       </SgSub>
@@ -110,7 +110,7 @@ export function SecCards() {
                 <p className="text-display font-extralight">
                   9,36<span className="text-h2 text-blue-200"> : 1</span>
                 </p>
-                <p className="mt-2 text-small text-petrol-100">Weiß auf Petrol 700, erfüllt AAA</p>
+                <p className="mt-2 text-small text-blue-100">Weiß auf Petrol 700, erfüllt AAA</p>
               </div>
             </GlareCard>
           </Specimen>
@@ -123,7 +123,7 @@ export function SecCards() {
               <span className="eyebrow text-blue-200 before:bg-blue-200">Fokus</span>
               <div className="flex flex-col gap-3">
                 <p className="text-h3">Mit der Maus an den Rand fahren</p>
-                <p className="max-w-sm text-small text-petrol-100">
+                <p className="max-w-sm text-small text-blue-100">
                   Der Schein folgt dem Zeiger und wird zur Kante hin stärker. Ohne React-Re-Render.
                 </p>
               </div>
@@ -143,7 +143,7 @@ export function SecCards() {
               <div className="aspect-[4/3] transition-transform duration-700 ease-out-expo group-hover/img:scale-105">
                 <BrandArt seed={2} />
               </div>
-              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-petrol-950/90 to-transparent p-7 text-white">
+              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-blue-950/90 to-transparent p-7 text-white">
                 <span className="text-caption text-blue-100">Beispiel · Bericht</span>
                 <span className="mt-1 flex items-center gap-2 text-h4">
                   Einblick in ein Projekt{' '}
@@ -181,13 +181,13 @@ export function SecCards() {
           items={stack.map((s) => (
             <div
               key={s.no}
-              className="grid min-h-80 overflow-hidden rounded-lg bg-petrol-900 text-white md:grid-cols-[1.2fr_1fr]"
+              className="grid min-h-80 overflow-hidden rounded-lg bg-blue-900 text-white md:grid-cols-[1.2fr_1fr]"
             >
               <div className="flex flex-col justify-between gap-10 p-8 sm:p-12">
                 <span className="text-caption text-blue-200 tabular-nums">{s.no} / 04</span>
                 <div className="flex flex-col gap-3">
                   <p className="text-h2 font-light">{s.t}</p>
-                  <p className="max-w-sm text-small text-petrol-100">{s.d}</p>
+                  <p className="max-w-sm text-small text-blue-100">{s.d}</p>
                 </div>
                 <LineButton href="#cards" tone="light">
                   Beispiel-Link
