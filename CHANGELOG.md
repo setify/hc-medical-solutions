@@ -5,6 +5,12 @@ Versionierung nach [SemVer](https://semver.org/lang/de/). Bis zum Launch gilt 0.
 
 Gespiegelt in Notion: Setify / HC Medical Solutions / Changelog.
 
+## [0.6.0] – 2026-10-01
+
+### Hinzugefügt
+
+- Interne Seite `/de/schriften` (nicht indexiert): drei Schriftkombinationen im Vergleich – A Lexend Deca (aktuell), B Plus Jakarta Sans mit Source Sans 3, C Space Grotesk mit IBM Plex Sans – gesetzt mit den finalen Startseitentexten, umschaltbar per Reiter plus Direktvergleich. Alle Schriften lokal eingebunden (SIL Open Font License).
+
 ## [0.5.0] – 2026-10-01
 
 ### Hinzugefügt

@@ -1,6 +1,6 @@
 {
   "name": "hc-medical-solutions",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Website HC Medical Solutions \u2013 Next.js + Payload CMS",
   "type": "module",
   "scripts": {
