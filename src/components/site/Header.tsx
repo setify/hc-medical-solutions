@@ -32,23 +32,23 @@ export async function Header({
     : null
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-surface/95 backdrop-blur-sm">
-      <div className="container-page flex h-18 items-center justify-between gap-6">
+    <header className="sticky top-0 z-40 px-3 pt-3 sm:px-4 lg:px-6">
+      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-6 rounded-full border border-line/70 bg-surface/95 pr-2 pl-5 shadow-sm backdrop-blur-sm sm:pl-6">
         <a href={`/${locale}`} className="inline-block shrink-0 rounded-sm">
           <Logo className="h-9 w-auto" />
           <span className="sr-only">{t('home')}</span>
         </a>
 
         <nav aria-label={t('mainNav')} className="hidden lg:block">
-          <ul className="flex items-center gap-8">
+          <ul className="flex items-center gap-1 rounded-full bg-surface-muted p-1">
             {items.map((item) => {
               const active =
                 isActive(item.href, current) || item.children.some((c) => isActive(c.href, current))
               const linkClass = cn(
-                'relative inline-flex items-center gap-1.5 py-6 text-small transition-colors hover:text-ink',
+                'relative inline-flex h-10 items-center gap-1.5 rounded-full px-4 text-small transition-colors hover:text-ink',
                 active
-                  ? 'text-ink after:absolute after:inset-x-0 after:bottom-4 after:h-px after:bg-accent'
-                  : 'text-muted',
+                  ? 'bg-surface text-ink shadow-xs before:size-1.5 before:rounded-full before:bg-signal before:content-[""]'
+                  : 'text-muted hover:bg-surface/60',
               )
               if (!item.children.length) {
                 return (
@@ -75,12 +75,12 @@ export async function Header({
                     </summary>
                     <ul
                       aria-label={t('submenu', { label: item.label })}
-                      className="absolute top-full left-0 min-w-64 border border-line bg-surface py-2 shadow-md"
+                      className="absolute top-full left-0 mt-3 min-w-64 rounded-lg border border-line bg-surface p-2 shadow-md"
                     >
                       <li>
                         <a
                           href={item.href}
-                          className="block px-5 py-2.5 text-small hover:bg-surface-muted"
+                          className="block rounded-md px-4 py-2.5 text-small hover:bg-surface-muted"
                         >
                           {item.label}
                         </a>
@@ -91,7 +91,7 @@ export async function Header({
                             href={child.href}
                             aria-current={child.href === current ? 'page' : undefined}
                             className={cn(
-                              'block px-5 py-2.5 text-small hover:bg-surface-muted',
+                              'block rounded-md px-4 py-2.5 text-small hover:bg-surface-muted',
                               child.href === current && 'text-accent-strong',
                             )}
                           >
@@ -107,13 +107,13 @@ export async function Header({
           </ul>
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <div className="hidden sm:block">
             <LanguageSwitcher locale={locale} alternates={alternates} />
           </div>
           {cta ? (
             <div className="hidden lg:block">
-              <CmsLink link={cta} />
+              <CmsLink link={cta} variant="dark" />
             </div>
           ) : null}
           <MobileMenu

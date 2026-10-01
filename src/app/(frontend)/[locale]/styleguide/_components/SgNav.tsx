@@ -28,7 +28,7 @@ export function SgNav({ sections }: { sections: { id: string; no: string; label:
   return (
     <nav
       aria-label="Styleguide-Abschnitte"
-      className="sticky top-8 hidden max-h-[calc(100dvh-4rem)] overflow-y-auto lg:block"
+      className="sticky top-28 hidden max-h-[calc(100dvh-8rem)] overflow-y-auto lg:block"
     >
       <ol className="relative flex flex-col border-l border-line">
         {sections.map((s) => {

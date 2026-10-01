@@ -1,6 +1,7 @@
 import { DownloadSimple } from '@phosphor-icons/react/dist/ssr'
 
 import { CmsLink } from '@/components/cms/CmsLink'
+import { BackgroundPaths } from '@/components/effects/BackgroundPaths'
 import { Media } from '@/components/cms/Media'
 import { RichText } from '@/components/cms/RichText'
 import { LogoLoop } from '@/components/effects/LogoLoop'
@@ -123,8 +124,11 @@ export function Stats({ block }: { block: Block<'stats'> } & Ctx) {
             <dd className="text-h1 font-extralight">
               <CountUp
                 to={item.value}
+                // Jahreszahlen zählen nur die letzten Jahre hoch und ohne Tausenderpunkt.
+                from={item.plain ? Math.max(0, item.value - 30) : 0}
+                grouping={!item.plain}
                 decimals={item.decimals ?? 0}
-                suffix={item.suffix ? ` ${item.suffix}` : ''}
+                suffix={item.suffix ? (item.suffix === '+' ? '+' : ` ${item.suffix}`) : ''}
               />
             </dd>
           </div>
@@ -138,10 +142,11 @@ export function CallToAction({ block, locale, homeId }: { block: Block<'callToAc
   const dark = block.variant !== 'light'
   const link = resolveLink(block.link, locale, homeId)
   return (
-    <Section tone={dark ? 'dark' : 'muted'}>
-      <div className="grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end">
+    <Section tone={dark ? 'dark' : 'muted'} className="md:py-32">
+      {dark ? <BackgroundPaths className="text-blue-400 opacity-60" /> : null}
+      <div className="relative grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end">
         <div className="flex flex-col gap-4">
-          <h2 className="text-h2 font-light">{block.title}</h2>
+          <h2 className="text-h1 font-light">{block.title}</h2>
           {block.text ? (
             <p className={cn('text-lead font-light', dark ? 'text-blue-100' : 'text-muted')}>
               {block.text}
@@ -149,7 +154,7 @@ export function CallToAction({ block, locale, homeId }: { block: Block<'callToAc
           ) : null}
         </div>
         <div className="md:justify-self-end">
-          <CmsLink link={link} variant={dark ? 'inverse' : 'primary'} />
+          <CmsLink link={link} variant={dark ? 'signal' : 'primary'} size="lg" />
         </div>
       </div>
     </Section>

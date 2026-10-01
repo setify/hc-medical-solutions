@@ -50,7 +50,7 @@ export async function JobList({
           <p className="mb-4 text-small text-muted" aria-live="polite">
             {t('count', { count: jobs.length })}
           </p>
-          <div className="border-t border-line">
+          <div className="flex flex-col gap-3">
             {jobs.map((job) => {
               const wp = workplaceKey(job.workplaceType)
               const meta = [

@@ -2,7 +2,7 @@ import MicroSlats from '@/components/effects/MicroSlats'
 
 const meta = [
   ['Grundlage', 'Logoblatt Honegger&Bregenzer, 09/2023'],
-  ['Version', '1.1 · Audit AI-Muster'],
+  ['Version', '1.2 · nach Kundenvorlage'],
   ['Geltung', 'Website, Präsentation, Flyer'],
   ['Standard', 'WCAG 2.2 AA, DE · EN · FR'],
 ]
@@ -10,8 +10,8 @@ const meta = [
 /** Bühne des Styleguides: Lamellen-Hintergrund, Titel links, Metadaten auf Linien. */
 export function SgHero() {
   return (
-    <header className="relative isolate overflow-hidden bg-blue-950 text-white">
-      <div aria-hidden="true" className="absolute inset-y-0 right-0 -z-10 w-full md:w-3/5">
+    <header className="panel mt-4 bg-blue-950 text-white">
+      <div aria-hidden="true" className="absolute inset-0 -z-10">
         <MicroSlats />
       </div>
       <div

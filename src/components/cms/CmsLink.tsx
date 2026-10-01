@@ -1,6 +1,6 @@
 import { ArrowRight, ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
 
-import { ButtonLink, type ButtonVariant } from '@/components/ui/Button'
+import { ButtonLink, type ButtonSize, type ButtonVariant } from '@/components/ui/Button'
 import { LineButton } from '@/components/ui/LineButton'
 import type { ResolvedLink } from '@/lib/links'
 
@@ -9,11 +9,13 @@ export function CmsLink({
   link,
   appearance = 'button',
   variant = 'primary',
+  size,
   tone = 'dark',
 }: {
   link: ResolvedLink | null
   appearance?: 'button' | 'line'
   variant?: ButtonVariant
+  size?: ButtonSize
   tone?: 'dark' | 'light'
 }) {
   if (!link) return null
@@ -39,6 +41,7 @@ export function CmsLink({
     <ButtonLink
       href={link.href}
       variant={variant}
+      size={size}
       iconRight={
         link.external ? <ArrowUpRight className="size-4" /> : <ArrowRight className="size-4" />
       }

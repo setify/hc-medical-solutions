@@ -152,10 +152,40 @@ export interface Page {
         | {
             eyebrow?: string | null;
             title: string;
+            /**
+             * Exakt so, wie er im Titel steht – wird farbig abgesetzt.
+             */
+            titleHighlight?: string | null;
             lead?: string | null;
-            variant?: ('light' | 'dark' | 'slats') | null;
+            variant?: ('light' | 'dark' | 'slats' | 'lines') | null;
             image?: (number | null) | Media;
+            /**
+             * Nur bei „Linienbündel“: Grafik „Zweiter Kanal zum Original“.
+             */
+            visual?: ('none' | 'channels') | null;
+            visualTags?:
+              | {
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
             actions?:
+              | {
+                  link: {
+                    type?: ('page' | 'document' | 'external') | null;
+                    label: string;
+                    page?: (number | null) | Page;
+                    document?: (number | null) | Document;
+                    url?: string | null;
+                    newTab?: boolean | null;
+                  };
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * Nur bei dunklen Varianten. Verweise auf wichtige Unterseiten.
+             */
+            quickLinks?:
               | {
                   link: {
                     type?: ('page' | 'document' | 'external') | null;
@@ -171,6 +201,122 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'hero';
+          }
+        | {
+            eyebrow?: string | null;
+            title?: string | null;
+            layout?: ('cards' | 'alternating') | null;
+            items?:
+              | {
+                  title: string;
+                  /**
+                   * Leerzeile trennt Absätze.
+                   */
+                  text?: string | null;
+                  highlight?: string | null;
+                  image?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'columns';
+          }
+        | {
+            eyebrow?: string | null;
+            title?: string | null;
+            intro?: string | null;
+            items?:
+              | {
+                  icon?:
+                    | (
+                        | 'original'
+                        | 'savings'
+                        | 'stock'
+                        | 'transparency'
+                        | 'traceability'
+                        | 'decision'
+                        | 'calendar'
+                        | 'temperature'
+                        | 'inventory'
+                        | 'delivery'
+                        | 'certificate'
+                        | 'check'
+                        | 'recall'
+                        | 'idea'
+                        | 'route'
+                        | 'freedom'
+                        | 'growth'
+                        | 'clock'
+                        | 'home'
+                        | 'family'
+                        | 'equipment'
+                      )
+                    | null;
+                  title: string;
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * Dunkle Kachel mit Button, ergänzt das Raster.
+             */
+            cta?: {
+              enabled?: boolean | null;
+              title?: string | null;
+              text?: string | null;
+              link?: {
+                type?: ('page' | 'document' | 'external') | null;
+                label: string;
+                page?: (number | null) | Page;
+                document?: (number | null) | Document;
+                url?: string | null;
+                newTab?: boolean | null;
+              };
+            };
+            tone?: ('plain' | 'muted' | 'teal') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'features';
+          }
+        | {
+            eyebrow?: string | null;
+            title: string;
+            /**
+             * Leerzeile trennt Absätze.
+             */
+            text?: string | null;
+            tags?:
+              | {
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            tone?: ('plain' | 'teal' | 'dark') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'statement';
+          }
+        | {
+            eyebrow?: string | null;
+            title?: string | null;
+            intro?: string | null;
+            members?:
+              | {
+                  name: string;
+                  role?: string | null;
+                  image?: (number | null) | Media;
+                  /**
+                   * Leerzeile trennt Absätze.
+                   */
+                  bio?: string | null;
+                  quote?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'team';
           }
         | {
             content?: {
@@ -274,6 +420,7 @@ export interface Page {
                   value: number;
                   decimals?: number | null;
                   suffix?: string | null;
+                  plain?: boolean | null;
                   label: string;
                   id?: string | null;
                 }[]
@@ -590,9 +737,17 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               eyebrow?: T;
               title?: T;
+              titleHighlight?: T;
               lead?: T;
               variant?: T;
               image?: T;
+              visual?: T;
+              visualTags?:
+                | T
+                | {
+                    label?: T;
+                    id?: T;
+                  };
               actions?:
                 | T
                 | {
@@ -606,6 +761,109 @@ export interface PagesSelect<T extends boolean = true> {
                           url?: T;
                           newTab?: T;
                         };
+                    id?: T;
+                  };
+              quickLinks?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          label?: T;
+                          page?: T;
+                          document?: T;
+                          url?: T;
+                          newTab?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        columns?:
+          | T
+          | {
+              eyebrow?: T;
+              title?: T;
+              layout?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    text?: T;
+                    highlight?: T;
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        features?:
+          | T
+          | {
+              eyebrow?: T;
+              title?: T;
+              intro?: T;
+              items?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              cta?:
+                | T
+                | {
+                    enabled?: T;
+                    title?: T;
+                    text?: T;
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          label?: T;
+                          page?: T;
+                          document?: T;
+                          url?: T;
+                          newTab?: T;
+                        };
+                  };
+              tone?: T;
+              id?: T;
+              blockName?: T;
+            };
+        statement?:
+          | T
+          | {
+              eyebrow?: T;
+              title?: T;
+              text?: T;
+              tags?:
+                | T
+                | {
+                    label?: T;
+                    id?: T;
+                  };
+              tone?: T;
+              id?: T;
+              blockName?: T;
+            };
+        team?:
+          | T
+          | {
+              eyebrow?: T;
+              title?: T;
+              intro?: T;
+              members?:
+                | T
+                | {
+                    name?: T;
+                    role?: T;
+                    image?: T;
+                    bio?: T;
+                    quote?: T;
                     id?: T;
                   };
               id?: T;
@@ -691,6 +949,7 @@ export interface PagesSelect<T extends boolean = true> {
                     value?: T;
                     decimals?: T;
                     suffix?: T;
+                    plain?: T;
                     label?: T;
                     id?: T;
                   };

@@ -16,12 +16,12 @@ const audit = [
   [
     'Farben ohne Abstufungen',
     'Vier Hausfarben, keine Hover-, Flächen- oder Linientöne.',
-    'Skalen 50–950 für Petrol, Blau, Neutral; semantische Tokens statt Hex-Werten im Code.',
+    'Skalen 50–950 für Blau, Teal, Petrol, Neutral und Graublau; semantische Tokens statt Hex-Werten im Code.',
   ],
   [
     'Graue Texte nicht geprüft',
     'Neutraltöne frei gewählt, Kontrast unklar.',
-    'Petrol-getönte Neutralskala, jede Textfarbe ≥ 4,5 : 1 (WCAG 2.2 AA) rechnerisch geprüft.',
+    'Leicht getönte Neutralskala, jede Textfarbe ≥ 4,5 : 1 (WCAG 2.2 AA) rechnerisch geprüft.',
   ],
   [
     'Starre Schriftgrößen',
@@ -47,14 +47,14 @@ const audit = [
 
 const auditSlop = [
   [
-    'Pillenform überall',
-    '27 Elemente mit rounded-full: Buttons, Badges, Tabs, Sprachwahl.',
-    'Radien aus dem Bildzeichen abgeleitet (≈ 10 %): Buttons 4 px, Flächen max. 8 px.',
+    'Pillenform ohne System',
+    '27 Elemente mit rounded-full, ohne erkennbare Regel.',
+    'Nach Kundenvorlage (10/2026) bewusst vollrund: Buttons, Felder, Chips, Navigation. Alles andere folgt der Radius-Skala.',
   ],
   [
-    'Weiche Riesenradien',
-    'Cards und Dialoge mit 20–40 px, der typische „Bento“-Look.',
-    'Flächen bei 8 px gedeckelt, passend zum eher kantigen HC-Zeichen.',
+    'Radien ohne Ordnung',
+    'Cards und Dialoge mit 20–40 px, beliebig gemischt.',
+    'Feste Skala: Cards 20 px, Panels und Dialoge 28 px, farbige Flächen als eingerückte Panels.',
   ],
   [
     'Glas-Kachel im Hero',
@@ -67,9 +67,9 @@ const auditSlop = [
     'Klarer Titel „Designsystem“ und ein sachlicher Satz.',
   ],
   [
-    'Icons im Kreis',
-    'Pfeil und Plus in runden Rahmen, die sich beim Hover drehen.',
-    'Freistehende Icons, die sich nur leicht bewegen.',
+    'Icons im Kreis als Dekoration',
+    'Pfeil und Plus in runden Rahmen, überall und ohne Funktion.',
+    'Kreise nur mit Aufgabe (Kundenvorlage): runde Pfeil-Buttons für Aktionen, Symbol im Kreis als Kennung einer Leistung.',
   ],
   [
     'Schwebende Cards',
@@ -84,7 +84,7 @@ const auditSlop = [
   [
     'Versalien-Overlines',
     'Gesperrte Großbuchstaben über fast jedem Block.',
-    'Kleine Zeile in normaler Schreibung, Linie als Marker.',
+    'Kleine Pille in normaler Schreibung mit Punkt in Teal.',
   ],
   [
     'Erfundene Zahlen und Partner',
@@ -92,9 +92,9 @@ const auditSlop = [
     'Nur belegbare Werte aus dem System, neutrale Platzhalter für Referenzen.',
   ],
   [
-    'Segmented Control',
-    'Tabs als Pille mit gleitender Füllung.',
-    'Tabs mit gleitender Linie, dem Leitmotiv folgend.',
+    'Uneinheitliche Reiter',
+    'Tabs, Navigation und Sprachwahl jeweils anders gestaltet.',
+    'Navigation und Tabs als gleiche Pillengruppe mit weißer, gleitender Markierung (Kundenvorlage).',
   ],
   [
     'Gedankenstrich-Prosa',

@@ -15,6 +15,24 @@ const house = [
     big: true,
   },
   {
+    name: 'Teal',
+    token: 'teal-400 · signal',
+    hex: '#22C7BD',
+    rgb: '34 · 199 · 189',
+    cmyk: 'Webfarbe',
+    role: 'Zweitfarbe: Buttons auf dunklem Grund, Hervorhebungen. Text darauf immer Blau 950.',
+    cls: 'bg-teal-400 text-blue-950',
+  },
+  {
+    name: 'Graublau',
+    token: 'frost-50 · canvas',
+    hex: '#F1F7FA',
+    rgb: '241 · 247 · 250',
+    cmyk: 'Webfarbe',
+    role: 'Seitenhintergrund; Panels in Frost 100.',
+    cls: 'bg-frost-100 text-blue-950 ring-1 ring-frost-200',
+  },
+  {
     name: 'Petrol',
     token: 'brand-petrol · petrol-700',
     hex: '#004E5C',
@@ -39,7 +57,7 @@ const house = [
     rgb: '233 · 72 · 61',
     cmyk: '0 · 88 · 80 · 0',
     role: 'Signal: sparsam, nie für Fließtext.',
-    cls: 'bg-brand-red text-n-950 md:col-span-2',
+    cls: 'bg-brand-red text-n-950',
   },
 ]
 
@@ -77,6 +95,31 @@ const scales: { name: string; steps: [string, string][] }[] = [
     ],
   },
   {
+    name: 'Teal',
+    steps: [
+      ['50', '#e8fbf9'],
+      ['100', '#c6f5f0'],
+      ['200', '#92ebe3'],
+      ['300', '#56dbd1'],
+      ['400', '#22c7bd'],
+      ['500', '#0eaaa2'],
+      ['600', '#06807b'],
+      ['700', '#096e6b'],
+      ['800', '#0b5856'],
+      ['900', '#0a4547'],
+      ['950', '#042b2e'],
+    ],
+  },
+  {
+    name: 'Graublau',
+    steps: [
+      ['50', '#f1f7fa'],
+      ['100', '#e3eef3'],
+      ['200', '#d2e3ea'],
+      ['300', '#b7d0db'],
+    ],
+  },
+  {
     name: 'Neutral',
     steps: [
       ['25', '#f8fafb'],
@@ -110,8 +153,11 @@ const semantic = [
   ['ink-soft', 'n-800', 'Fließtext im Rich Text'],
   ['muted', 'n-600', 'Nebentexte, Hilfetexte (≥ 6,8 : 1)'],
   ['line / line-strong', 'n-200 / n-300', 'Trennlinien, Feldränder'],
-  ['surface / -muted / -sunken', 'weiß / n-50 / n-100', 'Hintergründe in drei Ebenen'],
-  ['surface-inverse', 'blue-950', 'Dunkle Flächen: Hero, Footer, Aufrufe'],
+  ['canvas', 'frost-50', 'Seitenhintergrund (helles Graublau)'],
+  ['surface / -muted / -sunken', 'weiß / frost-100 / -200', 'Cards weiß, Panels Graublau'],
+  ['surface-inverse', 'blue-950', 'Dunkle Panels: Hero, Footer, Aufrufe'],
+  ['surface-teal', 'teal-900', 'Zweite dunkle Panel-Variante'],
+  ['signal / -strong', 'teal-400 / 300', 'Zweitfarbe: Buttons auf dunklem Grund'],
   ['primary / -strong', 'blue-600 / 700', 'Primäre Aktionen (Buttons, Auswahl)'],
   ['accent / -strong', 'blue-600 / 700', 'Links, Akzente, Fokus'],
   ['danger', 'red-700', 'Fehlertexte (7,06 : 1)'],
@@ -125,16 +171,16 @@ export function SecColor() {
       id="farbe"
       no="03"
       title="Farbe"
-      intro="Vier Hausfarben aus dem Logoblatt, erweitert zu vollständigen Skalen. Im Code stehen ausschließlich Tokens, nie Hex-Werte."
+      intro="Vier Hausfarben aus dem Logoblatt, ergänzt um Teal als Zweitfarbe und Graublau als Seitengrund (nach Kundenvorlage). Im Code stehen ausschließlich Tokens, nie Hex-Werte."
     >
-      <div className="grid gap-3 md:h-[28rem] md:grid-cols-[2fr_1fr_1fr] md:grid-rows-2">
+      <div className="grid gap-3 md:h-[40rem] md:grid-cols-[2fr_1fr_1fr] md:grid-rows-3">
         {house.map((c) => (
           <div
             key={c.name}
             className={cn(
               'flex min-h-52 flex-col justify-between rounded-lg p-7',
               c.cls,
-              c.big && 'md:row-span-2 md:p-10',
+              c.big && 'md:row-span-3 md:p-10',
             )}
           >
             <div className="flex items-start justify-between gap-4">
@@ -165,8 +211,11 @@ export function SecColor() {
               <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-6 lg:grid-cols-12">
                 {s.steps.map(([step, hex]) => {
                   const ratio = onWhite(hex)
-                  const dark = ratio > 4.5
-                  const isHouse = ['#004e5c', '#007f9d', '#e9483d', '#a0cce0'].includes(hex)
+                  // Schrift mit dem besseren Kontrast wählen
+                  const dark = ratio >= contrast(hex, '#0c171a')
+                  const isHouse = ['#004e5c', '#007f9d', '#e9483d', '#a0cce0', '#22c7bd'].includes(
+                    hex,
+                  )
                   return (
                     <div
                       key={step}
@@ -220,8 +269,11 @@ export function SecColor() {
               ['Weiß auf Blau 950', '#ffffff', '#061f33'],
               ['Blau 950 auf Hellblau', '#061f33', '#a0cce0'],
               ['Weiß auf Blau 600', '#ffffff', '#007f9d'],
+              ['Blau 950 auf Teal 400', '#061f33', '#22c7bd'],
+              ['Teal 300 auf Blau 950', '#56dbd1', '#061f33'],
+              ['Weiß auf Teal 900', '#ffffff', '#0a4547'],
+              ['Neutral 950 auf Graublau 100', '#0c171a', '#e3eef3'],
               ['Hellblau auf Blau 950', '#a0cce0', '#061f33'],
-              ['Petrol 700 auf Neutral 50', '#004e5c', '#f2f6f7'],
               ['Rot 500 auf Weiß, nur groß', '#e9483d', '#ffffff'],
             ].map(([label, fg, bg]) => {
               const r = contrast(fg!, bg!)

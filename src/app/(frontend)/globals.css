@@ -42,6 +42,25 @@
   --color-blue-900: #0a3550;
   --color-blue-950: #061f33;
 
+  /* Teal – Signal- und Zweitfarbe (Buttons auf dunklem Grund, Hervorhebungen, Teal-Flächen) */
+  --color-teal-50: #e8fbf9;
+  --color-teal-100: #c6f5f0;
+  --color-teal-200: #92ebe3;
+  --color-teal-300: #56dbd1;
+  --color-teal-400: #22c7bd;
+  --color-teal-500: #0eaaa2;
+  --color-teal-600: #06807b;
+  --color-teal-700: #096e6b;
+  --color-teal-800: #0b5856;
+  --color-teal-900: #0a4547;
+  --color-teal-950: #042b2e;
+
+  /* Graublau – Seitenhintergrund und helle Flächen */
+  --color-frost-50: #f1f7fa;
+  --color-frost-100: #e3eef3;
+  --color-frost-200: #d2e3ea;
+  --color-frost-300: #b7d0db;
+
   /* Rot – Signal (Hausfarbe #E9483D = 500) */
   --color-red-50: #fdecea;
   --color-red-100: #fbd5d1;
@@ -81,9 +100,11 @@
   --color-brand-sky: #a0cce0;
 
   /* Semantische Tokens – in Komponenten bevorzugt verwenden */
+  --color-canvas: var(--color-frost-50);
   --color-surface: var(--color-n-0);
-  --color-surface-muted: var(--color-n-50);
-  --color-surface-sunken: var(--color-n-100);
+  --color-surface-muted: var(--color-frost-100);
+  --color-surface-sunken: var(--color-frost-200);
+  --color-surface-teal: var(--color-teal-900);
   --color-surface-inverse: var(--color-blue-950);
   --color-ink: var(--color-n-950);
   --color-ink-soft: var(--color-n-800);
@@ -95,6 +116,9 @@
   /* Primär- und Akzentfarbe: Hausfarbe Blau; dunkle Flächen in tiefem Blau (blue-950). */
   --color-primary: var(--color-blue-600);
   --color-primary-strong: var(--color-blue-700);
+  /* Zweitfarbe: kräftiges Teal, vor allem als Button auf dunklen Flächen (Text blue-950). */
+  --color-signal: var(--color-teal-400);
+  --color-signal-strong: var(--color-teal-300);
   --color-focus: var(--color-blue-600);
   --color-danger: var(--color-red-700);
 
@@ -128,20 +152,20 @@
   --text-overline--line-height: 1.3;
   --text-overline--letter-spacing: 0.16em;
 
-  /* Radien – abgeleitet vom HC-Bildzeichen: Eckradius ≈ 10 % der Kantenlänge.
-     Kleine Elemente folgen der 10-%-Regel, Flächen sind bei 8 px gedeckelt.
-     rounded-full nur für Radio, Schalter und Statuspunkte. */
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
+  /* Radien – weich, nach Kundenvorlage (09/2026): Buttons, Chips und Navigation vollrund
+     (rounded-full), Felder und kleine Elemente sm/md, Cards lg, große Flächen (Panels) xl/2xl. */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 36px;
 
-  /* Schatten – petrol-getönt statt Schwarz */
-  --shadow-xs: 0 1px 2px rgb(3 31 37 / 0.06);
-  --shadow-sm: 0 2px 6px -2px rgb(3 31 37 / 0.1), 0 1px 2px rgb(3 31 37 / 0.05);
-  --shadow-md: 0 12px 28px -14px rgb(3 31 37 / 0.22), 0 2px 6px -2px rgb(3 31 37 / 0.06);
-  --shadow-lg: 0 30px 60px -28px rgb(3 31 37 / 0.32), 0 8px 18px -10px rgb(3 31 37 / 0.1);
+  /* Schatten – tiefblau getönt statt Schwarz */
+  --shadow-xs: 0 1px 2px rgb(6 31 51 / 0.06);
+  --shadow-sm: 0 2px 6px -2px rgb(6 31 51 / 0.1), 0 1px 2px rgb(6 31 51 / 0.05);
+  --shadow-md: 0 12px 28px -14px rgb(6 31 51 / 0.22), 0 2px 6px -2px rgb(6 31 51 / 0.06);
+  --shadow-lg: 0 30px 60px -28px rgb(6 31 51 / 0.32), 0 8px 18px -10px rgb(6 31 51 / 0.1);
   --shadow-edge: inset 0 1px 0 rgb(255 255 255 / 0.12);
 
   /* Bewegung */
@@ -230,7 +254,7 @@
   }
 
   body {
-    @apply bg-surface font-sans text-body font-light text-ink antialiased;
+    @apply bg-canvas font-sans text-body font-light text-ink antialiased;
     font-feature-settings: 'ss01' 0;
   }
 
@@ -255,10 +279,10 @@
     color: var(--color-blue-950);
   }
 
+  /* Kontur folgt dem Radius des Elements (Pillen bleiben rund). */
   :focus-visible {
     outline: 2px solid var(--color-focus);
     outline-offset: 3px;
-    border-radius: var(--radius-xs);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -282,13 +306,23 @@
     @apply mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-10;
   }
 
-  /* Overline mit Linien-Motiv */
+  /* Abgesetzte Fläche (Panel) mit großem Radius, eingerückt um den Seitenrand */
+  .panel {
+    @apply relative isolate mx-auto w-[calc(100%-1.5rem)] max-w-[1440px] overflow-hidden rounded-xl sm:w-[calc(100%-2rem)] lg:w-[calc(100%-3rem)];
+    /* WebGL-/Canvas-Ebenen werden von overflow+radius nicht zuverlässig beschnitten. */
+    clip-path: inset(0 round var(--radius-xl));
+  }
+
+  /* Kennzeichnung über Überschriften: Pille mit Punkt in der Signalfarbe */
   .eyebrow {
-    @apply inline-flex items-center gap-3 text-small font-normal text-muted;
+    @apply inline-flex items-center gap-2.5 self-start rounded-full border border-line bg-surface px-4 py-1.5 text-small font-normal text-ink;
   }
   .eyebrow::before {
     content: '';
-    @apply inline-block h-3.5 w-px bg-accent;
+    @apply inline-block size-1.5 rounded-full bg-signal;
+  }
+  .eyebrow-dark {
+    @apply border-white/15 bg-white/5 text-white;
   }
 
   /* Fließtext aus dem CMS (Rich Text) */
@@ -363,10 +397,10 @@
     }
   }
 
-  /* Barrierefrei: jeder Zwischenzustand erfüllt WCAG AA (n-500 = 4,6 : 1 auf Weiß). */
+  /* Barrierefrei: jeder Zwischenzustand erfüllt WCAG AA (n-600 ≥ 6 : 1 auf Weiß und Graublau). */
   @keyframes reveal-word {
     from {
-      color: var(--color-n-500);
+      color: var(--color-n-600);
       transform: translateY(0.12em);
     }
     to {
@@ -396,5 +430,185 @@
 
   .mask-fade-x {
     mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .mask-fade-y {
+    mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  /* Sektionsbibliothek: weitere Scroll-Effekte ohne JavaScript */
+  @supports (animation-timeline: view()) {
+    /* Buchstaben/Wörter steigen aus einer Maske (Eltern-Element mit overflow-hidden) */
+    .reveal-cut {
+      animation: reveal-cut linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 35%;
+    }
+    /* Linie zeichnet sich von links */
+    .draw-x {
+      transform-origin: left center;
+      animation: draw-x linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 50%;
+    }
+    /* Markierung hinter einem Wort */
+    .mark-sweep {
+      animation: mark-sweep linear both;
+      animation-timeline: view();
+      animation-range: entry 30% cover 55%;
+    }
+    /* Bild öffnet sich wie eine Blende */
+    .reveal-clip {
+      animation: reveal-clip linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 40%;
+    }
+    /* SVG-Kontur zeichnet sich (stroke-dasharray am Element setzen) */
+    .draw-stroke {
+      animation: draw-stroke linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 55%;
+    }
+    /* leichte Parallaxe innerhalb eines Bildrahmens */
+    .parallax-y {
+      animation: parallax-y linear both;
+      animation-timeline: view();
+    }
+  }
+
+  @keyframes reveal-cut {
+    from {
+      transform: translateY(105%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  @keyframes draw-x {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes mark-sweep {
+    from {
+      background-size: 0% 100%;
+    }
+    to {
+      background-size: 100% 100%;
+    }
+  }
+  @keyframes draw-stroke {
+    from {
+      stroke-dashoffset: var(--dash, 1600);
+      fill-opacity: 0;
+    }
+    70% {
+      stroke-dashoffset: 0;
+      fill-opacity: 0;
+    }
+    to {
+      stroke-dashoffset: 0;
+      fill-opacity: 1;
+    }
+  }
+  @keyframes reveal-clip {
+    from {
+      clip-path: inset(18% 18% 18% 18%);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes parallax-y {
+    from {
+      transform: translateY(-8%) scale(1.16);
+    }
+    to {
+      transform: translateY(8%) scale(1.16);
+    }
+  }
+
+  /* Wort steigt beim Laden aus der Maske (Hero) */
+  .cut-in {
+    animation: reveal-cut 0.9s var(--ease-out-expo) both;
+    animation-delay: calc(var(--i, 0) * 70ms + 150ms);
+  }
+
+  /* Linienbündel: ganze Ebene driftet (nur Transform, GPU) */
+  @keyframes paths-drift {
+    from {
+      transform: translate3d(-2%, 1.5%, 0) rotate(-1deg);
+    }
+    to {
+      transform: translate3d(2%, -1.5%, 0) rotate(1deg);
+    }
+  }
+
+  /* Fluss entlang einer Linie (Hero-Grafik „Zweiter Kanal“) */
+  @keyframes channel-flow {
+    from {
+      stroke-dashoffset: 100;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Senkrechtes Laufband (Zitat-Spalten) */
+  .marquee-y {
+    animation: marquee-y var(--marquee-duration, 40s) linear infinite;
+  }
+  @keyframes marquee-y {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(0, -50%, 0);
+    }
+  }
+
+  /* Flächenmuster */
+  .bg-lines {
+    background-image: linear-gradient(
+      90deg,
+      var(--pattern, var(--color-line)) 1px,
+      transparent 1px
+    );
+    background-size: var(--pattern-size, 7rem) 100%;
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(90deg, var(--pattern, var(--color-line)) 1px, transparent 1px),
+      linear-gradient(0deg, var(--pattern, var(--color-line)) 1px, transparent 1px);
+    background-size: var(--pattern-size, 4rem) var(--pattern-size, 4rem);
+  }
+  .bg-dots {
+    background-image: radial-gradient(var(--pattern, var(--color-n-300)) 1px, transparent 1.2px);
+    background-size: var(--pattern-size, 1.25rem) var(--pattern-size, 1.25rem);
+  }
+  .bg-slats {
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--pattern, rgb(255 255 255 / 0.06)) 0 2px,
+      transparent 2px 14px
+    );
+  }
+
+  @media (prefers-reduced-motion: reduce), print {
+    .reveal-cut,
+    .draw-x,
+    .mark-sweep,
+    .reveal-clip,
+    .parallax-y,
+    .draw-stroke,
+    .cut-in,
+    .marquee-y {
+      animation: none !important;
+    }
+    .mark-sweep {
+      background-size: 100% 100%;
+    }
   }
 }

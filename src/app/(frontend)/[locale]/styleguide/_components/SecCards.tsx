@@ -81,7 +81,7 @@ export function SecCards() {
         title="Stellenanzeigen"
         text="Für die Karriereseite: Status, Ort und Umfang auf einen Blick. Inaktive Stellen erscheinen nicht."
       >
-        <div className="border-t border-line">
+        <div className="flex flex-col gap-3">
           <JobCard
             title="Regulatory Affairs Manager (m/w/d)"
             meta={[
@@ -105,12 +105,12 @@ export function SecCards() {
         <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
           <Specimen label="Glare: Lichtreflex beim Hover" code="<GlareCard />" tone="none">
             <GlareCard className="flex min-h-72 flex-col justify-between">
-              <span className="eyebrow text-blue-200 before:bg-blue-200">Kontrast</span>
+              <span className="eyebrow eyebrow-dark">Kontrast</span>
               <div>
                 <p className="text-display font-extralight">
-                  9,36<span className="text-h2 text-blue-200"> : 1</span>
+                  16,78<span className="text-h2 text-blue-200"> : 1</span>
                 </p>
-                <p className="mt-2 text-small text-blue-100">Weiß auf Petrol 700, erfüllt AAA</p>
+                <p className="mt-2 text-small text-blue-100">Weiß auf Blau 950, erfüllt AAA</p>
               </div>
             </GlareCard>
           </Specimen>
@@ -120,7 +120,7 @@ export function SecCards() {
             tone="none"
           >
             <BorderGlowCard className="flex min-h-72 flex-col justify-between">
-              <span className="eyebrow text-blue-200 before:bg-blue-200">Fokus</span>
+              <span className="eyebrow eyebrow-dark">Fokus</span>
               <div className="flex flex-col gap-3">
                 <p className="text-h3">Mit der Maus an den Rand fahren</p>
                 <p className="max-w-sm text-small text-blue-100">

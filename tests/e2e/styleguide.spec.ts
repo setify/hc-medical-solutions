@@ -32,9 +32,13 @@ test.describe('Styleguide', () => {
 
   test('Tabs lassen sich per Pfeiltaste bedienen', async ({ page }) => {
     const first = page.getByRole('tab', { name: 'Überblick' })
-    await first.focus()
-    await page.keyboard.press('ArrowRight')
-    await expect(page.getByRole('tab', { name: 'Ablauf' })).toHaveAttribute('aria-selected', 'true')
+    const second = page.getByRole('tab', { name: 'Ablauf' })
+    // Bis zur Hydration reagiert der Tab nicht auf Tasten – deshalb wiederholen.
+    await expect(async () => {
+      await first.click()
+      await page.keyboard.press('ArrowRight')
+      await expect(second).toHaveAttribute('aria-selected', 'true', { timeout: 1000 })
+    }).toPass({ timeout: 20_000 })
     await expect(page.getByRole('tabpanel')).toContainText('Beispieltext Ablauf')
   })
 

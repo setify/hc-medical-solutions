@@ -97,7 +97,7 @@ export function SecText() {
           {[
             { v: 3, l: 'Sprachen' },
             { v: 4, l: 'Hausfarben' },
-            { v: 9.36, d: 2, s: ' : 1', l: 'Kontrast Weiß auf Petrol' },
+            { v: 16.78, d: 2, s: ' : 1', l: 'Kontrast Weiß auf Blau 950' },
             { v: 10, s: ' %', l: 'Eckradius des Bildzeichens' },
           ].map((k, i) => (
             <div
@@ -154,11 +154,11 @@ export function SecBackgrounds() {
       intro="Micro Slats: ein Feld feiner Lamellen, das sich wie eine Oberfläche im Wind bewegt. Das Linien-Motiv als Bühne. WebGL, pausiert außerhalb des Sichtbereichs und bei „Bewegung reduzieren“; ohne WebGL bleibt die Grundfarbe."
     >
       <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-        <Specimen label="Micro Slats · Petrol (Standard)" code="<MicroSlats />" tone="none">
+        <Specimen label="Micro Slats · Blau (Standard)" code="<MicroSlats />" tone="none">
           <div className="relative h-96 overflow-hidden rounded-lg bg-blue-950">
             <MicroSlats />
             <div className="pointer-events-none absolute inset-0 flex flex-col justify-end p-8 text-white">
-              <span className="eyebrow text-blue-200 before:bg-blue-200">Beispiel</span>
+              <span className="eyebrow eyebrow-dark">Beispiel</span>
               <p className="mt-3 max-w-md text-h2 font-light">
                 Text liegt immer auf ruhiger Fläche.
               </p>

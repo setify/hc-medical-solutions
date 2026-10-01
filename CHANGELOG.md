@@ -5,6 +5,36 @@ Versionierung nach [SemVer](https://semver.org/lang/de/). Bis zum Launch gilt 0.
 
 Gespiegelt in Notion: Setify / HC Medical Solutions / Changelog.
 
+## [0.5.0] – 2026-10-01
+
+### Hinzugefügt
+
+- Seitenstruktur nach der finalen Übergabe von HC (30.09.2026): Startseite, Vorgehensweise, Lagerlogistik, Qualität & Regulatory, Karriere, Kontakt sowie Impressum und Datenschutz. Navigation mit „Einkaufspotenzial prüfen“, Footer mit Leistungen, Unternehmen und Rechtlichem.
+- Startseite vollständig mit den finalen Texten: Hero mit Grafik „Der zweite Kanal zum Original“ und Schnellzugriff, zwei Kernaussagen, „Warum HC?“ mit fünf Kacheln und Aktionskachel, „Mehr als ein guter Preis“, „Unsere Expertise“ mit Fachbereichen und Kennzahlen, Michael und Bernhard Trick mit Porträt und Zitat, Abschluss mit Handlungsaufforderung.
+- Kernaussagen auf der Startseite als Bild und Text im Wechsel (wie Vorlage VL6); Bilder sind Platzhalter, bis HC eigene Fotos liefert.
+- Unterseiten zunächst mit Seitenkopf (Titel und Einleitung aus dem Dokument); Karriere mit Stellenliste, Kontakt mit Formular.
+- Neue CMS-Bausteine für alle Seiten: Kacheln mit Symbol (optional mit Aktionskachel), Aussagen nebeneinander, Statement mit Stichworten, Team mit Porträt und Zitat; Hero mit Linienbündel, Grafik und Schnellzugriff; Kennzahlen mit Jahreszahl.
+- Interne Sektionsbibliothek unter `/de/sektionen` (nicht indexiert) zur Auswahl mit HC: 122 Varianten in 18 Kapiteln, jede mit Kennung (z. B. H3, U7, D12). Enthält Hero, Überschriftentypen, Text, Bild und Text, Galerien, Karussells, Leistungen, Ablauf, Kennzahlen, Kundenstimmen, Team, Nachweise, FAQ, Handlungsaufrufe, Navigation, Hintergründe sowie Trenner und Übergänge.
+- Alle Inhalte sind Platzhalter; Bilder sind neutrale Motive, lokal in Markenblau eingefärbt (keine externen Einbindungen).
+- Neues Kapitel „Nach Kundenvorlage“ (VL1–VL9): Panel-Hero mit schwebenden Karten, Fortschrittsbalken, Auswahlkarten, Leistungsraster mit Aktionskarte, Teal-Panel, Karten- und Fächer-Karussell, Footer-Panel mit Newsletter.
+
+### Geändert
+
+- Gestaltung nach Kundenvorlage: Buttons, Eingabefelder, Kennzeichnungen, Tabs und Navigation vollständig abgerundet; Cards 20 px, große Flächen 28 px Radius.
+- Farbige Abschnitte erscheinen als eingerückte, gerundete Panels auf hellem Graublau (`#F1F7FA`); Header schwebt als runde Leiste mit Pillen-Navigation, Footer als dunkles Panel.
+- Teal (`#22C7BD`) als Zweitfarbe neben Blau, vor allem für Buttons auf dunklen Flächen; dunkle Panels in Tiefblau oder Teal.
+- Runde Pfeil-Buttons in Leistungs- und Stellenkarten; Stellen als einzelne gerundete Karten.
+- Styleguide aktualisiert (Farben mit Teal und Graublau, Radien, Buttons, Audit-Regeln).
+- Unterseiten ohne Hero erhalten einen hellen Seitenkopf als Panel; das Kontaktformular liegt in einer weißen Card.
+- Schatten tiefblau statt petrol getönt; Kontrastbeispiele im Styleguide auf die aktuellen Farben umgestellt.
+
+### Behoben
+
+- Linienbündel-Hintergrund (H2, C1, HG14) ruckelte (gemessen ~12 Bilder/s): Linien jetzt statisch, nur die Ebene driftet per GPU – flüssige 120 Bilder/s. Alle übrigen Varianten gemessen, ohne Auffälligkeiten.
+- Tastaturfokus machte runde Buttons und Felder eckig (globale Fokus-Regel setzte einen festen Radius).
+- Scroll-Expansion-Hero (H3) schloss sich beim Weiterscrollen wieder; Einleitung liegt jetzt unter dem Bild statt darauf.
+- Fächer-Karussell (VL8) zeigte nur eine Karte; Trenner-Vorschauen und Laufband-Überschrift passen jetzt zum Panel-Raster.
+
 ## [0.4.0] – 2026-09-30
 
 ### Geändert

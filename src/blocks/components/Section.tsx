@@ -20,6 +20,8 @@ export function Section({
     <section
       className={cn(
         'py-16 md:py-24',
+        // Farbige Abschnitte als eingerückte Panels mit großem Radius (Kundenvorlage).
+        tone !== 'plain' && 'panel my-4',
         tone === 'muted' && 'bg-surface-muted',
         tone === 'dark' && 'bg-blue-950 text-white',
         className,

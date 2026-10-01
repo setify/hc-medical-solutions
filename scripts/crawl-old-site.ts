@@ -74,19 +74,11 @@ function classify(pathname: string, lang: Row['lang']): Pick<Row, 'category' | '
       `${L}/kontakt`,
       'Bestätigung erscheint künftig inline',
     ],
-    [/^\/partners$/, 'Unternehmen', `${L}/partner`, 'Zielpfad nach Seitenkonzept prüfen'],
-    [
-      /^\/unternehmen\/vorgehensweise-medizinprodukte$/,
-      'Unternehmen',
-      `${L}/unternehmen/vorgehensweise`,
-      'Zielpfad nach Seitenkonzept prüfen',
-    ],
-    [
-      /^\/unternehmen\/(qualitaetsversprechen|lagerlogistik)$/,
-      'Unternehmen',
-      `${L}${p}`,
-      'Zielpfad nach Seitenkonzept prüfen',
-    ],
+    // Neue Seitenstruktur (finale Übergabe 30.09.2026); EN/FR bis zur Übersetzung auf Deutsch.
+    [/^\/partners$/, 'Unternehmen', '/de', 'Keine Partnerseite mehr geplant – bitte bestätigen'],
+    [/^\/unternehmen\/vorgehensweise-medizinprodukte$/, 'Unternehmen', '/de/vorgehensweise', ''],
+    [/^\/unternehmen\/qualitaetsversprechen$/, 'Unternehmen', '/de/qualitaet-regulatory', ''],
+    [/^\/unternehmen\/lagerlogistik$/, 'Unternehmen', '/de/lagerlogistik', ''],
     [/^\/(blog|allgemein)(\/.*)?$|^\/__trashed$/, 'Blog/Archiv (entfällt)', `${L}`, ''],
   ]
   for (const [re, category, to, note] of rules) if (re.test(p)) return { category, to, note }

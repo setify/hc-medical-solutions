@@ -1,11 +1,11 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
-// Überschriften aus den Testseiten (pnpm seed)
+// Startseite: Deutsch aus dem CMS (pnpm seed); EN/FR zeigen bis zur Übersetzung den Platzhalter.
 const locales = [
-  { code: 'de', heading: 'Seiten kommen jetzt aus dem CMS' },
-  { code: 'en', heading: 'Pages now come from the CMS' },
-  { code: 'fr', heading: 'Les pages viennent désormais du CMS' },
+  { code: 'de', heading: 'Der zweite Kanal zum Original.' },
+  { code: 'en', heading: 'The new HC Medical Solutions website is on its way.' },
+  { code: 'fr', heading: 'Le nouveau site de HC Medical Solutions est en cours de création.' },
 ] as const
 
 test('Startseite "/" leitet auf /de um', async ({ page }) => {

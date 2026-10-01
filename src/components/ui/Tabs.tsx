@@ -39,7 +39,7 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode }[] }
         role="tablist"
         aria-orientation="horizontal"
         onKeyDown={onKey}
-        className="flex gap-8 border-b border-line"
+        className="inline-flex max-w-full gap-1 overflow-x-auto rounded-full bg-surface-muted p-1"
       >
         {tabs.map((tab, i) => (
           <button
@@ -54,14 +54,14 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode }[] }
             tabIndex={i === active ? 0 : -1}
             onClick={() => setActive(i)}
             className={cn(
-              'relative h-12 text-small font-normal transition-colors',
+              'relative h-10 shrink-0 rounded-full px-5 text-small font-normal whitespace-nowrap transition-colors',
               i === active ? 'text-ink' : 'text-muted hover:text-ink',
             )}
           >
             {i === active ? (
               <motion.span
                 layoutId={`${id}-line`}
-                className="absolute inset-x-0 -bottom-px h-0.5 bg-accent"
+                className="absolute inset-0 rounded-full bg-surface shadow-sm"
                 transition={{ type: 'spring', stiffness: 380, damping: 32 }}
               />
             ) : null}

@@ -66,7 +66,7 @@ export function ContactForm({
         ref={statusRef}
         tabIndex={-1}
         role="status"
-        className="flex max-w-2xl items-start gap-4 border-l-2 border-success-700 bg-success-50 p-6 focus-visible:outline-none"
+        className="flex max-w-2xl items-start gap-4 rounded-lg bg-success-50 p-6 focus-visible:outline-none"
       >
         <CheckCircle
           aria-hidden="true"
@@ -79,7 +79,7 @@ export function ContactForm({
   }
 
   return (
-    <form ref={formRef} action={action} noValidate className="grid max-w-3xl gap-6 sm:grid-cols-2">
+    <form ref={formRef} action={action} noValidate className="grid gap-6 sm:grid-cols-2">
       <input type="hidden" name="locale" value={locale} />
       <input type="hidden" name="token" value={token} />
       {/* Honeypot: für Menschen unsichtbar, von Screenreadern ignoriert */}

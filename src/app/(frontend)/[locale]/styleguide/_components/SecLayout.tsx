@@ -17,11 +17,12 @@ const spacing = [
 ] as const
 
 const radii = [
-  ['xs', '2 px', 'rounded-xs', 'Badges, Checkbox'],
-  ['sm', '4 px', 'rounded-sm', 'Buttons, Felder'],
-  ['md', '6 px', 'rounded-md', 'Swatches, Toasts'],
-  ['lg', '8 px', 'rounded-lg', 'Cards, Dialoge'],
-  ['xl', '12 px', 'rounded-xl', 'Große Medien'],
+  ['xs', '6 px', 'rounded-xs', 'Checkbox, Markierungen'],
+  ['sm', '10 px', 'rounded-sm', 'Kleine Elemente'],
+  ['md', '14 px', 'rounded-md', 'Hinweise, Menüpunkte'],
+  ['lg', '20 px', 'rounded-lg', 'Cards, Textfelder'],
+  ['xl', '28 px', 'rounded-xl', 'Panels, Dialoge, große Bilder'],
+  ['full', 'rund', 'rounded-full', 'Buttons, Felder, Chips, Navigation'],
 ] as const
 
 const shadows = [
@@ -58,7 +59,7 @@ export function SecLayout() {
       id="raster"
       no="05"
       title="Raster, Abstände & Tiefe"
-      intro="4-px-Grundraster, Seitencontainer bis 1400 px, Radien abgeleitet vom abgerundeten Bildzeichen, Schatten petrol-getönt."
+      intro="4-px-Grundraster, Seitencontainer bis 1400 px, farbige Flächen als gerundete Panels auf hellem Graublau, Schatten tiefblau getönt."
     >
       <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr]">
         <SgSub title="Abstände" text="Tailwind-Skala, Vielfache von 4 px.">
@@ -97,12 +98,17 @@ export function SecLayout() {
       <div className="grid gap-12 lg:grid-cols-2">
         <SgSub
           title="Radien"
-          text="Abgeleitet vom Bildzeichen: Eckradius ≈ 10 % der Kantenlänge, Flächen bei 8 px gedeckelt. Keine Pillenformen; rounded-full nur für Radio, Schalter und Statuspunkte."
+          text="Weich nach Kundenvorlage: Buttons, Eingabefelder, Chips und Navigation vollrund; Cards 20 px; farbige Flächen als eingerückte Panels mit 28 px."
         >
-          <div className="grid grid-cols-3 gap-4 sm:grid-cols-5">
+          <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
             {radii.map(([t, v, cls, use]) => (
               <div key={t} className="flex flex-col gap-2">
-                <span className={cn('aspect-square bg-primary', cls)} />
+                <span
+                  className={cn(
+                    'aspect-square bg-primary',
+                    cls === 'rounded-full' ? 'aspect-[2/1] rounded-full' : cls,
+                  )}
+                />
                 <span className="font-mono text-caption text-ink">{t}</span>
                 <span className="text-caption text-muted">
                   {v} · {use}

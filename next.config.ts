@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
       {
         pathname: '/api/media/file/**',
       },
+      // Platzhalterbilder der internen Sektionsbibliothek (/de/sektionen)
+      {
+        pathname: '/sektionen/**',
+      },
     ],
   },
   webpack: (webpackConfig) => {

@@ -14,6 +14,7 @@ import {
   TeaserGrid,
   TextImage,
 } from './components/Content'
+import { Columns, Features, Statement, Team } from './components/Feature'
 import { Hero } from './components/Hero'
 import { JobList } from './components/JobList'
 import { Section } from './components/Section'
@@ -40,6 +41,14 @@ export function RenderBlocks({
         switch (block.blockType) {
           case 'hero':
             return <Hero key={key} block={block} isFirst={i === 0} {...ctx} />
+          case 'columns':
+            return <Columns key={key} block={block} {...ctx} />
+          case 'features':
+            return <Features key={key} block={block} {...ctx} />
+          case 'statement':
+            return <Statement key={key} block={block} {...ctx} />
+          case 'team':
+            return <Team key={key} block={block} {...ctx} />
           case 'richText':
             return <RichTextSection key={key} block={block} {...ctx} />
           case 'textImage':
@@ -65,12 +74,14 @@ export function RenderBlocks({
           case 'contactForm':
             return (
               <Section key={key} title={block.title} intro={block.intro}>
-                <ContactForm
-                  locale={locale}
-                  topics={(block.topics ?? []).map((t) => t.label)}
-                  privacyText={block.privacyText}
-                  successText={block.successText}
-                />
+                <div className="max-w-3xl rounded-xl bg-surface p-6 shadow-sm ring-1 ring-line/60 sm:p-10">
+                  <ContactForm
+                    locale={locale}
+                    topics={(block.topics ?? []).map((t) => t.label)}
+                    privacyText={block.privacyText}
+                    successText={block.successText}
+                  />
+                </div>
               </Section>
             )
           default:

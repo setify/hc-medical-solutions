@@ -8,7 +8,7 @@ import {
 
 import { MagneticButton } from '@/components/effects/MagneticButton'
 import { Badge } from '@/components/ui/Badge'
-import { Button, ButtonLink } from '@/components/ui/Button'
+import { Button, ButtonLink, roundIconClasses } from '@/components/ui/Button'
 import { Checkbox, Field, Input, Radio, Select, Switch, Textarea } from '@/components/ui/Field'
 import { LineButton } from '@/components/ui/LineButton'
 import { StarBorder } from '@/components/ui/StarBorder'
@@ -21,23 +21,25 @@ export function SecButtons() {
       id="buttons"
       no="06"
       title="Buttons & Links"
-      intro="Kantig wie das Bildzeichen (4 px Radius), ruhige Farbflächen ohne Schatten. Pro Bereich höchstens ein primärer Button. Beim Klicken gibt jeder Button mit leichtem Eindrücken (scale 0,98) Rückmeldung."
+      intro="Vollrund nach Kundenvorlage, ruhige Farbflächen ohne Schatten. Blau ist die Primärfarbe, Teal die Zweitfarbe, vor allem auf dunklen Panels. Pro Bereich höchstens ein primärer Button. Beim Klicken gibt jeder Button mit leichtem Eindrücken (scale 0,98) Rückmeldung."
     >
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
         <Specimen label="Varianten" code="<Button variant=… />" tone="plain">
           <div className="flex flex-wrap items-center gap-3">
             <Button>Primär</Button>
-            <Button variant="accent">Akzent</Button>
+            <Button variant="signal">Teal</Button>
+            <Button variant="dark">Tiefblau</Button>
             <Button variant="secondary">Sekundär</Button>
             <Button variant="ghost">Ghost</Button>
             <Button variant="danger">Löschen</Button>
           </div>
         </Specimen>
-        <Specimen label="Auf dunklem Grund" code='variant="inverse"' tone="dark">
+        <Specimen label="Auf dunklem Grund" code='variant="signal" · "inverse"' tone="dark">
           <div className="flex flex-wrap items-center gap-3">
-            <Button variant="inverse" iconRight={<ArrowRight className="size-4" />}>
+            <Button variant="signal" iconRight={<ArrowRight className="size-4" />}>
               Kontakt aufnehmen
             </Button>
+            <Button variant="inverse">Weiß</Button>
             <LineButton href="#buttons" tone="light">
               Mehr erfahren
             </LineButton>
@@ -71,6 +73,35 @@ export function SecButtons() {
             <Button variant="accent" iconRight={<ArrowUpRight className="size-4" />}>
               Zur Stelle
             </Button>
+          </div>
+        </Specimen>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <Specimen
+          label="Runde Pfeil-Buttons (Karten, Karussell)"
+          code="roundIconClasses('dark' | 'light' | 'outline')"
+        >
+          <div className="flex flex-wrap items-center gap-3">
+            <a href="#buttons" aria-label="Weiter (dunkel)" className={roundIconClasses('dark')}>
+              <ArrowUpRight aria-hidden="true" className="size-4" />
+            </a>
+            <a href="#buttons" aria-label="Weiter (Rand)" className={roundIconClasses('outline')}>
+              <ArrowRight aria-hidden="true" className="size-4" />
+            </a>
+            <span className="rounded-full bg-blue-950 p-1.5">
+              <a href="#buttons" aria-label="Weiter (hell)" className={roundIconClasses('light')}>
+                <ArrowUpRight aria-hidden="true" className="size-4" />
+              </a>
+            </span>
+          </div>
+        </Specimen>
+        <Specimen label="Kennzeichnung über Überschriften" code='className="eyebrow"'>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="eyebrow">Über HC Medical Solutions</span>
+            <span className="rounded-full bg-blue-950 p-2">
+              <span className="eyebrow eyebrow-dark">Leistungen</span>
+            </span>
           </div>
         </Specimen>
       </div>
@@ -114,7 +145,7 @@ export function SecButtons() {
       <SgSub title="Badges">
         <div className="flex flex-wrap gap-2">
           <Badge>Neutral</Badge>
-          <Badge tone="petrol">Petrol</Badge>
+          <Badge tone="teal">Teal</Badge>
           <Badge tone="accent" dot>
             Akzent
           </Badge>

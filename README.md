@@ -28,7 +28,7 @@ pnpm install
 cp .env.example .env          # PAYLOAD_SECRET setzen, S3-Keys aus `pnpm db:status`
 pnpm db:start                 # Supabase lokal starten + Bucket anlegen
 pnpm migrate                  # Datenbankschema anlegen
-pnpm seed                     # Testseiten, Navigation, Einstellungen (nur Entwicklung)
+pnpm seed [--reset]           # Seitenstruktur + Startseite (finale Texte), Testseiten, Navigation, Einstellungen
 pnpm dev                      # http://localhost:3100
 ```
 

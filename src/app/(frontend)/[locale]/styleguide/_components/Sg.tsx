@@ -20,7 +20,7 @@ export function SgSection({
     <section
       id={id}
       aria-labelledby={`${id}-h`}
-      className="scroll-mt-8 border-t border-line py-20 first:border-t-0 first:pt-4 md:py-28"
+      className="scroll-mt-28 border-t border-line py-20 first:border-t-0 first:pt-4 md:py-28"
     >
       <div className="grid gap-6 md:grid-cols-[5rem_1fr]">
         <span

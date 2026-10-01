@@ -23,6 +23,9 @@ export const HeroBlock: Block = {
   fields: [
     text('eyebrow', 'Kleine Zeile über dem Titel'),
     text('title', 'Titel', { required: true }),
+    text('titleHighlight', 'Hervorgehobener Teil des Titels', {
+      admin: { description: 'Exakt so, wie er im Titel steht – wird farbig abgesetzt.' },
+    }),
     textarea('lead', 'Einleitung'),
     {
       name: 'variant',
@@ -33,14 +36,42 @@ export const HeroBlock: Block = {
         { label: 'Hell', value: 'light' },
         { label: 'Dunkel', value: 'dark' },
         { label: 'Dunkel mit Lamellen-Hintergrund', value: 'slats' },
+        { label: 'Dunkel mit Linienbündel (Startseite)', value: 'lines' },
       ],
     },
     { name: 'image', label: 'Bild (optional)', type: 'upload', relationTo: 'media' },
+    {
+      name: 'visual',
+      label: 'Grafik rechts',
+      type: 'select',
+      defaultValue: 'none',
+      admin: { description: 'Nur bei „Linienbündel“: Grafik „Zweiter Kanal zum Original“.' },
+      options: [
+        { label: 'Keine', value: 'none' },
+        { label: 'Zweiter Kanal (Hersteller → HC → Einrichtung)', value: 'channels' },
+      ],
+    },
+    {
+      name: 'visualTags',
+      label: 'Stichworte in der Grafik',
+      type: 'array',
+      maxRows: 3,
+      admin: { condition: (_, s) => s?.visual === 'channels' },
+      fields: [text('label', 'Stichwort', { required: true })],
+    },
     {
       name: 'actions',
       label: 'Buttons',
       type: 'array',
       maxRows: 2,
+      fields: [linkField],
+    },
+    {
+      name: 'quickLinks',
+      label: 'Schnellzugriff (Leiste am unteren Rand)',
+      type: 'array',
+      maxRows: 4,
+      admin: { description: 'Nur bei dunklen Varianten. Verweise auf wichtige Unterseiten.' },
       fields: [linkField],
     },
   ],
@@ -157,6 +188,12 @@ export const StatsBlock: Block = {
           max: 2,
         },
         { name: 'suffix', label: 'Einheit (z. B. %)', type: 'text' },
+        {
+          name: 'plain',
+          label: 'Ohne Tausenderpunkt (z. B. Jahreszahl)',
+          type: 'checkbox',
+          defaultValue: false,
+        },
         text('label', 'Beschriftung', { required: true }),
       ],
     },
@@ -241,8 +278,184 @@ export const ContactFormBlock: Block = {
   ],
 }
 
+/** Symbole für Kacheln – feste Auswahl, damit die Gestaltung einheitlich bleibt. */
+export const featureIcons = [
+  ['original', 'Original / Siegel'],
+  ['savings', 'Einsparung'],
+  ['stock', 'Bestand / Paket'],
+  ['transparency', 'Transparenz / Auge'],
+  ['traceability', 'Rückverfolgbarkeit'],
+  ['decision', 'Entscheidung / Diagramm'],
+  ['calendar', 'Termin / Start'],
+  ['temperature', 'Lagerbedingungen'],
+  ['inventory', 'Bestandsführung'],
+  ['delivery', 'Lieferung'],
+  ['certificate', 'Zertifikat'],
+  ['check', 'Prüfung'],
+  ['recall', 'Rückruf'],
+  ['idea', 'Idee'],
+  ['route', 'Kurze Wege'],
+  ['freedom', 'Freiraum'],
+  ['growth', 'Entwicklung'],
+  ['clock', 'Arbeitszeit'],
+  ['home', 'Homeoffice'],
+  ['family', 'Familie'],
+  ['equipment', 'Ausstattung'],
+] as const
+
+const tone = (options: [string, string][], defaultValue: string): Field => ({
+  name: 'tone',
+  label: 'Hintergrund',
+  type: 'select',
+  defaultValue,
+  options: options.map(([value, label]) => ({ value, label })),
+})
+
+export const FeaturesBlock: Block = {
+  slug: 'features',
+  labels: { singular: 'Kacheln mit Symbol', plural: 'Kacheln mit Symbol' },
+  fields: [
+    text('eyebrow', 'Kleine Zeile über der Überschrift'),
+    heading,
+    intro,
+    {
+      name: 'items',
+      label: 'Kacheln',
+      type: 'array',
+      minRows: 1,
+      maxRows: 8,
+      fields: [
+        {
+          name: 'icon',
+          label: 'Symbol',
+          type: 'select',
+          defaultValue: 'check',
+          options: featureIcons.map(([value, label]) => ({ value, label })),
+        },
+        text('title', 'Titel', { required: true }),
+        textarea('text', 'Text'),
+      ],
+    },
+    {
+      name: 'cta',
+      label: 'Aktionskachel (optional)',
+      type: 'group',
+      admin: { description: 'Dunkle Kachel mit Button, ergänzt das Raster.' },
+      fields: [
+        { name: 'enabled', label: 'Anzeigen', type: 'checkbox', defaultValue: false },
+        text('title', 'Titel'),
+        textarea('text', 'Text'),
+        {
+          ...(linkField as Extract<Field, { type: 'group' }>),
+          admin: { condition: (_, s) => Boolean(s?.enabled) },
+        } as Field,
+      ],
+    },
+    tone(
+      [
+        ['plain', 'Ohne Fläche'],
+        ['muted', 'Helles Panel'],
+        ['teal', 'Teal-Panel'],
+      ],
+      'plain',
+    ),
+  ],
+}
+
+export const ColumnsBlock: Block = {
+  slug: 'columns',
+  labels: { singular: 'Aussagen', plural: 'Aussagen' },
+  fields: [
+    text('eyebrow', 'Kleine Zeile über der Überschrift'),
+    heading,
+    {
+      name: 'layout',
+      label: 'Darstellung',
+      type: 'select',
+      defaultValue: 'cards',
+      options: [
+        { label: 'Karten nebeneinander', value: 'cards' },
+        { label: 'Bild und Text im Wechsel', value: 'alternating' },
+      ],
+    },
+    {
+      name: 'items',
+      label: 'Aussagen',
+      type: 'array',
+      minRows: 1,
+      maxRows: 3,
+      fields: [
+        text('title', 'Titel', { required: true }),
+        textarea('text', 'Text', {
+          admin: { description: 'Leerzeile trennt Absätze.' },
+        }),
+        textarea('highlight', 'Hervorgehobener Satz (optional)'),
+        {
+          name: 'image',
+          label: 'Bild (bei „Bild und Text im Wechsel“)',
+          type: 'upload',
+          relationTo: 'media',
+        },
+      ],
+    },
+  ],
+}
+
+export const StatementBlock: Block = {
+  slug: 'statement',
+  labels: { singular: 'Statement', plural: 'Statements' },
+  fields: [
+    text('eyebrow', 'Kleine Zeile über der Überschrift'),
+    text('title', 'Überschrift', { required: true }),
+    textarea('text', 'Text', { admin: { description: 'Leerzeile trennt Absätze.' } }),
+    {
+      name: 'tags',
+      label: 'Stichworte (als Pillen)',
+      type: 'array',
+      maxRows: 12,
+      fields: [text('label', 'Stichwort', { required: true })],
+    },
+    tone(
+      [
+        ['plain', 'Ohne Fläche'],
+        ['teal', 'Teal-Panel'],
+        ['dark', 'Tiefblaues Panel'],
+      ],
+      'plain',
+    ),
+  ],
+}
+
+export const TeamBlock: Block = {
+  slug: 'team',
+  labels: { singular: 'Team / Personen', plural: 'Team / Personen' },
+  fields: [
+    text('eyebrow', 'Kleine Zeile über der Überschrift'),
+    heading,
+    intro,
+    {
+      name: 'members',
+      label: 'Personen',
+      type: 'array',
+      minRows: 1,
+      maxRows: 8,
+      fields: [
+        { name: 'name', label: 'Name', type: 'text', required: true },
+        text('role', 'Funktion'),
+        { name: 'image', label: 'Porträt', type: 'upload', relationTo: 'media' },
+        textarea('bio', 'Kurzbiografie', { admin: { description: 'Leerzeile trennt Absätze.' } }),
+        textarea('quote', 'Zitat (optional)'),
+      ],
+    },
+  ],
+}
+
 export const pageBlocks: Block[] = [
   HeroBlock,
+  ColumnsBlock,
+  FeaturesBlock,
+  StatementBlock,
+  TeamBlock,
   RichTextBlock,
   TextImageBlock,
   TeaserGridBlock,

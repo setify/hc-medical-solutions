@@ -80,6 +80,8 @@ export const getPageAlternates = (pageId: number, isHome: boolean) =>
     async (): Promise<Partial<Record<Locale, string>>> => {
       const payload = await getPayloadClient()
       const result: Partial<Record<Locale, string>> = {}
+      // Die Startseite ist in jeder Sprache erreichbar (ohne Übersetzung als Platzhalter).
+      if (isHome) return Object.fromEntries(locales.map((l) => [l, ''])) as Record<Locale, string>
       await Promise.all(
         locales.map(async (locale) => {
           const page = await payload

@@ -26,7 +26,7 @@ export function MobileMenu({
       <button
         type="button"
         onClick={() => ref.current?.showModal()}
-        className="grid size-11 place-items-center rounded-sm text-ink hover:bg-n-100 lg:hidden"
+        className="grid size-12 place-items-center rounded-full bg-blue-950 text-teal-300 hover:bg-blue-900 lg:hidden"
         aria-haspopup="dialog"
       >
         <List aria-hidden="true" className="size-6" />
@@ -38,13 +38,13 @@ export function MobileMenu({
         onClick={(e) => {
           if (e.target === e.currentTarget) e.currentTarget.close()
         }}
-        className="m-0 ml-auto h-dvh max-h-none w-[min(24rem,100%)] max-w-none bg-surface p-0 text-ink backdrop:bg-blue-950/50 open:flex open:flex-col"
+        className="m-0 mt-3 mr-3 ml-auto h-[calc(100dvh-1.5rem)] max-h-none w-[min(24rem,calc(100%-1.5rem))] max-w-none rounded-xl bg-surface p-0 text-ink backdrop:bg-blue-950/50 open:flex open:flex-col"
       >
         <div className="flex items-center justify-end border-b border-line p-4">
           <button
             type="button"
             onClick={() => ref.current?.close()}
-            className="grid size-11 place-items-center rounded-sm hover:bg-n-100"
+            className="grid size-11 place-items-center rounded-full hover:bg-surface-muted"
           >
             <X aria-hidden="true" className="size-6" />
             <span className="sr-only">{labels.close}</span>

@@ -15,6 +15,7 @@ export function CountUp({
   prefix = '',
   suffix = '',
   locale = 'de-DE',
+  grouping = true,
   className,
 }: {
   to: number
@@ -24,13 +25,19 @@ export function CountUp({
   prefix?: string
   suffix?: string
   locale?: string
+  /** false für Jahreszahlen (2019 statt 2.019) */
+  grouping?: boolean
   className?: string
 }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.6 })
   const reduce = useReducedMotion()
   const format = (v: number) =>
-    `${prefix}${v.toLocaleString(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}${suffix}`
+    `${prefix}${v.toLocaleString(locale, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+      useGrouping: grouping,
+    })}${suffix}`
 
   useEffect(() => {
     if (!inView || reduce || !ref.current) return

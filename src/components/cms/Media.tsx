@@ -19,7 +19,9 @@ export function Media({
 }) {
   if (!media || typeof media !== 'object' || !media.url) return null
   const alt = media.alt ?? ''
-  const common = { src: media.url, sizes, priority, className: cn('object-cover', className) }
+  // Payload liefert absolute URLs (serverURL); next/image erlaubt nur die eigenen Pfade unter /api/media/file.
+  const src = media.url.replace(/^https?:\/\/[^/]+(?=\/api\/media\/file\/)/, '')
+  const common = { src, sizes, priority, className: cn('object-cover', className) }
   if (fill) return <Image {...common} alt={alt} fill />
   return <Image {...common} alt={alt} width={media.width ?? 1600} height={media.height ?? 1000} />
 }

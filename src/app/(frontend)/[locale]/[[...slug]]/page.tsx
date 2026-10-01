@@ -118,8 +118,11 @@ export default async function CmsPage({ params }: Props) {
       ) : null}
       {script ? <script type="application/ld+json" dangerouslySetInnerHTML={script} /> : null}
       {page.layout?.[0]?.blockType === 'hero' ? null : (
-        <div className="container-page pt-16 md:pt-24">
-          <h1 className="max-w-4xl text-h1 font-light">{page.title}</h1>
+        // Seitenkopf ohne Hero: helles Panel mit Titel (Kundenvorlage).
+        <div className="panel mt-4 bg-surface-muted">
+          <div className="container-page py-14 md:py-20">
+            <h1 className="max-w-4xl text-h1 font-light">{page.title}</h1>
+          </div>
         </div>
       )}
       <RenderBlocks

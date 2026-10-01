@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright'
-import { expect, type Page, test } from '@playwright/test'
+import { type APIRequestContext, expect, type Page, test } from '@playwright/test'
 
 /*
  * Voraussetzung: `pnpm seed` (Testseiten) und lokale Supabase inkl. Mailpit (Port 55424).
@@ -20,9 +20,10 @@ const axe = (page: Page) =>
 
 test.describe('Seiten aus dem CMS', () => {
   test('Startseite rendert Hero, Navigation und Footer aus dem CMS', async ({ page }) => {
+    // Inhalte aus der finalen Übergabe (pnpm seed)
     await page.goto('/de')
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-      'Seiten kommen jetzt aus dem CMS',
+      'Der zweite Kanal zum Original.',
     )
     // Auf schmalen Viewports liegt die Navigation im Mobilmenü.
     const menuButton = page.getByRole('button', { name: 'Menü', exact: true })
@@ -33,7 +34,7 @@ test.describe('Seiten aus dem CMS', () => {
     const nav = page.getByRole('navigation', { name: 'Hauptnavigation' }).filter({ visible: true })
     await expect(nav.getByRole('link', { name: 'Karriere' })).toBeVisible()
     if (await menuButton.isVisible()) await page.keyboard.press('Escape')
-    await expect(page.getByRole('contentinfo')).toContainText('HC Medical Solutions GmbH')
+    await expect(page.getByRole('contentinfo')).toContainText('HC-Healthcare Consulting GmbH')
     const jsonLd = await page.locator('script[type="application/ld+json"]').first().textContent()
     expect(jsonLd).toContain('"Organization"')
   })
@@ -108,11 +109,16 @@ test.describe('Karriere (JOIN)', () => {
   })
 })
 
-test.describe('Kontaktformular', () => {
-  test.beforeEach(async ({ request }) => {
-    await request.delete('http://127.0.0.1:55424/api/v1/messages').catch(() => null)
-  })
+/** Nachrichten im lokalen Mailpit-Postfach mit dieser Antwortadresse (Tests laufen parallel). */
+async function mailsFrom(request: APIRequestContext, address: string) {
+  const res = await request.get('http://127.0.0.1:55424/api/v1/messages?limit=200')
+  const data = (await res.json()) as {
+    messages: { Subject: string; ReplyTo: { Address: string }[] }[]
+  }
+  return data.messages.filter((m) => m.ReplyTo?.[0]?.Address === address)
+}
 
+test.describe('Kontaktformular', () => {
   test('zeigt Feldfehler und setzt den Fokus auf das erste Feld', async ({ page }) => {
     await openContactForm(page)
     await page.getByRole('button', { name: 'Anfrage senden' }).click()
@@ -125,11 +131,12 @@ test.describe('Kontaktformular', () => {
     )
   })
 
-  test('sendet eine gültige Anfrage per E-Mail', async ({ page, request }) => {
+  test('sendet eine gültige Anfrage per E-Mail', async ({ page, request }, info) => {
+    const address = `mirjam+${info.project.name}-${Date.now()}@example.org`
     await openContactForm(page)
     await page.getByRole('textbox', { name: 'Vorname' }).fill('Mirjam')
     await page.getByRole('textbox', { name: 'Nachname' }).fill('Aufdermauer')
-    await page.getByRole('textbox', { name: 'E-Mail' }).fill('mirjam@example.org')
+    await page.getByRole('textbox', { name: 'E-Mail' }).fill(address)
     await page.getByRole('combobox', { name: 'Anliegen' }).selectOption({ index: 1 })
     await page.getByRole('textbox', { name: 'Nachricht' }).fill('Testanfrage aus der E2E-Suite.')
     await page.getByRole('checkbox', { name: /Datenschutzhinweise/ }).check()
@@ -138,20 +145,20 @@ test.describe('Kontaktformular', () => {
       timeout: 15000,
     })
 
-    const mails = await (await request.get('http://127.0.0.1:55424/api/v1/messages')).json()
-    expect(mails.total).toBe(1)
-    expect(mails.messages[0].Subject).toBe('Kontaktanfrage (DE): Allgemeine Anfrage')
-    expect(mails.messages[0].ReplyTo[0].Address).toBe('mirjam@example.org')
+    await expect.poll(async () => (await mailsFrom(request, address)).length).toBe(1)
+    const [mail] = await mailsFrom(request, address)
+    expect(mail?.Subject).toBe('Kontaktanfrage (DE): Allgemeine Anfrage')
   })
 
-  test('verwirft Absenden durch Bots (Honeypot)', async ({ page, request }) => {
+  test('verwirft Absenden durch Bots (Honeypot)', async ({ page, request }, info) => {
+    const address = `bot+${info.project.name}-${Date.now()}@example.org`
     await openContactForm(page)
     await page
       .locator('input[name="website"]')
       .evaluate((el: HTMLInputElement) => (el.value = 'spam'))
     await page.getByRole('textbox', { name: 'Vorname' }).fill('Bot')
     await page.getByRole('textbox', { name: 'Nachname' }).fill('Bot')
-    await page.getByRole('textbox', { name: 'E-Mail' }).fill('bot@example.org')
+    await page.getByRole('textbox', { name: 'E-Mail' }).fill(address)
     await page.getByRole('combobox', { name: 'Anliegen' }).selectOption({ index: 1 })
     await page.getByRole('textbox', { name: 'Nachricht' }).fill('Spam')
     await page.getByRole('checkbox', { name: /Datenschutzhinweise/ }).check()
@@ -159,7 +166,6 @@ test.describe('Kontaktformular', () => {
     await expect(
       page.getByRole('alert').filter({ hasText: 'konnte nicht gesendet werden' }),
     ).toBeVisible()
-    const mails = await (await request.get('http://127.0.0.1:55424/api/v1/messages')).json()
-    expect(mails.total).toBe(0)
+    expect(await mailsFrom(request, address)).toHaveLength(0)
   })
 })

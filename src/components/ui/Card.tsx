@@ -1,7 +1,8 @@
-import { ArrowRight, ArrowUpRight, Buildings, Clock, MapPin } from '@phosphor-icons/react/dist/ssr'
+import { ArrowUpRight, Buildings, Clock, MapPin } from '@phosphor-icons/react/dist/ssr'
 import type { ReactNode } from 'react'
 
 import { Badge } from '@/components/ui/Badge'
+import { roundIconClasses } from '@/components/ui/Button'
 import { cn } from '@/lib/cn'
 
 type Tone = 'plain' | 'muted' | 'inverse' | 'outline'
@@ -52,10 +53,15 @@ export function ServiceCard({
         </h3>
         <p className="text-small text-muted">{text}</p>
       </div>
-      <ArrowRight
+      <span
         aria-hidden="true"
-        className="absolute top-8 right-8 size-5 text-muted transition-[transform,color] duration-500 ease-out-expo group-hover/svc:translate-x-1 group-hover/svc:text-accent-strong"
-      />
+        className={roundIconClasses(
+          'dark',
+          'absolute top-6 right-6 group-hover/svc:bg-primary group-hover/svc:text-white',
+        )}
+      >
+        <ArrowUpRight className="size-4 transition-transform duration-500 ease-out-expo group-hover/svc:rotate-45" />
+      </span>
       <span className="pointer-events-none absolute inset-0 rounded-lg ring-2 ring-transparent group-has-[:focus-visible]/svc:ring-focus" />
     </article>
   )
@@ -83,7 +89,7 @@ export function JobCard({
 }) {
   const icons = { location: MapPin, type: Clock, workplace: Buildings }
   return (
-    <article className="group/job relative grid gap-4 border-b border-line px-2 py-7 transition-colors duration-300 hover:border-blue-300 hover:bg-blue-50/60 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8">
+    <article className="group/job relative grid gap-4 rounded-lg border border-line bg-surface px-6 py-6 transition-colors duration-300 hover:border-blue-300 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8 sm:px-8">
       <div className="flex flex-col gap-3">
         {badge ? (
           <div>
@@ -115,12 +121,19 @@ export function JobCard({
       </div>
       <span
         aria-hidden="true"
-        className="inline-flex items-center gap-2 text-small font-normal text-ink transition-colors group-hover/job:text-accent-strong"
+        className="inline-flex items-center gap-3 text-small font-normal text-ink"
       >
         {actionLabel}
-        <ArrowUpRight className="size-4 transition-transform duration-300 ease-out-expo group-hover/job:translate-x-1 group-hover/job:-translate-y-1" />
+        <span
+          className={roundIconClasses(
+            'dark',
+            'group-hover/job:bg-primary group-hover/job:text-white',
+          )}
+        >
+          <ArrowUpRight className="size-4 transition-transform duration-300 ease-out-expo group-hover/job:rotate-45" />
+        </span>
       </span>
-      <span className="pointer-events-none absolute inset-0 ring-2 ring-transparent group-has-[:focus-visible]/job:ring-focus" />
+      <span className="pointer-events-none absolute inset-0 rounded-lg ring-2 ring-transparent group-has-[:focus-visible]/job:ring-focus" />
     </article>
   )
 }

@@ -83,7 +83,7 @@ export function Field({
 // suppressHydrationWarning an Feldern: Passwortmanager (Dashlane, 1Password, LastPass) setzen dort
 // Attribute vor der Hydration. Gilt nur für das jeweilige Element.
 const control =
-  'w-full rounded-sm border bg-surface px-4 text-body text-ink font-light shadow-xs transition-[border-color,box-shadow,background-color] duration-200 placeholder:text-n-500 hover:border-n-400 focus:border-accent focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-n-50 disabled:text-n-500 read-only:bg-n-25'
+  'w-full border bg-surface px-5 text-body text-ink font-light shadow-xs transition-[border-color,box-shadow,background-color] duration-200 placeholder:text-n-500 hover:border-n-400 focus:border-accent focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-n-50 disabled:text-n-500 read-only:bg-n-25'
 
 const stateClass = (invalid?: boolean) =>
   invalid ? 'border-red-600 focus:border-red-600 focus:ring-red-100' : 'border-line-strong'
@@ -97,7 +97,7 @@ export function Input({
     <input
       aria-invalid={invalid || undefined}
       suppressHydrationWarning
-      className={cn(control, 'h-12', stateClass(invalid), className)}
+      className={cn(control, 'h-12 rounded-full', stateClass(invalid), className)}
       {...rest}
     />
   )
@@ -114,7 +114,7 @@ export function Textarea({
       suppressHydrationWarning
       className={cn(
         control,
-        'min-h-36 resize-y py-3 leading-relaxed',
+        'min-h-36 resize-y rounded-lg py-3 leading-relaxed',
         stateClass(invalid),
         className,
       )}
@@ -134,7 +134,12 @@ export function Select({
       <select
         aria-invalid={invalid || undefined}
         suppressHydrationWarning
-        className={cn(control, 'h-12 appearance-none pr-11', stateClass(invalid), className)}
+        className={cn(
+          control,
+          'h-12 appearance-none rounded-full pr-11',
+          stateClass(invalid),
+          className,
+        )}
         {...rest}
       >
         {children}
@@ -142,7 +147,7 @@ export function Select({
       <svg
         aria-hidden="true"
         viewBox="0 0 16 16"
-        className="pointer-events-none absolute top-1/2 right-4 size-4 -translate-y-1/2 text-muted"
+        className="pointer-events-none absolute top-1/2 right-5 size-4 -translate-y-1/2 text-muted"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.5"
